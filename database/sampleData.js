@@ -11,27 +11,25 @@ const properties = [
 
 const rates = [
   {
-    rate_id: 12345,
-    APR: 4.345,
+    rate_id: 23478,
+    lending_zip_code: 23458,
+    apr: 4.345,
     fee_rate: 0.128,
     years: 30,
-    type: 'fixed',
-    lender: 'Watermark Home Loans NMLS #1838',
+    loan_type: 'fixed',
     cost_low: 234567890,
     cost_high: 345678901,
-    zip_code: 23456,
+    down_payment_min: 34.2,
+    credit_min: 720,
+    lender_id: 13453,
     origination_year: 2019,
   },
+];
+
+const lenders = [
   {
-    rate_id: 23478,
-    APR: 4.345,
-    fee_rate: 0.128,
-    years: 30,
-    type: 'fixed',
-    lender: 'Watermark Home Loans NMLS #1838',
-    cost_low: 234567890,
-    cost_high: 345678901,
-    zip_code: 23458,
-    origination_year: 2019,
+    lender_id: 13453,
+    lender_logo_url: 'http://amazon.com/324325',
+    lender_nmls: 3243,
   },
 ];
