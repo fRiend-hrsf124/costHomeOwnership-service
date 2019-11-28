@@ -16,9 +16,12 @@ CREATE TABLE IF NOT EXISTS rates(
   apr DECIMAL(5,3),
   fee_rate DECIMAL(5,3),
   years TINYINT,
-  type VARCHAR(5),
-  lender VARCHAR(50),
+  loan_type VARCHAR(5),
+  lender_logo_url VARCHAR(50),
+  lender_nmls INTEGER,
   cost_low INTEGER,
   cost_high INTEGER,
+  down_payment_min DECIMAL(4,1),
+  credit_min SMALLINT,
   origination_year YEAR
 );
