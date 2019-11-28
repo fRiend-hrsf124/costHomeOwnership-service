@@ -17,12 +17,19 @@ const rates = [
     fee_rate: 0.128,
     years: 30,
     loan_type: 'fixed',
-    lender_logo_url: 'http://amazon.com/324325',
-    lender_nmls: 3243,
     cost_low: 234567890,
     cost_high: 345678901,
     down_payment_min: 34.2,
     credit_min: 720,
+    lender_id: 13453,
     origination_year: 2019,
+  },
+];
+
+const lenders = [
+  {
+    lender_id: 13453,
+    lender_logo_url: 'http://amazon.com/324325',
+    lender_nmls: 3243,
   },
 ];
