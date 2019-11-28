@@ -1,33 +1,20 @@
 /* eslint-disable no-console */
-const mysql = require('mysql');
-const fs = require('fs');
-const path = require('path');
+const Sequelize = require('sequelize');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'test',
-  password: 'test',
-  multipleStatements: true,
-});
+const db = new Sequelize('fRiend', 'test', 'test',
+  {
+    host: 'localhost',
+    dialect: 'mysql',
+    multipleStatements: true,
+  });
 
-connection.connect((err) => {
-  if (err) {
-    console.log(err.stack);
-    return;
-  }
-  console.log(`connected as ${connection.threadId}`);
-});
+db
+  .authenticate()
+  .then(() => {
+    console.log('successfully connected to db');
+  })
+  .catch((err) => {
+    console.log('unable to connnect to db', err);
+  });
 
-
-const schemaFile = path.resolve(__dirname, 'schema.sql');
-const createDBQuery = fs.readFileSync(schemaFile).toString();
-connection.query(createDBQuery, (err) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-
-  console.log('connected to mysql db');
-});
-
-module.exports = connection;
+module.exports = db;
