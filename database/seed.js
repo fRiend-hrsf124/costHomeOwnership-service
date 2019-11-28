@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2/promise');
+const faker = require('faker/locale/en_US');
 const auth = require('./auth');
 
 async function addTables(credentials) {
