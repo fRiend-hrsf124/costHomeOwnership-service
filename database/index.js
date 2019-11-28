@@ -20,22 +20,14 @@ connection.connect((err) => {
 
 
 const schemaFile = path.resolve(__dirname, 'schema.sql');
-fs.readFile(schemaFile, (err, fileData) => {
+const createDBQuery = fs.readFileSync(schemaFile).toString();
+connection.query(createDBQuery, (err) => {
   if (err) {
     console.log(err);
     return;
   }
 
-  const createDBQuery = fileData.toString();
-  connection.query(createDBQuery, (error) => {
-    if (error) {
-      console.log(err);
-      return;
-    }
-
-    console.log('connected to mysql db');
-  });
+  console.log('connected to mysql db');
 });
-
 
 module.exports = connection;
