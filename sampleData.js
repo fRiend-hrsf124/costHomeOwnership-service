@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 const properties = [
-  { 
+  {
     property_id: 12345,
     property_zip_code: 67890,
     redfin_cost_estimate: 123456789,
@@ -33,4 +34,4 @@ const rates = [
     zip_code: 23458,
     origination_year: 2019,
   },
-] 
+];
