@@ -8,6 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "seed:dev": "node database/seed.js"
   },
   "dependencies": {
     "express": "^4.17.1",

@@ -9,7 +9,10 @@ const connection = mysql.createConnection({
 });
 
 connection.connect((err) => {
-  if (err) console.log(err.stack);
+  if (err) {
+    console.log(err.stack);
+    return;
+  }
   console.log(`connected as ${connection.threadId}`);
 });
 
@@ -22,24 +25,28 @@ const createDBQuery = `
     property_zip_code SMALLINT,
     redfin_cost_estimate INTEGER,
     property_tax_rate DECIMAL(5,3),
-    insurance_rate DECIMAL(5,3),
+    insurance_rate DECIMAL(5,3)
   );
   CREATE TABLE IF NOT EXISTS rates(
     rate_id INTEGER,
     lending_zip_code SMALLINT,
-    APR DECIMAL(5,3),
+    apr DECIMAL(5,3),
     fee_rate DECIMAL(5,3),
     years TINYINT,
     type VARCHAR(5),
     lender VARCHAR(50),
     cost_low INTEGER,
     cost_high INTEGER,
-    origination_year YEAR,
+    origination_year YEAR
   );
 `;
 
 connection.query(createDBQuery, (err) => {
-  if (err) console.log(err);
+  if (err) {
+    console.log(err);
+    return;
+  }
+
   console.log(`connected to mysql db '${DB}'`);
 });
 
