@@ -1,12 +1,6 @@
 /* eslint-disable no-console */
 const Sequelize = require('sequelize');
-
-const auth = {
-  database: 'fRiend',
-  user: 'test',
-  password: 'test',
-  host: 'localhost',
-};
+const auth = require('./auth');
 
 const {
   database, user, password, host,
@@ -27,7 +21,4 @@ conn
     console.log('unable to connnect to db', err);
   });
 
-module.exports = {
-  conn,
-  auth,
-};
+module.exports = conn;
