@@ -24,21 +24,57 @@ async function addTables(credentials) {
   await conn.query(createDBQuery);
 
   console.log('successfully created tables');
-  conn.close();
+  return conn;
+}
+
+// generate 100 properties
+async function seedProperties(conn) {
+  const zips = [];
+  const zipsCount = 10;
+  // TODO - remove longer length zips
+  for (let i = 0; i < zipsCount; i += 1) {
+    zips.push(faker.address.zipCode());
+  }
+
+  const costLow = 600000;
+  const costRange = 2000000;
+
+  const taxLow = 0.8;
+  const taxRange = 0.4;
+
+  const insuranceLow = 0.1;
+  const insuranceRange = 0.2;
+
+  for (let i = 1; i <= 100; i += 1) {
+    // TODO - use faker for integer generation instead of math.rand
+    const zip = zips[Math.random() * zipsCount];
+    const cost = costLow + Math.random() * costRange;
+    const taxRate = taxLow + Math.random() * taxRange;
+    const insuranceRate = insuranceLow + Math.random() * insuranceRange;
+    const query = `INSERT INTO properties (
+      property_id,
+      property_zip_code,
+      redfin_cost_estimate,
+      property_tax_rate,
+      insurance_rate
+      ) VALUES (
+      ${i},
+      ${zip},
+      ${cost},
+      ${taxRate},
+      ${insuranceRate}
+    )`;
+    await conn.query(query);
+  }
+
+  console.log('successfully seeded property table');
+  return conn;
 }
 
 addTables(auth)
-  .catch((err) => {
-    console.log(err);
-  });
-
-
-// generate 100 properties
-//   property_id - 1-100
-//   property_zip_code - limit to 10 total
-//   redfin_cost_estimate - 600 - 2500k
-//   property_tax_rate - 0.8 - 1.2%
-//   insurance_rate - .1 - .3%
+  .then((conn) => seedProperties(conn))
+  .then((conn) => conn.close())
+  .catch(console.log);
 
 // generate 3 lenders
 // lender_nmls - random 6 digit number
