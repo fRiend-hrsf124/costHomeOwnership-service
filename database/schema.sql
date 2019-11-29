@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS rates(
   rate_id INTEGER NOT NULL AUTO_INCREMENT,
   lending_zip_code SMALLINT,
   apr DECIMAL(5,3),
-  fee_rate DECIMAL(5,3),
   years TINYINT,
   loan_type VARCHAR(5),
   cost_low INTEGER,
