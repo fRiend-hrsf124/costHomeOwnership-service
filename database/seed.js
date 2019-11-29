@@ -35,7 +35,7 @@ addTables(auth)
 
 // generate 100 properties
 //   property_id - 1-100
-//   property_zip_code - bay area
+//   property_zip_code - limit to 10 total
 //   redfin_cost_estimate - 600 - 2500k
 //   property_tax_rate - 0.8 - 1.2%
 //   insurance_rate - .1 - .3%
@@ -49,14 +49,14 @@ const lenderLogoUrls = [
   'https://hrsf-fec-cho-lenderlogos.s3-us-west-1.amazonaws.com/7834_logo.gif',
 ];
 
-// generate XX rates
-//   lending_zip_code - pick zips randomly from property zips
+// generate  rates
+//   lending_zip_code - pick zips randomly from property zips, even distribution
 //   apr - 4-6%
 //   years - 3(a), 5(a), 7(a), 10(a), 10(f), 15(f), 20(f), 30(f)
 //   loan_type - ARM, FIXED
-//   cost_low - based on lowest property cost
-//   cost_high - based on highest property cost
-//   down_payment_min 0 - 40%
-//   credit_min 600 - 740
+//   cost_low - based on lowest property cost, 5 ranges total
+//   cost_high - based on highest property cost, 5 ranges total
+//   down_payment_min - 0, 10, 20%
+//   credit_min - 660, 680, 700, 720, 740
 //   lender_id - pick randomly from lender ids
-//   origination_year - use current year
+//   origination_year - 2019
