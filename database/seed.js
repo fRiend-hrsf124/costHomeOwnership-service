@@ -5,28 +5,31 @@ const mysql = require('mysql2/promise');
 const faker = require('faker/locale/en_US');
 const auth = require('./auth');
 
-async function addTables(credentials) {
+const dbConn = (async function seed(credentials) {
   const {
     database, user, password, host,
   } = credentials;
 
-  const conn = await mysql.createConnection({
+  // eslint-disable-next-line no-return-await
+  return mysql.createConnection({
     host,
     user,
     password,
     database,
     multipleStatements: true,
   });
+}(auth));
 
+async function addTables(conn) {
   const schemaFile = path.resolve(__dirname, 'schema.sql');
   const createDBQuery = fs.readFileSync(schemaFile).toString();
 
   await conn.query(createDBQuery);
 
   console.log('successfully created tables');
-  return conn;
 }
 
+// generate 10 zip codes
 const zips = [];
 const zipsCount = 10;
 for (let i = 0; i < zipsCount; i += 1) {
@@ -34,7 +37,6 @@ for (let i = 0; i < zipsCount; i += 1) {
   zips.push(faker.address.zipCode());
 }
 
-// generate 10 zip codes
 async function seedZips(conn) {
   const taxLow = 0.8;
   const taxRange = 0.4;
@@ -54,7 +56,6 @@ async function seedZips(conn) {
   }
   await Promise.all(queries);
   console.log('successfully seeded zips table');
-  return conn;
 }
 
 // generate 100 properties
@@ -86,13 +87,12 @@ async function seedProperties(conn) {
 
   await Promise.all(queries);
   console.log('successfully seeded property table');
-  return conn;
 }
 
-addTables(auth)
-  .then((conn) => seedZips(conn))
-  .then((conn) => seedProperties(conn))
-  .then((conn) => conn.close())
+addTables(dbConn)
+  .then(() => seedZips(dbConn))
+  .then(() => seedProperties(dbConn))
+  .then(() => dbConn.close())
   .catch(console.log);
 
 // generate 3 lenders
