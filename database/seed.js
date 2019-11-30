@@ -5,7 +5,7 @@ const mysql = require('mysql2/promise');
 const faker = require('faker/locale/en_US');
 const auth = require('./auth');
 
-const dbConn = (async function seed(credentials) {
+async function getConn(credentials) {
   const {
     database, user, password, host,
   } = credentials;
@@ -18,7 +18,7 @@ const dbConn = (async function seed(credentials) {
     database,
     multipleStatements: true,
   });
-}(auth));
+}
 
 async function addTables(conn) {
   const schemaFile = path.resolve(__dirname, 'schema.sql');
@@ -27,22 +27,16 @@ async function addTables(conn) {
   await conn.query(createDBQuery);
 
   console.log('successfully created tables');
+  return conn;
 }
 
 // generate 10 zip codes
-const zips = [];
-const zipsCount = 10;
-for (let i = 0; i < zipsCount; i += 1) {
-  // TODO - use set with while loop to avoid duplicates
-  zips.push(faker.address.zipCode());
-}
-
-async function seedZips(conn) {
+async function seedZips(conn, zips) {
   const taxLow = 0.8;
   const taxRange = 0.4;
 
   const queries = [];
-  for (let i = 0; i < zipsCount; i += 1) {
+  for (let i = 0; i < zips.length; i += 1) {
     const zip = zips[i];
     const taxRate = taxLow + faker.random.number(taxRange * 1000) / 1000;
     const query = `INSERT INTO zips (
@@ -56,10 +50,11 @@ async function seedZips(conn) {
   }
   await Promise.all(queries);
   console.log('successfully seeded zips table');
+  return conn;
 }
 
 // generate 100 properties
-async function seedProperties(conn) {
+async function seedProperties(conn, zips) {
   const costLow = 600000;
   const costRange = 2000000;
 
@@ -68,7 +63,7 @@ async function seedProperties(conn) {
 
   const queries = [];
   for (let i = 1; i <= 100; i += 1) {
-    const zip = zips[faker.random.number(zipsCount - 1)];
+    const zip = zips[faker.random.number(zips.length - 1)];
     const cost = costLow + faker.random.number(costRange / 10000) * 10000;
     const insuranceRate = insuranceLow + faker.random.number(insuranceRange * 100) / 100;
     const query = `INSERT INTO properties (
@@ -87,12 +82,22 @@ async function seedProperties(conn) {
 
   await Promise.all(queries);
   console.log('successfully seeded property table');
+  return conn;
 }
 
-addTables(dbConn)
-  .then(() => seedZips(dbConn))
-  .then(() => seedProperties(dbConn))
-  .then(() => dbConn.close())
+
+const sharedZips = [];
+const zipsCount = 10;
+for (let i = 0; i < zipsCount; i += 1) {
+  // TODO - use set with while loop to avoid duplicates
+  sharedZips.push(faker.address.zipCode());
+}
+
+getConn(auth)
+  .then((conn) => addTables(conn))
+  .then((conn) => seedZips(conn, sharedZips))
+  .then((conn) => seedProperties(conn, sharedZips))
+  .then((conn) => conn.close())
   .catch(console.log);
 
 // generate 3 lenders
