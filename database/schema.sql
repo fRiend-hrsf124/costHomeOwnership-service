@@ -24,7 +24,7 @@ CREATE TABLE properties(
 
 CREATE TABLE lenders(
   lender_id INTEGER NOT NULL AUTO_INCREMENT,
-  lender_logo_url VARCHAR(50),
+  lender_logo_url VARCHAR(80),
   lender_nmls INTEGER,
   CONSTRAINT lender_id PRIMARY KEY (lender_id)
 );

@@ -70,11 +70,51 @@ const seedProperties = (conn, zips) => {
         "${zip}",
         ${cost},
         ${insuranceRate}
-        );\n`;
+      );\n`;
     query += partialQuery;
   }
 
   return conn.query(query);
+};
+
+const seedLenders = (conn) => {
+  // TODO - use S3 API to programmatically retrieve list of urls
+  const lenderLogoUrls = [
+    'https://hrsf-fec-cho-lenderlogos.s3-us-west-1.amazonaws.com/10271_logo.gif',
+    'https://hrsf-fec-cho-lenderlogos.s3-us-west-1.amazonaws.com/10612_logo.gif',
+    'https://hrsf-fec-cho-lenderlogos.s3-us-west-1.amazonaws.com/7834_logo.gif',
+  ];
+
+  const lenderCount = 3;
+  let query = '';
+  for (let i = 0; i < lenderCount; i += 1) {
+    // lender_nmls - random 6 digit number
+    const nmls = faker.random.number({ min: 100000, max: 999999 });
+    const partialQuery = `INSERT INTO lenders (
+      lender_logo_url,
+      lender_nmls
+      ) VALUES (
+        "${lenderLogoUrls[i]}",
+        ${nmls}
+      );\n`;
+    query += partialQuery;
+  }
+
+  return conn.query(query);
+};
+
+const seedRates = (conn, zips) => {
+  // generate  rates
+  //   lending_zip_code - pick zips randomly from property zips, even distribution
+  //   apr - 4-6%
+  //   years - 3(a), 5(a), 7(a), 10(a), 10(f), 15(f), 20(f), 30(f)
+  //   loan_type - ARM, FIXED
+  //   cost_low - based on lowest property cost, 5 ranges total
+  //   cost_high - based on highest property cost, 5 ranges total
+  //   down_payment_min - 0, 10, 20%
+  //   credit_min - 660, 680, 700, 720, 740
+  //   lender_id - pick randomly from lender ids
+  //   origination_year - 2019
 };
 
 (async (scopeAuth) => {
@@ -92,27 +132,8 @@ const seedProperties = (conn, zips) => {
   await seedZips(conn, sharedZips);
   console.log('successfully seeded zips table');
   await seedProperties(conn, sharedZips);
-  console.log('successfully seeded property table');
+  console.log('successfully seeded properties table');
+  await seedLenders(conn);
+  console.log('successfully seeded lenders table');
   conn.close();
 })(auth).catch(console.log);
-
-// generate 3 lenders
-// lender_nmls - random 6 digit number
-// TODO - use API to programmatically retrieve list of urls
-const lenderLogoUrls = [
-  'https://hrsf-fec-cho-lenderlogos.s3-us-west-1.amazonaws.com/10271_logo.gif',
-  'https://hrsf-fec-cho-lenderlogos.s3-us-west-1.amazonaws.com/10612_logo.gif',
-  'https://hrsf-fec-cho-lenderlogos.s3-us-west-1.amazonaws.com/7834_logo.gif',
-];
-
-// generate  rates
-//   lending_zip_code - pick zips randomly from property zips, even distribution
-//   apr - 4-6%
-//   years - 3(a), 5(a), 7(a), 10(a), 10(f), 15(f), 20(f), 30(f)
-//   loan_type - ARM, FIXED
-//   cost_low - based on lowest property cost, 5 ranges total
-//   cost_high - based on highest property cost, 5 ranges total
-//   down_payment_min - 0, 10, 20%
-//   credit_min - 660, 680, 700, 720, 740
-//   lender_id - pick randomly from lender ids
-//   origination_year - 2019
