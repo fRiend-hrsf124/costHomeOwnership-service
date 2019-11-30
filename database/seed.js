@@ -39,18 +39,20 @@ async function seedZips(conn) {
   const taxLow = 0.8;
   const taxRange = 0.4;
 
+  const queries = [];
   for (let i = 0; i < zipsCount; i += 1) {
     const zip = zips[i];
-    const taxRate = taxLow + Math.floor(faker.random.number(taxRange * 10) / 10);
+    const taxRate = taxLow + faker.random.number(taxRange * 1000) / 1000;
     const query = `INSERT INTO zips (
       zip_code,
       property_tax_rate
       ) VALUES (
-      ${zip},
+      "${zip}",
       ${taxRate}
     )`;
-    await conn.query(query);
+    queries.push(conn.query(query));
   }
+  await Promise.all(queries);
   console.log('successfully seeded zips table');
   return conn;
 }
@@ -63,10 +65,11 @@ async function seedProperties(conn) {
   const insuranceLow = 0.1;
   const insuranceRange = 0.2;
 
+  const queries = [];
   for (let i = 1; i <= 100; i += 1) {
-    const zip = zips[faker.random.number(zipsCount) - 1];
-    const cost = costLow + faker.random.number(costRange / 1000) * 1000;
-    const insuranceRate = insuranceLow + Math.floor(faker.random.number(insuranceRange * 10) / 10);
+    const zip = zips[faker.random.number(zipsCount - 1)];
+    const cost = costLow + faker.random.number(costRange / 10000) * 10000;
+    const insuranceRate = insuranceLow + faker.random.number(insuranceRange * 100) / 100;
     const query = `INSERT INTO properties (
       property_id,
       zip_code,
@@ -78,9 +81,10 @@ async function seedProperties(conn) {
       ${cost},
       ${insuranceRate}
     )`;
-    await conn.query(query);
+    queries.push(conn.query(query));
   }
 
+  await Promise.all(queries);
   console.log('successfully seeded property table');
   return conn;
 }
