@@ -26,7 +26,6 @@ const createDbTables = (conn) => {
   return conn.query(createDBQuery);
 };
 
-// generate 10 zip codes
 const seedZips = (conn, zips) => {
   const taxLow = 0.8;
   const taxRange = 0.4;
@@ -48,7 +47,6 @@ const seedZips = (conn, zips) => {
   return conn.query(query);
 };
 
-// generate 100 properties
 const seedProperties = (conn, zips) => {
   const costLow = 600000;
   const costRange = 2000000;
@@ -56,8 +54,9 @@ const seedProperties = (conn, zips) => {
   const insuranceLow = 0.1;
   const insuranceRange = 0.2;
 
+  const propertyCount = 100;
   let query = '';
-  for (let i = 1; i <= 100; i += 1) {
+  for (let i = 1; i <= propertyCount; i += 1) {
     const zip = zips[faker.random.number(zips.length - 1)];
     const cost = costLow + faker.random.number(costRange / 10000) * 10000;
     const insuranceRate = insuranceLow + faker.random.number(insuranceRange * 100) / 100;
