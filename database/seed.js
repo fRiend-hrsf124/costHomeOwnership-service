@@ -5,12 +5,11 @@ const mysql = require('mysql2/promise');
 const faker = require('faker/locale/en_US');
 const auth = require('./auth');
 
-async function getConn(credentials) {
+const createDbConn = (scopeAuth) => {
   const {
     database, user, password, host,
-  } = credentials;
+  } = scopeAuth;
 
-  // eslint-disable-next-line no-return-await
   return mysql.createConnection({
     host,
     user,
@@ -18,87 +17,85 @@ async function getConn(credentials) {
     database,
     multipleStatements: true,
   });
-}
+};
 
-async function addTables(conn) {
+const createDbTables = (conn) => {
   const schemaFile = path.resolve(__dirname, 'schema.sql');
   const createDBQuery = fs.readFileSync(schemaFile).toString();
 
-  await conn.query(createDBQuery);
-
-  console.log('successfully created tables');
-  return conn;
-}
+  return conn.query(createDBQuery);
+};
 
 // generate 10 zip codes
-async function seedZips(conn, zips) {
+const seedZips = (conn, zips) => {
   const taxLow = 0.8;
   const taxRange = 0.4;
 
-  const queries = [];
+  let query = '';
   for (let i = 0; i < zips.length; i += 1) {
     const zip = zips[i];
     const taxRate = taxLow + faker.random.number(taxRange * 1000) / 1000;
-    const query = `INSERT INTO zips (
+    const partialQuery = `INSERT INTO zips (
       zip_code,
       property_tax_rate
       ) VALUES (
       "${zip}",
       ${taxRate}
-    )`;
-    queries.push(conn.query(query));
+    );\n`;
+    query += partialQuery;
   }
-  await Promise.all(queries);
-  console.log('successfully seeded zips table');
-  return conn;
-}
+
+  return conn.query(query);
+};
 
 // generate 100 properties
-async function seedProperties(conn, zips) {
+const seedProperties = (conn, zips) => {
   const costLow = 600000;
   const costRange = 2000000;
 
   const insuranceLow = 0.1;
   const insuranceRange = 0.2;
 
-  const queries = [];
+  let query = '';
   for (let i = 1; i <= 100; i += 1) {
     const zip = zips[faker.random.number(zips.length - 1)];
     const cost = costLow + faker.random.number(costRange / 10000) * 10000;
     const insuranceRate = insuranceLow + faker.random.number(insuranceRange * 100) / 100;
-    const query = `INSERT INTO properties (
+    const partialQuery = `INSERT INTO properties (
       property_id,
       zip_code,
       redfin_cost_estimate,
       insurance_rate
       ) VALUES (
-      ${i},
-      "${zip}",
-      ${cost},
-      ${insuranceRate}
-    )`;
-    queries.push(conn.query(query));
+        ${i},
+        "${zip}",
+        ${cost},
+        ${insuranceRate}
+        );\n`;
+    query += partialQuery;
   }
 
-  await Promise.all(queries);
+  return conn.query(query);
+};
+
+(async (scopeAuth) => {
+  // TODO - use JS Set with while loop and length checking to avoid duplicates for
+  // larger quantities
+  const sharedZips = [];
+  const zipsCount = 10;
+  for (let i = 0; i < zipsCount; i += 1) {
+    sharedZips.push(faker.address.zipCode());
+  }
+
+  const conn = await createDbConn(scopeAuth);
+  await createDbTables(conn);
+  console.log('successfully created tables');
+  await seedZips(conn, sharedZips);
+  console.log('successfully seeded zips table');
+  await seedProperties(conn, sharedZips);
   console.log('successfully seeded property table');
-  return conn;
-}
-
-
-const sharedZips = [];
-const zipsCount = 10;
-for (let i = 0; i < zipsCount; i += 1) {
-  // TODO - use set with while loop to avoid duplicates
-  sharedZips.push(faker.address.zipCode());
-}
-
-getConn(auth)
-  .then((conn) => addTables(conn))
-  .then((conn) => seedZips(conn, sharedZips))
-  .then((conn) => seedProperties(conn, sharedZips))
-  .then((conn) => conn.close())
-  .catch(console.log);
+  conn.close();
+})(auth).catch(console.log);
 
 // generate 3 lenders
 // lender_nmls - random 6 digit number
