@@ -27,41 +27,55 @@ async function addTables(credentials) {
   return conn;
 }
 
-// generate 100 properties
-async function seedProperties(conn) {
-  const zips = [];
-  const zipsCount = 10;
-  // TODO - remove longer length zips
-  for (let i = 0; i < zipsCount; i += 1) {
-    zips.push(faker.address.zipCode());
-  }
+const zips = [];
+const zipsCount = 10;
+for (let i = 0; i < zipsCount; i += 1) {
+  // TODO - use set with while loop to avoid duplicates
+  zips.push(faker.address.zipCode());
+}
 
-  const costLow = 600000;
-  const costRange = 2000000;
-
+// generate 10 zip codes
+async function seedZips(conn) {
   const taxLow = 0.8;
   const taxRange = 0.4;
+
+  for (let i = 0; i < zipsCount; i += 1) {
+    const zip = zips[i];
+    const taxRate = taxLow + Math.floor(faker.random.number(taxRange * 10) / 10);
+    const query = `INSERT INTO zips (
+      zip_code,
+      property_tax_rate
+      ) VALUES (
+      ${zip},
+      ${taxRate}
+    )`;
+    await conn.query(query);
+  }
+  console.log('successfully seeded zips table');
+  return conn;
+}
+
+// generate 100 properties
+async function seedProperties(conn) {
+  const costLow = 600000;
+  const costRange = 2000000;
 
   const insuranceLow = 0.1;
   const insuranceRange = 0.2;
 
   for (let i = 1; i <= 100; i += 1) {
-    // TODO - use faker for integer generation instead of math.rand
-    const zip = zips[Math.random() * zipsCount];
-    const cost = costLow + Math.random() * costRange;
-    const taxRate = taxLow + Math.random() * taxRange;
-    const insuranceRate = insuranceLow + Math.random() * insuranceRange;
+    const zip = zips[faker.random.number(zipsCount) - 1];
+    const cost = costLow + faker.random.number(costRange / 1000) * 1000;
+    const insuranceRate = insuranceLow + Math.floor(faker.random.number(insuranceRange * 10) / 10);
     const query = `INSERT INTO properties (
       property_id,
-      property_zip_code,
+      zip_code,
       redfin_cost_estimate,
-      property_tax_rate,
       insurance_rate
       ) VALUES (
       ${i},
-      ${zip},
+      "${zip}",
       ${cost},
-      ${taxRate},
       ${insuranceRate}
     )`;
     await conn.query(query);
@@ -72,6 +86,7 @@ async function seedProperties(conn) {
 }
 
 addTables(auth)
+  .then((conn) => seedZips(conn))
   .then((conn) => seedProperties(conn))
   .then((conn) => conn.close())
   .catch(console.log);
