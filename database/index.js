@@ -15,10 +15,10 @@ const conn = new Sequelize(database, user, password,
 conn
   .authenticate()
   .then(() => {
-    console.log('successfully connected to db');
+    console.log(`successfully connected to db '${database}'`);
   })
   .catch((err) => {
-    console.log('unable to connnect to db', err);
+    console.log(`unable to connnect to db '${database}'`, err);
   });
 
 module.exports = conn;

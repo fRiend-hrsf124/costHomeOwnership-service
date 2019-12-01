@@ -26,3 +26,4 @@ dist/
 
 # Authentication info
 */auth.js
+*/s3credentials.csv
