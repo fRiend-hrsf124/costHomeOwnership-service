@@ -104,22 +104,57 @@ const seedLenders = (conn) => {
 };
 
 const seedRates = (conn, zips) => {
-  // generate  rates
-  //   lending_zip_code - pick zips randomly from property zips, even distribution
-  //   apr - 4-6%
-  //   years - 3(a), 5(a), 7(a), 10(a), 10(f), 15(f), 20(f), 30(f)
-  //   loan_type - ARM, FIXED
-  //   cost_low - based on lowest property cost, 5 ranges total
-  //   cost_high - based on highest property cost, 5 ranges total
-  //   down_payment_min - 0, 10, 20%
-  //   credit_min - 660, 680, 700, 720, 740
-  //   lender_id - pick randomly from lender ids
-  //   origination_year - 2019
+  // weighted toward more popular options
+  const terms = [3, 5, 7, 10, 10, 15, 15, 20, 30, 30, 30, 30];
+  const types = ['ARM', 'Fixed', 'Fixed'];
+
+  const rateCount = 1000;
+  let query = '';
+  for (let i = 0; i < rateCount; i += 1) {
+    const zip = zips[faker.random.number(zips.length - 1)];
+    const apr = faker.random.number({ min: 4, max: 5.25, precision: 0.001 });
+    const type = types[faker.random.number(types.length - 1)];
+    const term = terms[faker.random.number(type === 'Fixed'
+      ? { min: 4, max: terms.length - 1 }
+      : 3)];
+    const low = faker.random.number({ min: 0, max: 2000000, precision: 100000 });
+    const high = faker.random.number({ min: 1000000, max: 3500000, precision: 100000 });
+    const downPaymentMin = faker.random.number({ min: 0, max: 20, precision: 10 });
+    const creditMin = faker.random.number({ min: 660, max: 740, precision: 20 });
+    const lenderId = faker.random.number({ min: 1, max: 3 });
+
+    const partialQuery = `INSERT INTO rates (
+      zip_code,
+      apr,
+      term,
+      loan_type,
+      cost_low,
+      cost_high,
+      down_payment_min,
+      credit_min,
+      lender_id,
+      origination_year
+    ) VALUES (
+      "${zip}",
+      ${apr},
+      ${term},
+      "${type}",
+      ${low},
+      ${high},
+      ${downPaymentMin},
+      ${creditMin},
+      ${lenderId},
+      2019
+    );\n`;
+    query += partialQuery;
+  }
+
+  return conn.query(query);
 };
 
 (async (scopeAuth) => {
   // TODO - use JS Set with while loop and length checking to avoid duplicates for
-  // larger quantities
+  // larger set of zips
   const sharedZips = [];
   const zipsCount = 10;
   for (let i = 0; i < zipsCount; i += 1) {
@@ -135,5 +170,7 @@ const seedRates = (conn, zips) => {
   console.log('successfully seeded properties table');
   await seedLenders(conn);
   console.log('successfully seeded lenders table');
+  await seedRates(conn, sharedZips);
+  console.log('successfully seeded rates table');
   conn.close();
 })(auth).catch(console.log);

@@ -33,7 +33,7 @@ CREATE TABLE rates(
   rate_id INTEGER NOT NULL AUTO_INCREMENT,
   zip_code VARCHAR(10),
   apr DECIMAL(5,3),
-  years TINYINT,
+  term TINYINT,
   loan_type VARCHAR(5),
   cost_low INTEGER,
   cost_high INTEGER,
