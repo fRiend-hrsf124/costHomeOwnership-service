@@ -8,17 +8,12 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "seed:dev": "node database/seed.js",
-    "build:dev": "webpack -d -w --config webpack.config.js",
-    "start:dev": "nodemon --inspect server/server.js"
+    "seed:dev": "node database/seed.js"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "mysql2": "^2.0.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
     "sequelize": "^5.21.2"
   },
   "devDependencies": {
