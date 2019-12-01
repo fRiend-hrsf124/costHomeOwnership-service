@@ -8,7 +8,9 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "seed:dev": "node database/seed.js"
+    "seed:dev": "node database/seed.js",
+    "build:dev": "webpack -d -w --config webpack.config.js",
+    "start:dev": "nodemon --inspect server/server.js"
   },
   "dependencies": {
     "express": "^4.17.1",
