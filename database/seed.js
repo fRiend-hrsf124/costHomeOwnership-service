@@ -153,24 +153,25 @@ const seedRates = (conn, zips) => {
 };
 
 (async (scopeAuth) => {
-  // TODO - use JS Set with while loop and length checking to avoid duplicates for
-  // larger set of zips
-  const sharedZips = [];
-  const zipsCount = 10;
-  for (let i = 0; i < zipsCount; i += 1) {
-    sharedZips.push(faker.address.zipCode());
+  let sharedZips = new Set();
+  while (sharedZips.size < 10) {
+    const zip = faker.address.zipCode();
+    if (zip.length === 5) {
+      sharedZips.add(zip);
+    }
   }
+  sharedZips = [...sharedZips];
 
   const conn = await createDbConn(scopeAuth);
   await createDbTables(conn);
-  console.log('successfully created tables');
+  console.log('created database tables');
   await seedZips(conn, sharedZips);
-  console.log('successfully seeded zips table');
+  console.log('seeded zips table');
   await seedProperties(conn, sharedZips);
-  console.log('successfully seeded properties table');
+  console.log('seeded properties table');
   await seedLenders(conn);
-  console.log('successfully seeded lenders table');
+  console.log('seeded lenders table');
   await seedRates(conn, sharedZips);
-  console.log('successfully seeded rates table');
+  console.log('seeded rates table');
   conn.close();
 })(auth).catch(console.log);
