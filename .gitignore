@@ -25,5 +25,4 @@ build/
 public/bundle.js
 
 # Authentication info
-*/auth.js
 */s3credentials.csv

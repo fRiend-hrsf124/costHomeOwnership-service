@@ -8,7 +8,7 @@ const database = process.env.NODE_ENV === 'test' ? 'fRiend-test' : 'fRiend';
 
 const {
   user, password, host,
-} = auth;
+} = process.env.NODE_ENV === 'test' ? auth.authTest : auth.authTest;
 
 const conn = mysql.createConnection({
   host,
