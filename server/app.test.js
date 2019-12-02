@@ -1,0 +1,5 @@
+// const app = require('./app');
+
+test('It adds two numbers', () => {
+  expect(1 + 1).toBe(2);
+});
