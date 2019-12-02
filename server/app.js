@@ -11,13 +11,27 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
-app.get('', (req, res) => {
-  controller.getPropertyData
+app.get('/api/costHomeOwnership/properties', (req, res) => {
+  controller.getPropertyData()
     .then((data) => {
 
     })
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+      res.status(400).end(err);
+    });
+});
 
+app.get('/api/costHomeOwnership/rates', (req, res) => {
+  const { cost, zip } = req.body;
+  controller.getRates(cost, zip)
+    .then((rates) => {
+
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).end(err);
+    });
 });
 
 module.exports = app;

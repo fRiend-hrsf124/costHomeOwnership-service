@@ -1,7 +1,14 @@
-const Sequelize = require('../database/index.js');
+const db = require('../database/index.js');
 
-const getPropertyData = () => Sequelize.find();
+const getPropertyData = () => {
+
+};
+
+const getRates = (cost, zip) => {
+
+};
 
 module.exports = {
   getPropertyData,
+  getRates,
 };
