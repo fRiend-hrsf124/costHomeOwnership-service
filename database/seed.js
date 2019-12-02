@@ -1,6 +1,4 @@
 /* eslint-disable no-console */
-const fs = require('fs');
-const path = require('path');
 const mysql = require('mysql2/promise');
 const faker = require('faker/locale/en_US');
 const auth = require('./auth');
@@ -19,11 +17,18 @@ const createDbConn = (scopeAuth) => {
   });
 };
 
-const createDbTables = (conn) => {
-  const schemaFile = path.resolve(__dirname, 'schema.sql');
-  const createDBQuery = fs.readFileSync(schemaFile).toString();
+const cleanDbTables = (conn) => {
+  const query = `
+    SET FOREIGN_KEY_CHECKS = 0;
 
-  return conn.query(createDBQuery);
+    TRUNCATE TABLE rates;
+    TRUNCATE TABLE lenders;
+    TRUNCATE TABLE properties;
+    TRUNCATE TABLE zips;
+
+    SET FOREIGN_KEY_CHECKS = 1;
+  `;
+  return conn.query(query);
 };
 
 const seedZips = (conn, zips) => {
@@ -88,7 +93,6 @@ const seedLenders = (conn) => {
   const lenderCount = 3;
   let query = '';
   for (let i = 0; i < lenderCount; i += 1) {
-    // lender_nmls - random 6 digit number
     const nmls = faker.random.number({ min: 100000, max: 999999 });
     const partialQuery = `INSERT INTO lenders (
       lender_logo_url,
@@ -163,15 +167,21 @@ const seedRates = (conn, zips) => {
   sharedZips = [...sharedZips];
 
   const conn = await createDbConn(scopeAuth);
-  await createDbTables(conn);
-  console.log('created database tables');
+
+  await cleanDbTables(conn);
+  console.log('cleaned database tables');
+
   await seedZips(conn, sharedZips);
   console.log('seeded zips table');
+
   await seedProperties(conn, sharedZips);
   console.log('seeded properties table');
+
   await seedLenders(conn);
   console.log('seeded lenders table');
+
   await seedRates(conn, sharedZips);
   console.log('seeded rates table');
+
   conn.close();
 })(auth).catch(console.log);

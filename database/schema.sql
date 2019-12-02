@@ -2,18 +2,13 @@ CREATE DATABASE IF NOT EXISTS fRiend;
 
 USE fRiend;
 
-DROP TABLE IF EXISTS rates;
-DROP TABLE IF EXISTS lenders;
-DROP TABLE IF EXISTS properties;
-DROP TABLE IF EXISTS zips;
-
-CREATE TABLE zips(
+CREATE TABLE IF NOT EXISTS zips(
   zip_code VARCHAR(10) NOT NULL,
   property_tax_rate DECIMAL(5,3),
   CONSTRAINT zip_code PRIMARY KEY (zip_code)
 );
 
-CREATE TABLE properties(
+CREATE TABLE IF NOT EXISTS properties(
   property_id INTEGER NOT NULL,
   zip_code VARCHAR(10),
   redfin_cost_estimate INTEGER,
@@ -22,14 +17,14 @@ CREATE TABLE properties(
   CONSTRAINT property_id PRIMARY KEY (property_id)
 );
 
-CREATE TABLE lenders(
+CREATE TABLE IF NOT EXISTS lenders(
   lender_id INTEGER NOT NULL AUTO_INCREMENT,
   lender_logo_url VARCHAR(80),
   lender_nmls INTEGER,
   CONSTRAINT lender_id PRIMARY KEY (lender_id)
 );
 
-CREATE TABLE rates(
+CREATE TABLE IF NOT EXISTS rates(
   rate_id INTEGER NOT NULL AUTO_INCREMENT,
   zip_code VARCHAR(10),
   apr DECIMAL(5,3),
