@@ -11,27 +11,19 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
-app.get('/api/costHomeOwnership/properties', (req, res) => {
-  controller.getPropertyData()
-    .then((data) => {
-
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).end(err);
-    });
+app.get('/api/costHomeOwnership/properties', async (req, res) => {
+  const { id } = req.body;
+  try {
+    const [rows] = await controller.getPropertyData(id);
+    res.end(JSON.stringify(rows[0]));
+  } catch (err) {
+    console.log(err);
+    res.status(400).end('server could not retrieve property data');
+  }
 });
 
 app.get('/api/costHomeOwnership/rates', (req, res) => {
   const { cost, zip } = req.body;
-  controller.getRates(cost, zip)
-    .then((rates) => {
-
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).end(err);
-    });
 });
 
 module.exports = app;
