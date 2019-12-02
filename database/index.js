@@ -1,26 +1,19 @@
 /* eslint-disable no-console */
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 const auth = require('./auth');
 
-let connection;
+const {
+  database, user, password, host,
+} = auth;
 
-const createDbConn = (scopeAuth) => {
-  const {
-    database, user, password, host,
-  } = scopeAuth;
+const conn = mysql.createConnection({
+  host,
+  user,
+  password,
+  database,
+  multipleStatements: true,
+});
 
-  return mysql.createConnection({
-    host,
-    user,
-    password,
-    database,
-    multipleStatements: true,
-  });
-};
+// TODO - move table creation here from seed script
 
-(async (scopeAuth) => {
-  connection = await createDbConn(scopeAuth);
-  console.log('connected to database');
-})(auth).catch(console.log);
-
-module.exports = connection;
+module.exports = conn;
