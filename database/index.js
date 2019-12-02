@@ -1,24 +1,25 @@
 /* eslint-disable no-console */
-const Sequelize = require('sequelize');
+const mysql = require('mysql2');
+const fs = require('fs');
+const path = require('path');
 const auth = require('./auth');
 
 const {
   database, user, password, host,
 } = auth;
 
-const conn = new Sequelize(database, user, password,
-  {
-    host,
-    dialect: 'mysql',
-  });
+const conn = mysql.createConnection({
+  host,
+  user,
+  password,
+  database,
+  multipleStatements: true,
+});
 
-conn
-  .authenticate()
-  .then(() => {
-    console.log(`successfully connected to db '${database}'`);
-  })
-  .catch((err) => {
-    console.log(`unable to connnect to db '${database}'`, err);
-  });
+const schemaFile = path.resolve(__dirname, 'schema.sql');
+const createDBQuery = fs.readFileSync(schemaFile).toString();
+conn.promise().query(createDBQuery)
+  .then(console.log('db connected'))
+  .catch(console.log);
 
 module.exports = conn;
