@@ -5,11 +5,11 @@ const fs = require('fs');
 const path = require('path');
 const auth = require('./auth');
 
-const createDbConn = (scopeAuth) => {
+const createDbConn = (scopeAuth, env) => {
   const {
     user, password, host,
   } = scopeAuth;
-  const database = process.env.NODE_ENV === 'test' ? 'fRiend-test' : 'fRiend';
+  const database = env === 'test' ? 'fRiend-test' : 'fRiend';
 
   return mysql.createConnection({
     host,
@@ -166,7 +166,7 @@ const seedRates = (conn, zips) => {
   return conn.query(query);
 };
 
-(async (scopeAuth) => {
+const seedDb = async (scopeAuth, env) => {
   let sharedZips = new Set();
   while (sharedZips.size < 10) {
     const zip = faker.address.zipCode();
@@ -178,7 +178,7 @@ const seedRates = (conn, zips) => {
 
   const conn = await createDbConn(scopeAuth);
 
-  await createDbTables(conn);
+  await createDbTables(conn, env);
   console.log('created database tables if non-existant');
 
   await cleanDbTables(conn);
@@ -197,4 +197,8 @@ const seedRates = (conn, zips) => {
   console.log('seeded rates table');
 
   conn.close();
-})(auth).catch(console.log);
+};
+
+seedDb(auth).catch(console.log);
+
+module.exports = seedDb;
