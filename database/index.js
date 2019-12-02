@@ -1,24 +1,26 @@
 /* eslint-disable no-console */
-const Sequelize = require('sequelize');
+const mysql = require('mysql2/promise');
 const auth = require('./auth');
 
-const {
-  database, user, password, host,
-} = auth;
+let connection;
 
-const conn = new Sequelize(database, user, password,
-  {
+const createDbConn = (scopeAuth) => {
+  const {
+    database, user, password, host,
+  } = scopeAuth;
+
+  return mysql.createConnection({
     host,
-    dialect: 'mysql',
+    user,
+    password,
+    database,
+    multipleStatements: true,
   });
+};
 
-conn
-  .authenticate()
-  .then(() => {
-    console.log(`successfully connected to db '${database}'`);
-  })
-  .catch((err) => {
-    console.log(`unable to connnect to db '${database}'`, err);
-  });
+(async (scopeAuth) => {
+  connection = await createDbConn(scopeAuth);
+  console.log('connected to database');
+})(auth).catch(console.log);
 
-module.exports = conn;
+module.exports = connection;
