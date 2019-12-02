@@ -13,6 +13,7 @@ app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 app.get('/api/costHomeOwnership/properties', async (req, res) => {
   const { id } = req.body;
+
   try {
     const [properties] = await controller.getPropertyData(id);
     res.json(properties[0]);
@@ -26,6 +27,7 @@ app.get('/api/costHomeOwnership/rates', async (req, res) => {
   const {
     cost, zip, term, type, downPay, credit, origYear,
   } = req.body;
+
   try {
     const [rates] = await controller.getRates(
       cost, zip, term, type, downPay, credit, origYear,

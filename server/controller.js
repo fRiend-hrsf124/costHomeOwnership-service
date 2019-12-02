@@ -4,6 +4,7 @@ const getPropertyData = (id) => {
   const query = `SELECT * FROM properties AS p JOIN zips AS z
     ON p.zip_code = z.zip_code
     WHERE property_id = ?`;
+
   return db.promise().execute(query, [id]);
 };
 
@@ -17,8 +18,8 @@ const getRates = (cost, zip, term, type, downPay, credit, origYear) => {
     AND r.loan_type = ?
     AND r.down_payment_min <= ?
     AND r.credit_min <= ?
-    AND r.origination_year = ?
-    `;
+    AND r.origination_year = ?`;
+
   return db.promise().execute(query, [
     cost,
     cost,
