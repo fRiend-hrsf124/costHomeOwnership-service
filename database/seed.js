@@ -8,7 +8,7 @@ const auth = require('./auth');
 const createDbConn = (scopeAuth, env) => {
   const {
     user, password, host,
-  } = scopeAuth;
+  } = process.env.NODE_ENV === 'test' ? scopeAuth.authTest : scopeAuth.authTest;
   const database = env === 'test' ? 'fRiend-test' : 'fRiend';
 
   return mysql.createConnection({
