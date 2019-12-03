@@ -4,13 +4,20 @@ const authDev = {
   host: 'localhost',
 };
 
-const authTest = {
+const authtest = {
   user: 'test',
   password: 'test',
   host: 'localhost',
 };
 
+const authCCi = {
+  user: 'root',
+  password: 'rootpw',
+  host: 'localhost',
+};
+
 module.exports = {
   authDev,
-  authTest,
+  authtest,
+  authCCi,
 };

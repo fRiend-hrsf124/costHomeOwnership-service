@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "jest",
+    "lint": "eslint .",
     "seed:dev": "node database/seed.js",
     "build:dev": "webpack -d -w --config webpack.config.js",
     "start:dev": "nodemon --inspect server/server.js"

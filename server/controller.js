@@ -1,14 +1,15 @@
 const { dbConn } = require('../database/index.js');
 
-const getPropertyData = (id) => {
+const getPropertyData = async (id) => {
   const query = `SELECT * FROM properties AS p JOIN zips AS z
     ON p.zip_code = z.zip_code
     WHERE property_id = ?`;
 
-  return dbConn.execute(query, [id]);
+  const conn = await dbConn;
+  return conn.execute(query, [id]);
 };
 
-const getRates = (cost, zip, term, type, downPay, credit, origYear) => {
+const getRates = async (cost, zip, term, type, downPay, credit, origYear) => {
   const query = `SELECT * FROM rates AS r JOIN lenders AS l
     ON r.lender_id = l.lender_id
     WHERE r.cost_low <= ?
@@ -20,7 +21,8 @@ const getRates = (cost, zip, term, type, downPay, credit, origYear) => {
     AND r.credit_min <= ?
     AND r.origination_year = ?`;
 
-  return dbConn.execute(query, [
+  const conn = await dbConn;
+  return conn.execute(query, [
     cost,
     cost,
     zip,
