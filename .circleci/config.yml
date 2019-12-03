@@ -10,7 +10,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:10.15.3
-      - image: circleci/mysql:5.7.0
+      - image: circleci/mysql:5.7.28
         environment:
           NODE_ENV: CCi
           MYSQL_ROOT_PASSWORD: rootpw
@@ -33,6 +33,5 @@ workflows:
   version: 2
   lint_and_test:
     jobs:
-      - build
       - lint
       - test
