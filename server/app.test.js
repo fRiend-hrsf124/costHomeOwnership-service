@@ -100,17 +100,13 @@ describe('Server', () => {
   });
 
   describe('GET /api/costHomeOwnership/properties', () => {
-    test('It should respond with a JSON object with property_id key', async () => {
+    test('It should respond with a JSON object with property_id matching request', async () => {
       const body = { id: 1 };
       const res = await request(app)
         .get('/api/costHomeOwnership/properties')
         .send(body);
       expect(res.statusCode).toBe(200);
-      // expect(res.body).toBe(
-      //   expect.objectContaining({
-      //     property_id: 1,
-      //   }),
-      // );
+      expect(res.body.propertyId).toBe(1);
     });
   });
 });
