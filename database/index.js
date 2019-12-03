@@ -19,7 +19,7 @@ const createDbConn = (scopeAuth, env) => {
 };
 
 const selectDbInstance = (conn, env) => {
-  const database = env === 'test' ? 'fRiend_test' : 'fRiend';
+  const database = `fRiend_${env}`;
   const query = `
     CREATE DATABASE IF NOT EXISTS ${database};
     USE ${database};
