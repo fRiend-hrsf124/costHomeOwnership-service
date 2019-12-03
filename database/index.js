@@ -4,22 +4,63 @@ const fs = require('fs');
 const path = require('path');
 const auth = require('./auth');
 
-const {
-  database, user, password, host,
-} = auth;
+const createDbConn = (scopeAuth, env) => {
+  const {
+    user, password, host,
+  } = env === 'test' ? scopeAuth.authTest : scopeAuth.authDev;
 
-const conn = mysql.createConnection({
-  host,
-  user,
-  password,
-  database,
-  multipleStatements: true,
-});
+  return mysql.createConnection({
+    host,
+    user,
+    password,
+    multipleStatements: true,
+  });
+};
 
-const schemaFile = path.resolve(__dirname, 'schema.sql');
-const createDBQuery = fs.readFileSync(schemaFile).toString();
-conn.promise().query(createDBQuery)
-  .then(console.log('db connected'))
-  .catch(console.log);
+const selectDbInstance = (conn, env) => {
+  const database = env === 'test' ? 'fRiend_test' : 'fRiend';
+  const query = `
+    CREATE DATABASE IF NOT EXISTS ${database};
+    USE ${database};
+  `;
 
-module.exports = conn;
+  return conn.query(query);
+};
+
+const testDbConn = (conn, env) => {
+  conn.connect();
+  selectDbInstance(conn, env);
+  console.log(`MySQL connected as user '${env}'`);
+  return conn;
+};
+
+const createDbTables = (conn) => {
+  const schemaFile = path.resolve(__dirname, 'schema.sql');
+  const createDBQuery = fs.readFileSync(schemaFile).toString();
+
+  return conn.query(createDBQuery);
+};
+
+const cleanDbTables = (conn) => {
+  const query = `
+    SET FOREIGN_KEY_CHECKS = 0;
+
+    TRUNCATE TABLE rates;
+    TRUNCATE TABLE lenders;
+    TRUNCATE TABLE properties;
+    TRUNCATE TABLE zips;
+
+    SET FOREIGN_KEY_CHECKS = 1;
+  `;
+  return conn.query(query);
+};
+
+const env = process.env.NODE_ENV || 'dev';
+const untestedConn = createDbConn(auth, env);
+const dbConn = testDbConn(untestedConn, env).promise();
+
+module.exports = {
+  dbConn,
+  createDbTables,
+  cleanDbTables,
+};

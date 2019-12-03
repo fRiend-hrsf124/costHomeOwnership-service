@@ -1,44 +1,6 @@
 /* eslint-disable no-console */
-const mysql = require('mysql2/promise');
 const faker = require('faker/locale/en_US');
-const fs = require('fs');
-const path = require('path');
-const auth = require('./auth');
-
-const createDbConn = (scopeAuth) => {
-  const {
-    database, user, password, host,
-  } = scopeAuth;
-
-  return mysql.createConnection({
-    host,
-    user,
-    password,
-    database,
-    multipleStatements: true,
-  });
-};
-
-const createDbTables = (conn) => {
-  const schemaFile = path.resolve(__dirname, 'schema.sql');
-  const createDBQuery = fs.readFileSync(schemaFile).toString();
-
-  return conn.query(createDBQuery);
-};
-
-const cleanDbTables = (conn) => {
-  const query = `
-    SET FOREIGN_KEY_CHECKS = 0;
-
-    TRUNCATE TABLE rates;
-    TRUNCATE TABLE lenders;
-    TRUNCATE TABLE properties;
-    TRUNCATE TABLE zips;
-
-    SET FOREIGN_KEY_CHECKS = 1;
-  `;
-  return conn.query(query);
-};
+const { dbConn, createDbTables, cleanDbTables } = require('./index');
 
 const seedZips = (conn, zips) => {
   const taxLow = 0.8;
@@ -165,7 +127,7 @@ const seedRates = (conn, zips) => {
   return conn.query(query);
 };
 
-(async (scopeAuth) => {
+const seedDb = async (conn, env) => {
   let sharedZips = new Set();
   while (sharedZips.size < 10) {
     const zip = faker.address.zipCode();
@@ -175,9 +137,7 @@ const seedRates = (conn, zips) => {
   }
   sharedZips = [...sharedZips];
 
-  const conn = await createDbConn(scopeAuth);
-
-  await createDbTables(conn);
+  await createDbTables(conn, env);
   console.log('created database tables if non-existant');
 
   await cleanDbTables(conn);
@@ -195,5 +155,7 @@ const seedRates = (conn, zips) => {
   await seedRates(conn, sharedZips);
   console.log('seeded rates table');
 
-  conn.close();
-})(auth).catch(console.log);
+  await conn.end();
+};
+
+seedDb(dbConn).catch(console.log);

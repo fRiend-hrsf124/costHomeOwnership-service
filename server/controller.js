@@ -1,11 +1,11 @@
-const db = require('../database/index.js');
+const { dbConn } = require('../database/index.js');
 
 const getPropertyData = (id) => {
   const query = `SELECT * FROM properties AS p JOIN zips AS z
     ON p.zip_code = z.zip_code
     WHERE property_id = ?`;
 
-  return db.promise().execute(query, [id]);
+  return dbConn.execute(query, [id]);
 };
 
 const getRates = (cost, zip, term, type, downPay, credit, origYear) => {
@@ -20,7 +20,7 @@ const getRates = (cost, zip, term, type, downPay, credit, origYear) => {
     AND r.credit_min <= ?
     AND r.origination_year = ?`;
 
-  return db.promise().execute(query, [
+  return dbConn.execute(query, [
     cost,
     cost,
     zip,

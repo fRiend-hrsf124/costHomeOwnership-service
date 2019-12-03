@@ -1,7 +1,3 @@
-CREATE DATABASE IF NOT EXISTS fRiend;
-
-USE fRiend;
-
 CREATE TABLE IF NOT EXISTS zips(
   zip_code VARCHAR(10) NOT NULL,
   property_tax_rate DECIMAL(5,3),

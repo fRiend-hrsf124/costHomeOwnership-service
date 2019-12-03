@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyparser = require('body-parser');
 const controller = require('./controller');
+const keysToCamel = require('./camelCaseUtil');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.get('/api/costHomeOwnership/properties', async (req, res) => {
 
   try {
     const [properties] = await controller.getPropertyData(id);
-    res.json(properties[0]);
+    res.json(keysToCamel(properties));
   } catch (err) {
     console.log(err);
     res.status(400).end('server could not retrieve property data');
@@ -32,7 +33,7 @@ app.get('/api/costHomeOwnership/rates', async (req, res) => {
     const [rates] = await controller.getRates(
       cost, zip, term, type, downPay, credit, origYear,
     );
-    res.json(rates);
+    res.json(keysToCamel(rates));
   } catch (err) {
     console.log(err);
     res.status(400).end('server could not retrieve rates data');
