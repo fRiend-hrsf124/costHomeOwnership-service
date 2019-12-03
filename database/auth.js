@@ -12,6 +12,7 @@ const authtest = {
 
 const authCCi = {
   user: 'root',
+  password: 'rootpw',
   host: 'localhost',
 };
 
