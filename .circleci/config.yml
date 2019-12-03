@@ -8,16 +8,16 @@ jobs:
       - run: echo "build"
   lint:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:10.15.3
     steps:
       - checkout
       - run: echo "lint"
   test:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:10.15.3
     steps:
       - checkout
-      - run: echo "test"
+      - run: npm install
       - run: npm run test
 workflows:
   version: 2
