@@ -14,6 +14,8 @@ jobs:
         environment:
           NODE_ENV: CCi
           MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_USER: test
+          MYSQL_PASSWORD: test
     steps:
       - checkout
       - run:
