@@ -5,9 +5,10 @@ const path = require('path');
 const auth = require('./auth');
 
 const createDbConn = (scopeAuth, env) => {
+  const authEnv = `auth${env}`;
   const {
     user, password, host,
-  } = env === 'test' ? scopeAuth.authTest : scopeAuth.authDev;
+  } = scopeAuth[authEnv];
 
   return mysql.createConnection({
     host,
@@ -30,7 +31,7 @@ const selectDbInstance = (conn, env) => {
 const testDbConn = (conn, env) => {
   conn.connect();
   selectDbInstance(conn, env);
-  console.log(`MySQL connected as user '${env}'`);
+  console.log(`MySQL connected for '${env}' env`);
   return conn;
 };
 
@@ -55,7 +56,7 @@ const cleanDbTables = (conn) => {
   return conn.query(query);
 };
 
-const env = process.env.NODE_ENV || 'dev';
+const env = process.env.NODE_ENV || 'Dev';
 const untestedConn = createDbConn(auth, env);
 const dbConn = testDbConn(untestedConn, env).promise();
 

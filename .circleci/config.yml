@@ -2,10 +2,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:10.15.3
     steps:
       - checkout
-      - run: echo "build"
+      - run: echo "complete me"
   lint:
     docker:
       - image: circleci/node:10.15.3
@@ -16,6 +16,8 @@ jobs:
   test:
     docker:
       - image: circleci/node:10.15.3
+        environment:
+          NODE_ENV: CCi
     steps:
       - checkout
       - run: npm install

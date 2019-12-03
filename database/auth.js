@@ -10,7 +10,13 @@ const authTest = {
   host: 'localhost',
 };
 
+const authCCi = {
+  user: 'root',
+  host: 'localhost',
+};
+
 module.exports = {
   authDev,
   authTest,
+  authCCi,
 };
