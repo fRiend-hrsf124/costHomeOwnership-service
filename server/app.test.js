@@ -3,13 +3,14 @@ const request = require('supertest');
 const app = require('./app');
 const { dbConn, createDbTables, cleanDbTables } = require('../database/index');
 
+const zip = 12345;
+
 beforeAll(async () => {
   await createDbTables(dbConn);
 });
 
 beforeEach(async () => {
   // add zip entry
-  const zip = 12345;
   const taxRate = 1.234;
   let query = `INSERT INTO zips (
       zip_code,
@@ -100,13 +101,49 @@ describe('Server', () => {
   });
 
   describe('GET /api/costHomeOwnership/properties', () => {
-    test('It should respond with a JSON object with property_id matching request', async () => {
+    test('It should respond with an array containing a property object with propertyId matching request', async () => {
       const body = { id: 1 };
       const res = await request(app)
         .get('/api/costHomeOwnership/properties')
         .send(body);
       expect(res.statusCode).toBe(200);
-      expect(res.body.propertyId).toBe(1);
+      expect(res.body[0].propertyId).toBe(1);
+    });
+  });
+
+  describe('GET /api/costHomeOwnership/rates', () => {
+    test('It should respond with an array of rate objects matching provided criteria', async () => {
+      const criteria = {
+        cost: 2180000,
+        zip,
+        term: 30,
+        type: 'Fixed',
+        downPay: 20,
+        credit: 740,
+        origYear: 2019,
+      };
+      const res = await request(app)
+        .get('/api/costHomeOwnership/rates')
+        .send(criteria);
+      expect(res.statusCode).toBe(200);
+      expect(res.body[0].rateId).toBe(1);
+    });
+
+    test('It should respond with an empty array if no rates match criteria', async () => {
+      const criteria = {
+        cost: 80000,
+        zip,
+        term: 30,
+        type: 'Fixed',
+        downPay: 20,
+        credit: 740,
+        origYear: 2019,
+      };
+      const res = await request(app)
+        .get('/api/costHomeOwnership/rates')
+        .send(criteria);
+      expect(res.statusCode).toBe(200);
+      expect(res.body.length).toBe(0);
     });
   });
 });

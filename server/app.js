@@ -17,7 +17,7 @@ app.get('/api/costHomeOwnership/properties', async (req, res) => {
 
   try {
     const [properties] = await controller.getPropertyData(id);
-    res.json(keysToCamel(properties[0]));
+    res.json(keysToCamel(properties));
   } catch (err) {
     console.log(err);
     res.status(400).end('server could not retrieve property data');
