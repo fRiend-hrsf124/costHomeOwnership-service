@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'Test';
 const request = require('supertest');
 const app = require('./app');
 const { dbConn, createDbTables, cleanDbTables } = require('../database/index');

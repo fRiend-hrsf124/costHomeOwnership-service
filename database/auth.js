@@ -4,7 +4,7 @@ const authDev = {
   host: 'localhost',
 };
 
-const authtest = {
+const authTest = {
   user: 'test',
   password: 'test',
   host: 'localhost',
@@ -12,5 +12,5 @@ const authtest = {
 
 module.exports = {
   authDev,
-  authtest,
+  authTest,
 };
