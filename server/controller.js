@@ -5,7 +5,7 @@ const getPropertyData = (id) => {
     ON p.zip_code = z.zip_code
     WHERE property_id = ?`;
 
-  return dbConn.promise().execute(query, [id]);
+  return dbConn.execute(query, [id]);
 };
 
 const getRates = (cost, zip, term, type, downPay, credit, origYear) => {
@@ -20,7 +20,7 @@ const getRates = (cost, zip, term, type, downPay, credit, origYear) => {
     AND r.credit_min <= ?
     AND r.origination_year = ?`;
 
-  return dbConn.promise().execute(query, [
+  return dbConn.execute(query, [
     cost,
     cost,
     zip,

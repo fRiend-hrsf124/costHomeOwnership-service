@@ -155,7 +155,7 @@ const seedDb = async (conn, env) => {
   await seedRates(conn, sharedZips);
   console.log('seeded rates table');
 
-  conn.end();
+  await conn.end();
 };
 
-seedDb(dbConn.promise()).catch(console.log);
+seedDb(dbConn).catch(console.log);

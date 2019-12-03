@@ -7,16 +7,31 @@ const auth = require('./auth');
 const createDbConn = (scopeAuth, env) => {
   const {
     user, password, host,
-  } = env === 'test' ? scopeAuth.authTest : scopeAuth.authTest;
-  const database = env === 'test' ? 'fRiend-test' : 'fRiend';
+  } = env === 'test' ? scopeAuth.authTest : scopeAuth.authDev;
 
   return mysql.createConnection({
     host,
     user,
     password,
-    database,
     multipleStatements: true,
   });
+};
+
+const selectDbInstance = (conn, env) => {
+  const database = env === 'test' ? 'fRiend_test' : 'fRiend';
+  const query = `
+    CREATE DATABASE IF NOT EXISTS ${database};
+    USE ${database};
+  `;
+
+  return conn.query(query);
+};
+
+const testDbConn = (conn, env) => {
+  conn.connect();
+  selectDbInstance(conn, env);
+  console.log(`MySQL connected as user '${env}'`);
+  return conn;
 };
 
 const createDbTables = (conn) => {
@@ -40,8 +55,9 @@ const cleanDbTables = (conn) => {
   return conn.query(query);
 };
 
-const env = process.env.NODE_ENV;
-const dbConn = createDbConn(auth, env);
+const env = process.env.NODE_ENV || 'dev';
+const untestedConn = createDbConn(auth, env);
+const dbConn = testDbConn(untestedConn, env).promise();
 
 module.exports = {
   dbConn,
