@@ -1,20 +1,25 @@
 version: 2
 jobs:
-  lint:
+  build:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
+      - run: echo "build"
+  lint:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
       - run: echo "lint"
   test:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
-      - checkout
       - run: echo "test"
 workflows:
   version: 2
   lint_and_test:
     jobs:
+      - build
       - lint
       - test
