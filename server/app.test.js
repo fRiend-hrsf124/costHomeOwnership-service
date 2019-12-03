@@ -7,9 +7,6 @@ const zip = 12345;
 
 beforeAll(async () => {
   await createDbTables(dbConn);
-});
-
-beforeEach(async () => {
   // add zip entry
   const taxRate = 1.234;
   let query = `INSERT INTO zips (
@@ -84,11 +81,14 @@ beforeEach(async () => {
   await dbConn.query(query);
 });
 
+beforeEach(async () => {
+});
+
 afterEach(async () => {
-  await cleanDbTables(dbConn);
 });
 
 afterAll(async () => {
+  await cleanDbTables(dbConn);
   await dbConn.end();
 });
 
