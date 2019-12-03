@@ -1,21 +1,13 @@
 // Convert db keys to camelCase for client
 // https://matthiashager.com/converting-snake-case-to-camel-case-object-keys-with-javascript
-const keysToCamel = function (o) {
-  const toCamel = (s) => {
-    return s.replace(/([-_][a-z])/ig, ($1) => {
-      return $1.toUpperCase()
-        .replace('-', '')
-        .replace('_', '');
-    });
-  };
+const keysToCamel = (o) => {
+  const toCamel = (s) => s.replace(/([-_][a-z])/ig, ($1) => $1.toUpperCase()
+    .replace('-', '')
+    .replace('_', ''));
 
-  const isArray = function (a) {
-    return Array.isArray(a);
-  };
+  const isArray = (a) => Array.isArray(a);
 
-  const isObject = function (o) {
-    return o === Object(o) && !isArray(o) && typeof o !== 'function';
-  };
+  const isObject = (obj) => obj === Object(obj) && !isArray(obj) && typeof obj !== 'function';
 
   if (isObject(o)) {
     const n = {};

@@ -11,7 +11,8 @@ jobs:
       - image: circleci/node:10.15.3
     steps:
       - checkout
-      - run: echo "lint"
+      - run: npm install
+      - run:
   test:
     docker:
       - image: circleci/node:10.15.3
