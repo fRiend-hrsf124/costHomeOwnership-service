@@ -5,19 +5,19 @@
        - image: circleci/ruby:2.4.1
      steps:
        - checkout
-       - run: echo "A first hello"
+       - run: echo "build"
    lint:
      docker:
        - image: circleci/ruby:2.4.1
      steps:
        - checkout
-       - run: echo "A first hello"
+       - run: echo "lint"
    test:
      docker:
        - image: circleci/ruby:2.4.1
      steps:
        - checkout
-       - run: echo "A first hello"
+       - run: echo "test"
   workflows:
     version: 2
     all:
