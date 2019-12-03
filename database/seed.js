@@ -128,6 +128,8 @@ const seedRates = (conn, zips) => {
 };
 
 const seedDb = async (conn, env) => {
+  const db = await conn;
+
   let sharedZips = new Set();
   while (sharedZips.size < 10) {
     const zip = faker.address.zipCode();
@@ -137,25 +139,25 @@ const seedDb = async (conn, env) => {
   }
   sharedZips = [...sharedZips];
 
-  await createDbTables(conn, env);
+  await createDbTables(db, env);
   console.log('created database tables if non-existant');
 
-  await cleanDbTables(conn);
+  await cleanDbTables(db);
   console.log('cleaned database tables');
 
-  await seedZips(conn, sharedZips);
+  await seedZips(db, sharedZips);
   console.log('seeded zips table');
 
-  await seedProperties(conn, sharedZips);
+  await seedProperties(db, sharedZips);
   console.log('seeded properties table');
 
-  await seedLenders(conn);
+  await seedLenders(db);
   console.log('seeded lenders table');
 
-  await seedRates(conn, sharedZips);
+  await seedRates(db, sharedZips);
   console.log('seeded rates table');
 
-  await conn.end();
+  await db.end();
 };
 
 seedDb(dbConn).catch(console.log);

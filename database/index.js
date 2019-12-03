@@ -1,37 +1,30 @@
 /* eslint-disable no-console */
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 const fs = require('fs');
 const path = require('path');
 const auth = require('./auth');
 
-const createDbConn = (scopeAuth, env) => {
+const createDbConn = async (scopeAuth, env) => {
   const authEnv = `auth${env}`;
   const {
     user, password, host,
   } = scopeAuth[authEnv];
 
-  return mysql.createConnection({
+  const conn = await mysql.createConnection({
     host,
     user,
     password,
     multipleStatements: true,
   });
-};
 
-const selectDbInstance = (conn, env) => {
   const database = `fRiend_${env}`;
   const query = `
     CREATE DATABASE IF NOT EXISTS ${database};
     USE ${database};
   `;
+  await conn.query(query);
 
-  return conn.query(query);
-};
-
-const testDbConn = (conn, env) => {
-  conn.connect();
-  selectDbInstance(conn, env);
-  console.log(`MySQL connected for '${env}' env`);
+  console.log(`MySQL connected for '${env}' env to database '${database}'`);
   return conn;
 };
 
@@ -57,11 +50,9 @@ const cleanDbTables = (conn) => {
 };
 
 const env = process.env.NODE_ENV || 'Dev';
-const untestedConn = createDbConn(auth, env);
-const dbConn = testDbConn(untestedConn, env).promise();
 
 module.exports = {
-  dbConn,
+  dbConn: createDbConn(auth, env).catch(console.log),
   createDbTables,
   cleanDbTables,
 };

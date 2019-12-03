@@ -6,8 +6,9 @@ const { dbConn, createDbTables, cleanDbTables } = require('../database/index');
 const zip = 12345;
 
 beforeAll(async () => {
-  await createDbTables(dbConn);
-  await cleanDbTables(dbConn);
+  const conn = await dbConn;
+  await createDbTables(conn);
+  await cleanDbTables(conn);
 
   // add zip entry
   const taxRate = 1.234;
@@ -18,7 +19,7 @@ beforeAll(async () => {
       "${zip}",
       ${taxRate}
     );\n`;
-  await dbConn.query(query);
+  await conn.query(query);
 
   // add property entry
   const cost = 1234567;
@@ -34,7 +35,7 @@ beforeAll(async () => {
       ${cost},
       ${insuranceRate}
       );\n`;
-  await dbConn.query(query);
+  await conn.query(query);
 
   // add lender entry
   const lenderLogoUrl = 'https://hrsf-fec-cho-lenderlogos.s3-us-west-1.amazonaws.com/10271_logo.gif';
@@ -46,7 +47,7 @@ beforeAll(async () => {
       "${lenderLogoUrl}",
       ${nmls}
       );\n`;
-  await dbConn.query(query);
+  await conn.query(query);
 
   // add rate entry
   const apr = 4.123;
@@ -80,7 +81,7 @@ beforeAll(async () => {
       ${lenderId},
       2019
       );\n`;
-  await dbConn.query(query);
+  await conn.query(query);
 });
 
 beforeEach(async () => {
@@ -90,8 +91,9 @@ afterEach(async () => {
 });
 
 afterAll(async () => {
-  await cleanDbTables(dbConn);
-  await dbConn.end();
+  const conn = await dbConn;
+  await cleanDbTables(conn);
+  await conn.end();
 });
 
 describe('Server', () => {
