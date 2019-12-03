@@ -109,6 +109,14 @@ describe('Server', () => {
       expect(res.statusCode).toBe(200);
       expect(res.body[0].propertyId).toBe(1);
     });
+
+    test('It should respond with 400 for invalid request', async () => {
+      const body = {};
+      const res = await request(app)
+        .get('/api/costHomeOwnership/properties')
+        .send(body);
+      expect(res.statusCode).toBe(400);
+    });
   });
 
   describe('GET /api/costHomeOwnership/rates', () => {
@@ -144,6 +152,14 @@ describe('Server', () => {
         .send(criteria);
       expect(res.statusCode).toBe(200);
       expect(res.body.length).toBe(0);
+    });
+
+    test('It should respond with 400 for invalid request', async () => {
+      const body = {};
+      const res = await request(app)
+        .get('/api/costHomeOwnership/rates')
+        .send(body);
+      expect(res.statusCode).toBe(400);
     });
   });
 });
