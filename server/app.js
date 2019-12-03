@@ -12,14 +12,13 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
-app.get('/api/costHomeOwnership/properties', async (req, res) => {
-  const { id } = req.body;
+app.get('/api/costHomeOwnership/properties/:id', async (req, res) => {
+  const { id } = req.params;
 
   try {
     const [properties] = await controller.getPropertyData(id);
     res.json(keysToCamel(properties));
   } catch (err) {
-    // console.log(err);
     res.status(400).end('server could not retrieve property data');
   }
 });
