@@ -10,12 +10,15 @@ jobs:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
+      - checkout
       - run: echo "lint"
   test:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
+      - checkout
       - run: echo "test"
+      - run: npm run test
 workflows:
   version: 2
   lint_and_test:
