@@ -25,10 +25,10 @@ class App extends React.Component {
     this.getRates = this.getRates.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { propertyId } = this.state;
-    this.getPropertyData(propertyId);
-    this.getRates();
+    await this.getPropertyData(propertyId);
+    await this.getRates();
   }
 
   async getPropertyData(id) {
