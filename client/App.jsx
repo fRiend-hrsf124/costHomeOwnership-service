@@ -22,7 +22,7 @@ class App extends React.Component {
       rates: [],
     };
 
-    this.handleCostInputChange = this.handleCostInputChange.bind(this);
+    this.handleCostSubmit = this.handleCostSubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -77,8 +77,10 @@ class App extends React.Component {
     }
   }
 
-  handleCostInputChange(state) {
-    this.setState(state);
+  handleCostSubmit(e) {
+    e.preventDefault();
+    const cost = e.target.children.cost.value;
+    this.setState({ cost });
   }
 
   render() {
@@ -98,8 +100,9 @@ class App extends React.Component {
       <div>
         <CostInputs
           cost={cost}
+          key={cost}
           downPay={downPay}
-          handleChange={this.handleCostInputChange}
+          handleCostSubmit={this.handleCostSubmit}
         />
       </div>
     );

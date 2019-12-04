@@ -1,51 +1,20 @@
+/* eslint-disable import/extensions */
 import React from 'react';
+import Price from './CostInputPrice.jsx';
 
-class CostInputs extends React.Component {
-  constructor(props) {
-    super(props);
-    const { cost, downPay } = this.props;
-
-    this.state = {
-      localCost: cost,
-      localDownPay: downPay,
-    };
-
-    this.handleCostChange = this.handleCostChange.bind(this);
-    this.handleCostSubmit = this.handleCostSubmit.bind(this);
-  }
-
-  handleCostChange(e) {
-    this.setState({ localCost: e.target.value });
-  }
-
-  handleCostSubmit(e) {
-    e.preventDefault();
-    const { handleChange } = this.props;
-    const { localCost } = this.state;
-    handleChange({ cost: localCost });
-  }
-
-  render() {
-    // eslint-disable-next-line no-unused-vars
-    const { localCost, localDownPay } = this.state;
-    // const downPayCost = localCost * (localDownPay / 100);
-    return (
-      <div>
-        <form onSubmit={this.handleCostSubmit}>
-          <label htmlFor="cost">Home Price</label>
-          <br />
-          <input
-            type="text"
-            id="cost"
-            value={localCost}
-            onChange={this.handleCostChange}
-          />
-        </form>
-        {/* <input id="downPayCost">{downPayCost}</input> */}
-        {/* <input id="downPay">{downPay}</input> */}
-      </div>
-    );
-  }
-}
+const CostInputs = (props) => {
+  const { cost, handleCostSubmit } = props;
+  // const downPayCost = localCost * (localDownPay / 100);
+  return (
+    <div>
+      <Price
+        cost={cost}
+        handleCostSubmit={handleCostSubmit}
+      />
+      {/* <input id="downPayCost">{downPayCost}</input> */}
+      {/* <input id="downPay">{downPay}</input> */}
+    </div>
+  );
+};
 
 export default CostInputs;
