@@ -1,22 +1,23 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'test';
 const request = require('supertest');
+const querystring = require('querystring');
 const app = require('./app');
 const { dbConn, createDbTables, cleanDbTables } = require('../database/index');
 
-const zip = 12345;
+const zipCode = 12345;
 
 beforeAll(async () => {
   const conn = await dbConn;
   await createDbTables(conn);
   await cleanDbTables(conn);
 
-  // add zip entry
+  // add zipCode entry
   const taxRate = 1.234;
   let query = `INSERT INTO zips (
       zip_code,
       property_tax_rate
       ) VALUES (
-      "${zip}",
+      "${zipCode}",
       ${taxRate}
     );\n`;
   await conn.query(query);
@@ -31,7 +32,7 @@ beforeAll(async () => {
     insurance_rate
     ) VALUES (
       ${1},
-      "${zip}",
+      "${zipCode}",
       ${cost},
       ${insuranceRate}
       );\n`;
@@ -70,7 +71,7 @@ beforeAll(async () => {
     lender_id,
     origination_year
     ) VALUES (
-      "${zip}",
+      "${zipCode}",
       ${apr},
       ${term},
       "${type}",
@@ -106,20 +107,10 @@ describe('Server', () => {
 
   describe('GET /api/costHomeOwnership/properties', () => {
     test('It should respond with an array containing a property object with propertyId matching request', async () => {
-      const body = { id: 1 };
       const res = await request(app)
-        .get('/api/costHomeOwnership/properties')
-        .send(body);
+        .get('/api/costHomeOwnership/properties?id=1');
       expect(res.statusCode).toBe(200);
       expect(res.body[0].propertyId).toBe(1);
-    });
-
-    test('It should respond with 400 for invalid request', async () => {
-      const body = {};
-      const res = await request(app)
-        .get('/api/costHomeOwnership/properties')
-        .send(body);
-      expect(res.statusCode).toBe(400);
     });
   });
 
@@ -127,16 +118,15 @@ describe('Server', () => {
     test('It should respond with an array of rate objects matching provided criteria', async () => {
       const criteria = {
         cost: 2180000,
-        zip,
+        zipCode,
         term: 30,
         type: 'Fixed',
         downPay: 20,
         credit: 740,
         origYear: 2019,
       };
-      const res = await request(app)
-        .get('/api/costHomeOwnership/rates')
-        .send(criteria);
+      const url = `/api/costHomeOwnership/rates?${querystring.stringify(criteria)}`;
+      const res = await request(app).get(url);
       expect(res.statusCode).toBe(200);
       expect(res.body[0].rateId).toBe(1);
     });
@@ -144,16 +134,15 @@ describe('Server', () => {
     test('It should respond with an empty array if no rates match criteria', async () => {
       const criteria = {
         cost: 80000,
-        zip,
+        zipCode,
         term: 30,
         type: 'Fixed',
         downPay: 20,
         credit: 740,
         origYear: 2019,
       };
-      const res = await request(app)
-        .get('/api/costHomeOwnership/rates')
-        .send(criteria);
+      const url = `/api/costHomeOwnership/rates?${querystring.stringify(criteria)}`;
+      const res = await request(app).get(url);
       expect(res.statusCode).toBe(200);
       expect(res.body.length).toBe(0);
     });
