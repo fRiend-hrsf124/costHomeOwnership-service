@@ -26,35 +26,32 @@ const HomePrice = (props) => {
     handleCostSubmit(costForm);
   };
 
-
   return (
-    <div>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <label htmlFor="cost">Home Price</label>
-        <br />
-        <input
-          type="text"
-          id="cost"
-          name="cost"
-          value={costForm}
-          onChange={handleTextChange}
-          onKeyDown={handleTextEnter}
-          onBlur={handleSubmit}
-        />
-        <br />
-        <input
-          type="range"
-          id="costSlider"
-          name="costSlider"
-          min={redfinCostEstimate * 0.8}
-          max={redfinCostEstimate * 1.2}
-          value={costSlider}
-          step={1000}
-          onChange={handleSliderChange}
-          onMouseUp={handleSubmit}
-        />
-      </form>
-    </div>
+    <form onSubmit={(e) => e.preventDefault()}>
+      <label htmlFor="cost">Home Price</label>
+      <br />
+      <input
+        type="text"
+        id="cost"
+        name="cost"
+        value={costForm}
+        onChange={handleTextChange}
+        onKeyDown={handleTextEnter}
+        onBlur={handleSubmit}
+      />
+      <br />
+      <input
+        type="range"
+        id="costSlider"
+        name="costSlider"
+        min={redfinCostEstimate * 0.8}
+        max={redfinCostEstimate * 1.2}
+        value={costSlider}
+        step={1000}
+        onChange={handleSliderChange}
+        onMouseUp={handleSubmit}
+      />
+    </form>
   );
 };
 

@@ -4,9 +4,7 @@ const DownPayment = (props) => {
   const { cost, downPay, handleDownPaySubmit } = props;
 
   const [downPayNew, setDownPayNew] = React.useState(downPay);
-
   const [downPayForm, setDownPayForm] = React.useState(downPay);
-
   const [downPayDollarsForm, setDownPayDollarsForm] = React.useState(cost * (downPay / 100));
 
   const handleDownPayChange = (e) => {
@@ -21,36 +19,39 @@ const DownPayment = (props) => {
     setDownPayNew((nextVal / cost) * 100);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleTextEnter = (e) => {
+    if (e.key === 'Enter') {
+      handleDownPaySubmit(downPayNew);
+    }
+  };
+
+  const handleSubmit = () => {
     handleDownPaySubmit(downPayNew);
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="downPayDollars">Down Payment</label>
-        <br />
-        <input
-          type="text"
-          id="downPayDollars"
-          name="downPayDollars"
-          value={downPayDollarsForm}
-          onChange={handleDownPayDollarsChange}
-          onBlur={handleSubmit}
-        />
-      </form>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          id="downPay"
-          name="downPay"
-          value={downPayForm}
-          onChange={handleDownPayChange}
-          onBlur={handleSubmit}
-        />
-      </form>
-    </div>
+    <form onSubmit={(e) => e.preventDefault()}>
+      <label htmlFor="downPayDollars">Down Payment</label>
+      <br />
+      <input
+        type="text"
+        id="downPayDollars"
+        name="downPayDollars"
+        value={downPayDollarsForm}
+        onChange={handleDownPayDollarsChange}
+        onBlur={handleSubmit}
+        onKeyDown={handleTextEnter}
+      />
+      <input
+        type="text"
+        id="downPay"
+        name="downPay"
+        value={downPayForm}
+        onChange={handleDownPayChange}
+        onBlur={handleSubmit}
+        onKeyDown={handleTextEnter}
+      />
+    </form>
   );
 };
 
