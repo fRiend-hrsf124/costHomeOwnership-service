@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 
 class CostInputs extends React.Component {
@@ -32,20 +31,18 @@ class CostInputs extends React.Component {
     // const downPayCost = localCost * (localDownPay / 100);
     return (
       <div>
-        <span>
-          <form onSubmit={this.handleCostSubmit}>
-            <label htmlFor="cost">Home Price</label>
-            <br />
-            <input
-              type="text"
-              id="cost"
-              value={localCost}
-              onChange={this.handleCostChange}
-            />
-          </form>
-          {/* <input id="downPayCost">{downPayCost}</input> */}
-          {/* <input id="downPay">{downPay}</input> */}
-        </span>
+        <form onSubmit={this.handleCostSubmit}>
+          <label htmlFor="cost">Home Price</label>
+          <br />
+          <input
+            type="text"
+            id="cost"
+            value={localCost}
+            onChange={this.handleCostChange}
+          />
+        </form>
+        {/* <input id="downPayCost">{downPayCost}</input> */}
+        {/* <input id="downPay">{downPay}</input> */}
       </div>
     );
   }

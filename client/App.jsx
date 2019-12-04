@@ -1,6 +1,5 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import axios from 'axios';
 import CostInputs from './components/CostInputs.jsx';
@@ -14,7 +13,7 @@ class App extends React.Component {
       redfinCostEstimate: null,
       insuranceRate: null,
       propertyTaxRate: null,
-      cost: 80000,
+      cost: 10,
       term: 30,
       type: 'Fixed',
       downPay: 20,
