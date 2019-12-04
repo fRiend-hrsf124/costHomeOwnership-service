@@ -71,7 +71,6 @@ class App extends React.Component {
   render() {
     const {
       rates,
-      zipCode,
       redfinCostEstimate,
       insuranceRate,
       propertyTaxRate,
