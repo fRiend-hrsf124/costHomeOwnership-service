@@ -25,7 +25,6 @@ app.get('/api/costHomeOwnership/rates', async (req, res) => {
     cost, zipCode, term, type, downPay, credit, origYear,
   } = req.query;
   // TODO - check security implications
-
   try {
     const [rates] = await controller.getRates(
       cost, zipCode, term, type, downPay, credit, origYear,
