@@ -106,20 +106,10 @@ describe('Server', () => {
 
   describe('GET /api/costHomeOwnership/properties', () => {
     test('It should respond with an array containing a property object with propertyId matching request', async () => {
-      const body = { id: 1 };
       const res = await request(app)
-        .get('/api/costHomeOwnership/properties')
-        .send(body);
+        .get('/api/costHomeOwnership/properties/1');
       expect(res.statusCode).toBe(200);
       expect(res.body[0].propertyId).toBe(1);
-    });
-
-    test('It should respond with 400 for invalid request', async () => {
-      const body = {};
-      const res = await request(app)
-        .get('/api/costHomeOwnership/properties')
-        .send(body);
-      expect(res.statusCode).toBe(400);
     });
   });
 
