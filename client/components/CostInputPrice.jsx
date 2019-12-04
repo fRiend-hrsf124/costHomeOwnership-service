@@ -9,8 +9,13 @@ const Price = (props) => {
     setCost(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleCostSubmit(costForm);
+  };
+
   return (
-    <form onSubmit={handleCostSubmit}>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="cost">Home Price</label>
       <br />
       <input

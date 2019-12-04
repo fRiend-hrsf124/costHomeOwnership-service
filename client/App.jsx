@@ -77,9 +77,7 @@ class App extends React.Component {
     }
   }
 
-  handleCostSubmit(e) {
-    e.preventDefault();
-    const cost = e.target.children.cost.value;
+  handleCostSubmit(cost) {
     this.setState({ cost });
   }
 
