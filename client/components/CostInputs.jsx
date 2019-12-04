@@ -34,8 +34,7 @@ class CostInputs extends React.Component {
       <div>
         <span>
           <form onSubmit={this.handleCostSubmit}>
-            {/* <label htmlFor="cost">Home Price</label> */}
-            Home Price
+            <label htmlFor="cost">Home Price</label>
             <br />
             <input
               type="text"
