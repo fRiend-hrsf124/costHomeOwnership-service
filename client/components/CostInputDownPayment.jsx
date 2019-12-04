@@ -6,6 +6,7 @@ const DownPayment = (props) => {
   const [downPayNew, setDownPayNew] = React.useState(downPay);
   const [downPayForm, setDownPayForm] = React.useState(downPay);
   const [downPayDollarsForm, setDownPayDollarsForm] = React.useState(cost * (downPay / 100));
+  const [downPaySlider, setDownPaySlider] = React.useState(downPay);
 
   const handleDownPayChange = (e) => {
     const nextVal = e.target.value;
@@ -23,6 +24,14 @@ const DownPayment = (props) => {
     if (e.key === 'Enter') {
       handleDownPaySubmit(downPayNew);
     }
+  };
+
+  const handleSliderChange = (e) => {
+    const newDownPaySlider = e.target.value;
+    setDownPaySlider(newDownPaySlider);
+    setDownPayNew(newDownPaySlider);
+    setDownPayForm(newDownPaySlider);
+    setDownPayDollarsForm(cost * (newDownPaySlider / 100));
   };
 
   const handleSubmit = () => {
@@ -50,6 +59,18 @@ const DownPayment = (props) => {
         onChange={handleDownPayChange}
         onBlur={handleSubmit}
         onKeyDown={handleTextEnter}
+      />
+      <br />
+      <input
+        type="range"
+        id="downPaySlider"
+        name="downPaySlider"
+        min={0}
+        max={100}
+        value={downPaySlider}
+        step={1}
+        onChange={handleSliderChange}
+        onMouseUp={handleSubmit}
       />
     </form>
   );
