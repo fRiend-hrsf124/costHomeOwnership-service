@@ -12,7 +12,7 @@ class App extends React.Component {
       redfinCostEstimate: null,
       insuranceRate: null,
       propertyTaxRate: null,
-      cost: 800000,
+      cost: 80000,
       term: 30,
       type: 'Fixed',
       downPay: 20,
@@ -59,8 +59,17 @@ class App extends React.Component {
     const {
       cost, zipCode, term, type, downPay, credit, origYear,
     } = this.state;
+
+    const queries = {
+      cost, zipCode, term, type, downPay, credit, origYear,
+    };
+
+    const queryString = Object.keys(queries)
+      .map((k) => `${k}=${queries[k]}`)
+      .join('&');
+
     try {
-      const res = await axios.get(`/api/costHomeOwnership/rates?cost=${cost}&zipCode=${zipCode}&term=${term}&type=${type}&downPay=${downPay}&credit=${credit}&origYear=${origYear}`);
+      const res = await axios.get(`/api/costHomeOwnership/rates?${queryString}`);
       const rates = await res.data;
       this.setState({ rates });
     } catch (err) {
