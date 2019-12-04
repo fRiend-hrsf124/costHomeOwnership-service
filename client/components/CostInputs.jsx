@@ -4,27 +4,44 @@ import React from 'react';
 class CostInputs extends React.Component {
   constructor(props) {
     super(props);
+    const { cost, downPay } = this.props;
 
+    this.state = {
+      localCost: cost,
+      localDownPay: downPay,
+    };
+
+    this.handleCostChange = this.handleCostChange.bind(this);
     this.handleCostSubmit = this.handleCostSubmit.bind(this);
+  }
+
+  handleCostChange(e) {
+    this.setState({ localCost: e.target.value });
   }
 
   handleCostSubmit(e) {
     e.preventDefault();
     const { handleChange } = this.props;
-    const cost = e.target.value;
-    handleChange({ cost });
+    const { localCost } = this.state;
+    handleChange({ cost: localCost });
   }
 
   render() {
-    const { cost, downPay } = this.props;
-    const downPayCost = cost * (downPay / 100);
+    const { localCost, localDownPay } = this.state;
+    // const downPayCost = localCost * (localDownPay / 100);
     return (
       <div>
         <span>
-          <label>
+          <form onSubmit={this.handleCostSubmit}>
+            <label>
             Home Price
-            <input id="cost" value={cost} onChange={this.handleCostSubmit} />
-          </label>
+              <input
+                id="cost"
+                value={localCost}
+                onChange={this.handleCostChange}
+              />
+            </label>
+          </form>
           {/* <input id="downPayCost">{downPayCost}</input> */}
           {/* <input id="downPay">{downPay}</input> */}
         </span>
