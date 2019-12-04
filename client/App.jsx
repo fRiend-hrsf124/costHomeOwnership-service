@@ -1,7 +1,9 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import axios from 'axios';
+import CostInputs from './components/CostInputs.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,8 +23,7 @@ class App extends React.Component {
       rates: [],
     };
 
-    this.getPropertyData = this.getPropertyData.bind(this);
-    this.getRates = this.getRates.bind(this);
+    this.handleCostInputChange = this.handleCostInputChange.bind(this);
   }
 
   async componentDidMount() {
@@ -77,15 +78,27 @@ class App extends React.Component {
     }
   }
 
+  handleCostInputChange(state) {
+    this.setState(state);
+  }
+
   render() {
     const {
       rates,
-      redfinCostEstimate,
       insuranceRate,
       propertyTaxRate,
+      redfinCostEstimate,
+      cost,
+      downPay,
     } = this.state;
     return (
-      <div>hi from react</div>
+      <div>
+        <CostInputs
+          cost={cost}
+          downPay={downPay}
+          handleChange={this.handleCostInputChange}
+        />
+      </div>
     );
   }
 }
