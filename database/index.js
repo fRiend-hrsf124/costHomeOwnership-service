@@ -5,10 +5,9 @@ const path = require('path');
 const auth = require('./auth');
 
 const createDbConn = async (scopeAuth, env) => {
-  const authEnv = `auth${env}`;
   const {
     user, password, host,
-  } = scopeAuth[authEnv];
+  } = scopeAuth[env];
 
   const conn = await mysql.createConnection({
     host,
@@ -49,7 +48,7 @@ const cleanDbTables = (conn) => {
   return conn.query(query);
 };
 
-const env = process.env.NODE_ENV || 'Dev';
+const env = process.env.NODE_ENV || 'dev';
 
 module.exports = {
   dbConn: createDbConn(auth, env).catch(console.log),

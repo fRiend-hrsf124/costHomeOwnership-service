@@ -1,23 +1,16 @@
-const authDev = {
+const dev = {
   user: 'dev',
   password: 'dev',
   host: 'localhost',
 };
 
-const authtest = {
+const test = {
   user: 'test',
   password: 'test',
   host: 'localhost',
 };
 
-const authCCi = {
-  user: 'root',
-  password: 'rootpw',
-  host: 'localhost',
-};
-
 module.exports = {
-  authDev,
-  authtest,
-  authCCi,
+  dev,
+  test,
 };

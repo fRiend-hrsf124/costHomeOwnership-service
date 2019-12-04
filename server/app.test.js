@@ -1,4 +1,4 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'test';
+process.env.NODE_ENV = 'test';
 const request = require('supertest');
 const querystring = require('querystring');
 const app = require('./app');
