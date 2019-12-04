@@ -23,6 +23,7 @@ class App extends React.Component {
     };
 
     this.handleCostSubmit = this.handleCostSubmit.bind(this);
+    this.handleDownPaySubmit = this.handleDownPaySubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -81,6 +82,10 @@ class App extends React.Component {
     this.setState({ cost });
   }
 
+  handleDownPaySubmit(downPay) {
+    this.setState({ downPay });
+  }
+
   render() {
     const {
       // eslint-disable-next-line no-unused-vars
@@ -98,9 +103,10 @@ class App extends React.Component {
       <div>
         <CostInputs
           cost={cost}
-          key={cost}
+          key={cost * downPay}
           downPay={downPay}
           handleCostSubmit={this.handleCostSubmit}
+          handleDownPaySubmit={this.handleDownPaySubmit}
         />
       </div>
     );

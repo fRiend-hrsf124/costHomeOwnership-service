@@ -1,18 +1,26 @@
 /* eslint-disable import/extensions */
 import React from 'react';
-import Price from './CostInputPrice.jsx';
+import HomePrice from './CostInputHomePrice.jsx';
+import DownPayment from './CostInputDownPayment.jsx';
 
 const CostInputs = (props) => {
-  const { cost, handleCostSubmit } = props;
-  // const downPayCost = localCost * (localDownPay / 100);
+  const {
+    cost, handleCostSubmit, downPay, handleDownPaySubmit,
+  } = props;
+
   return (
     <div>
-      <Price
-        cost={cost}
-        handleCostSubmit={handleCostSubmit}
-      />
-      {/* <input id="downPayCost">{downPayCost}</input> */}
-      {/* <input id="downPay">{downPay}</input> */}
+      <span>
+        <HomePrice
+          cost={cost}
+          handleCostSubmit={handleCostSubmit}
+        />
+        <DownPayment
+          cost={cost}
+          downPay={downPay}
+          handleDownPaySubmit={handleDownPaySubmit}
+        />
+      </span>
     </div>
   );
 };

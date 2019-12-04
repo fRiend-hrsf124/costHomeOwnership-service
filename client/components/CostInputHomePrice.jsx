@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Price = (props) => {
+const HomePrice = (props) => {
   const { cost, handleCostSubmit } = props;
   const [costForm, setCost] = React.useState(cost);
 
@@ -30,4 +30,4 @@ const Price = (props) => {
   );
 };
 
-export default Price;
+export default HomePrice;
