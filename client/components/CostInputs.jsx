@@ -5,7 +5,11 @@ import DownPayment from './CostInputDownPayment.jsx';
 
 const CostInputs = (props) => {
   const {
-    cost, handleCostSubmit, downPay, handleDownPaySubmit,
+    cost,
+    handleCostSubmit,
+    downPay,
+    handleDownPaySubmit,
+    redfinCostEstimate,
   } = props;
 
   return (
@@ -14,6 +18,7 @@ const CostInputs = (props) => {
         <HomePrice
           cost={cost}
           handleCostSubmit={handleCostSubmit}
+          redfinCostEstimate={redfinCostEstimate}
         />
         <DownPayment
           cost={cost}

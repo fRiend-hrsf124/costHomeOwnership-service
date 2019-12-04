@@ -94,19 +94,19 @@ class App extends React.Component {
       insuranceRate,
       // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
-      // eslint-disable-next-line no-unused-vars
-      redfinCostEstimate,
       cost,
       downPay,
+      redfinCostEstimate,
     } = this.state;
     return (
       <div>
         <CostInputs
-          cost={cost}
           key={cost * downPay}
-          downPay={downPay}
+          cost={cost}
           handleCostSubmit={this.handleCostSubmit}
+          downPay={downPay}
           handleDownPaySubmit={this.handleDownPaySubmit}
+          redfinCostEstimate={redfinCostEstimate}
         />
       </div>
     );
