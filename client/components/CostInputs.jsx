@@ -27,20 +27,22 @@ class CostInputs extends React.Component {
   }
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { localCost, localDownPay } = this.state;
     // const downPayCost = localCost * (localDownPay / 100);
     return (
       <div>
         <span>
           <form onSubmit={this.handleCostSubmit}>
-            <label>
+            {/* <label htmlFor="cost">Home Price</label> */}
             Home Price
-              <input
-                id="cost"
-                value={localCost}
-                onChange={this.handleCostChange}
-              />
-            </label>
+            <br />
+            <input
+              type="text"
+              id="cost"
+              value={localCost}
+              onChange={this.handleCostChange}
+            />
           </form>
           {/* <input id="downPayCost">{downPayCost}</input> */}
           {/* <input id="downPay">{downPay}</input> */}

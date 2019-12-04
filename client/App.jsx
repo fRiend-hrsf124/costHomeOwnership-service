@@ -84,9 +84,13 @@ class App extends React.Component {
 
   render() {
     const {
+      // eslint-disable-next-line no-unused-vars
       rates,
+      // eslint-disable-next-line no-unused-vars
       insuranceRate,
+      // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
+      // eslint-disable-next-line no-unused-vars
       redfinCostEstimate,
       cost,
       downPay,
