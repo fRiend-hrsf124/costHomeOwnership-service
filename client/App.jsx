@@ -7,36 +7,70 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      property: {
-        propertyId: props.id,
-        zipCode: '',
-        redfinCostEstimate: null,
-        insuranceRate: null,
-        propertyTaxRate: null,
-      },
+      propertyId: props.id,
+      zipCode: '',
+      redfinCostEstimate: null,
+      insuranceRate: null,
+      propertyTaxRate: null,
+      // cost: 80000,
+      // term: 30,
+      // type: 'Fixed',
+      // downPay: 20,
+      // credit: 740,
+      // origYear: 2019,
       rates: [],
     };
 
     this.getPropertyData = this.getPropertyData.bind(this);
+    // this.getRates = this.getRates.bind(this);
   }
 
   componentDidMount() {
-    const { property } = this.state;
-    this.getPropertyData(property.propertyId);
+    const { propertyId } = this.state;
+    this.getPropertyData(propertyId);
+    // this.getRates();
   }
 
   async getPropertyData(id) {
     try {
       const res = await axios.get(`/api/costHomeOwnership/properties?id=${id}`);
-      const property = await res.data[0];
-      this.setState({ property });
+      const {
+        propertyId, zipCode, redfinCostEstimate, insuranceRate, propertyTaxRate,
+      } = await res.data[0];
+      this.setState({
+        propertyId, zipCode, redfinCostEstimate, insuranceRate, propertyTaxRate,
+      });
     } catch (err) {
       console.log(err);
     }
   }
 
+  // async getRates() {
+  //   try {
+  //     const res = await axios.get(`/api/costHomeOwnership/rates?
+  //       cost=${}&
+  //       zip=${}&
+  //       term=${}&
+  //       type=${}&
+  //       downPay=${}&
+  //       credit=${}&
+  //       origYear=${}
+  //     `);
+  //     const rates = await res.data;
+  //     this.setState({ rates });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
   render() {
-    const { property, rates } = this.state;
+    const {
+      rates,
+      zipCode,
+      redfinCostEstimate,
+      insuranceRate,
+      propertyTaxRate,
+    } = this.state;
     return (
       <div>hi from react</div>
     );

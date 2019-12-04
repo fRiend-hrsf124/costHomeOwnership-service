@@ -1,19 +1,16 @@
 /* eslint-disable no-console */
 const express = require('express');
 const path = require('path');
-const bodyparser = require('body-parser');
 const controller = require('./controller');
 const keysToCamel = require('./camelCaseUtil');
 
 const app = express();
 
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: false }));
-
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 app.get('/api/costHomeOwnership/properties', async (req, res) => {
   const { id } = req.query;
+  // TODO - check security implications
 
   try {
     const [properties] = await controller.getPropertyData(id);
@@ -25,16 +22,16 @@ app.get('/api/costHomeOwnership/properties', async (req, res) => {
 
 app.get('/api/costHomeOwnership/rates', async (req, res) => {
   const {
-    cost, zip, term, type, downPay, credit, origYear,
-  } = req.body;
+    cost, zipCode, term, type, downPay, credit, origYear,
+  } = req.query;
+  // TODO - check security implications
 
   try {
     const [rates] = await controller.getRates(
-      cost, zip, term, type, downPay, credit, origYear,
+      cost, zipCode, term, type, downPay, credit, origYear,
     );
     res.json(keysToCamel(rates));
   } catch (err) {
-    // console.log(err);
     res.status(400).end('server could not retrieve rates data');
   }
 });
