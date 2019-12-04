@@ -107,7 +107,7 @@ describe('Server', () => {
   describe('GET /api/costHomeOwnership/properties', () => {
     test('It should respond with an array containing a property object with propertyId matching request', async () => {
       const res = await request(app)
-        .get('/api/costHomeOwnership/properties/1');
+        .get('/api/costHomeOwnership/properties?id=1');
       expect(res.statusCode).toBe(200);
       expect(res.body[0].propertyId).toBe(1);
     });

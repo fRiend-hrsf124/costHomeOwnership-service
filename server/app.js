@@ -8,12 +8,12 @@ const keysToCamel = require('./camelCaseUtil');
 const app = express();
 
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.urlencoded({ extended: false }));
 
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
-app.get('/api/costHomeOwnership/properties/:id', async (req, res) => {
-  const { id } = req.params;
+app.get('/api/costHomeOwnership/properties', async (req, res) => {
+  const { id } = req.query;
 
   try {
     const [properties] = await controller.getPropertyData(id);

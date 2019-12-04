@@ -27,10 +27,9 @@ class App extends React.Component {
 
   async getPropertyData(id) {
     try {
-      const res = await axios.get(`/api/costHomeOwnership/properties/${id}`);
+      const res = await axios.get(`/api/costHomeOwnership/properties?id=${id}`);
       const property = await res.data[0];
       this.setState({ property });
-      console.log(property);
     } catch (err) {
       console.log(err);
     }
