@@ -27,26 +27,30 @@ const DownPayment = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="downPay">Down Payment</label>
-      <br />
-      <input
-        type="text"
-        id="downPayDollars"
-        name="downPayDollars"
-        value={downPayDollarsForm}
-        onChange={handleDownPayDollarsChange}
-        onBlur={handleSubmit}
-      />
-      <input
-        type="text"
-        id="downPay"
-        name="downPay"
-        value={downPayForm}
-        onChange={handleDownPayChange}
-        onBlur={handleSubmit}
-      />
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="downPayDollars">Down Payment</label>
+        <br />
+        <input
+          type="text"
+          id="downPayDollars"
+          name="downPayDollars"
+          value={downPayDollarsForm}
+          onChange={handleDownPayDollarsChange}
+          onBlur={handleSubmit}
+        />
+      </form>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          id="downPay"
+          name="downPay"
+          value={downPayForm}
+          onChange={handleDownPayChange}
+          onBlur={handleSubmit}
+        />
+      </form>
+    </div>
   );
 };
 
