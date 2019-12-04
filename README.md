@@ -1,6 +1,6 @@
 # Project Name
 
-> Project description
+> fRiend - Cost of Home Ownership module
 
 ## Related Projects
 
