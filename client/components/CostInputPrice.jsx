@@ -24,6 +24,7 @@ const Price = (props) => {
         name="cost"
         value={costForm}
         onChange={handleChange}
+        onBlur={handleSubmit}
       />
     </form>
   );
