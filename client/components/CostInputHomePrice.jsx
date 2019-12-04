@@ -10,26 +10,26 @@ const HomePrice = (props) => {
     setCost(e.target.value);
   };
 
+  const handleTextEnter = (e) => {
+    if (e.key === 'Enter') {
+      handleCostSubmit(costForm);
+    }
+  };
+
   const handleSliderChange = (e) => {
     const newCost = e.target.value;
     setCostSlider(newCost);
     setCost(newCost);
   };
 
-  const handleSliderRelease = () => {
+  const handleSubmit = () => {
     handleCostSubmit(costForm);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleCostSubmit(costForm);
-  };
 
   return (
-    // use onkeydown instead of multiple forms for enter to submit
-    // https://stackoverflow.com/questions/33211672/how-to-submit-a-form-using-enter-key-in-react-js/33212911
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="cost">Home Price</label>
         <br />
         <input
@@ -38,10 +38,9 @@ const HomePrice = (props) => {
           name="cost"
           value={costForm}
           onChange={handleTextChange}
+          onKeyDown={handleTextEnter}
           onBlur={handleSubmit}
         />
-      </form>
-      <form>
         <br />
         <input
           type="range"
@@ -52,7 +51,7 @@ const HomePrice = (props) => {
           value={costSlider}
           step={1000}
           onChange={handleSliderChange}
-          onMouseUp={handleSliderRelease}
+          onMouseUp={handleSubmit}
         />
       </form>
     </div>
