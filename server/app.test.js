@@ -112,6 +112,12 @@ describe('Server', () => {
       expect(res.statusCode).toBe(200);
       expect(res.body[0].propertyId).toBe(1);
     });
+
+    test('It should respond with 400 for a request with no id', async () => {
+      const res = await request(app)
+        .get('/api/costHomeOwnership/properties');
+      expect(res.statusCode).toBe(400);
+    });
   });
 
   describe('GET /api/costHomeOwnership/rates', () => {
@@ -147,11 +153,9 @@ describe('Server', () => {
       expect(res.body.length).toBe(0);
     });
 
-    test('It should respond with 400 for invalid request', async () => {
-      const body = {};
+    test('It should respond with 400 for a request without required queries', async () => {
       const res = await request(app)
-        .get('/api/costHomeOwnership/rates')
-        .send(body);
+        .get('/api/costHomeOwnership/rates');
       expect(res.statusCode).toBe(400);
     });
   });
