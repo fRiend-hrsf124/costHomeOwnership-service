@@ -1,8 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import DownPayment from './CostInputDownPayment';
 
 describe('CostInputDownPayment', () => {
+  const mountNode = 'root';
   let downPayment;
   const cost = 800000;
   const downPay = 20;
@@ -13,7 +15,11 @@ describe('CostInputDownPayment', () => {
       cost={cost}
       downPay={downPay}
       handleDownPaySubmit={handleDownPaySubmit}
-    />, { attachTo: document.getElementById('root') });
+    />, { attachTo: document.getElementById(mountNode) });
+  });
+
+  afterAll(() => {
+    ReactDOM.unmountComponentAtNode(mountNode);
   });
 
   describe('Props', () => {
