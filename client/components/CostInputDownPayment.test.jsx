@@ -6,7 +6,7 @@ describe('CostInputDownPayment', () => {
   let downPayment;
   const cost = 800000;
   const downPay = 20;
-  const handleDownPaySubmit = () => { };
+  const handleDownPaySubmit = jest.fn();
 
   beforeAll(() => {
     downPayment = mount(<DownPayment
@@ -29,5 +29,22 @@ describe('CostInputDownPayment', () => {
   test('It should set downPaySlider value correctly', () => {
     const domDownPaySlider = downPayment.find('#downPaySlider').props().value;
     expect(domDownPaySlider).toEqual(downPay);
+  });
+
+  test('It should call update handleDownPaySubmit and update state when moving slider', () => {
+    const domDownPaySliderNode = downPayment.find('#downPaySlider');
+    // const changedDownPay = 25;
+    // domDownPaySliderNode.simulate('change', { target: { value: changedDownPay } });
+
+    // const {
+    //   downPaySlider, downPayNew, downPayForm, downPayDollarsForm,
+    // } = downPayment.state();
+    // expect(downPaySlider).toBe(changedDownPay);
+    // expect(downPayNew).toBe(changedDownPay);
+    // expect(downPayForm).toBe(changedDownPay);
+    // expect(downPayDollarsForm).toBe(cost * (changedDownPay / 100));
+
+    domDownPaySliderNode.simulate('mouseUp');
+    expect(handleDownPaySubmit).toHaveBeenCalled();
   });
 });
