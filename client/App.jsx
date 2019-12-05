@@ -1,7 +1,8 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import axios from 'axios';
+import CostInputs from './components/CostInputs.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class App extends React.Component {
       redfinCostEstimate: null,
       insuranceRate: null,
       propertyTaxRate: null,
-      cost: 80000,
+      cost: 10,
       term: 30,
       type: 'Fixed',
       downPay: 20,
@@ -21,8 +22,8 @@ class App extends React.Component {
       rates: [],
     };
 
-    this.getPropertyData = this.getPropertyData.bind(this);
-    this.getRates = this.getRates.bind(this);
+    this.handleCostSubmit = this.handleCostSubmit.bind(this);
+    this.handleDownPaySubmit = this.handleDownPaySubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -77,15 +78,37 @@ class App extends React.Component {
     }
   }
 
+  handleCostSubmit(cost) {
+    this.setState({ cost });
+  }
+
+  handleDownPaySubmit(downPay) {
+    this.setState({ downPay });
+  }
+
   render() {
     const {
+      // eslint-disable-next-line no-unused-vars
       rates,
-      redfinCostEstimate,
+      // eslint-disable-next-line no-unused-vars
       insuranceRate,
+      // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
+      cost,
+      downPay,
+      redfinCostEstimate,
     } = this.state;
     return (
-      <div>hi from react</div>
+      <div>
+        <CostInputs
+          key={cost * downPay}
+          cost={cost}
+          handleCostSubmit={this.handleCostSubmit}
+          downPay={downPay}
+          handleDownPaySubmit={this.handleDownPaySubmit}
+          redfinCostEstimate={redfinCostEstimate}
+        />
+      </div>
     );
   }
 }
