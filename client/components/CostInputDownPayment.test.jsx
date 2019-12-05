@@ -19,6 +19,7 @@ describe('CostInputDownPayment', () => {
   });
 
   afterAll(() => {
+    // TODO - check that this functions as intended
     ReactDOM.unmountComponentAtNode(mountNode);
   });
 
