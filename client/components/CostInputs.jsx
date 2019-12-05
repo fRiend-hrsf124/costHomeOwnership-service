@@ -14,18 +14,16 @@ const CostInputs = (props) => {
 
   return (
     <div>
-      <span>
-        <HomePrice
-          cost={cost}
-          handleCostSubmit={handleCostSubmit}
-          redfinCostEstimate={redfinCostEstimate}
-        />
-        <DownPayment
-          cost={cost}
-          downPay={downPay}
-          handleDownPaySubmit={handleDownPaySubmit}
-        />
-      </span>
+      <HomePrice
+        cost={cost}
+        handleCostSubmit={handleCostSubmit}
+        redfinCostEstimate={redfinCostEstimate}
+      />
+      <DownPayment
+        cost={cost}
+        downPay={downPay}
+        handleDownPaySubmit={handleDownPaySubmit}
+      />
     </div>
   );
 };
