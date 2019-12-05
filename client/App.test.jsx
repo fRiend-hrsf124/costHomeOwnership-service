@@ -14,19 +14,24 @@ describe('App', () => {
   const propertyTaxRate = 1.234;
 
   beforeAll(() => {
+    const getPropertyDataRes = () => Promise.resolve({
+      data: [{
+        propertyId,
+        zipCode,
+        redfinCostEstimate,
+        insuranceRate,
+        propertyTaxRate,
+      }],
+    });
+
+    const getRatesRes = () => Promise.resolve({
+      data: [],
+    });
+
+    // handle componentDidMount calls
     mockAxios.get
-      .mockImplementationOnce(() => Promise.resolve({
-        data: [{
-          propertyId,
-          zipCode,
-          redfinCostEstimate,
-          insuranceRate,
-          propertyTaxRate,
-        }],
-      }))
-      .mockImplementationOnce(() => Promise.resolve({
-        data: [],
-      }));
+      .mockImplementationOnce(getPropertyDataRes)
+      .mockImplementationOnce(getRatesRes);
 
     wrapper = mount(<App id={propertyId} />,
       { attachTo: document.getElementById(mountNode) });
@@ -37,9 +42,14 @@ describe('App', () => {
     ReactDOM.unmountComponentAtNode(mountNode);
   });
 
-  test('It should mount one component', async () => {
-    // update
-    const compCount = wrapper.find('div').children().length;
-    expect(compCount).toBe(3);
+  test('It should render CostInputs component with cost prop before server calls', () => {
+    const costInputsCompCost = wrapper.find('CostInputs').props().cost;
+    expect(costInputsCompCost).toBe(10);
+  });
+
+  test('It should render CostInputs component with cost prop after server calls', () => {
+    wrapper.update();
+    const costInputsCompCost = wrapper.find('CostInputs').props().cost;
+    expect(costInputsCompCost).toBe(redfinCostEstimate);
   });
 });
