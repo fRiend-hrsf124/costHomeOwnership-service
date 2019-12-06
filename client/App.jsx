@@ -32,10 +32,9 @@ class App extends React.Component {
     this.handleUserSubmit = this.handleUserSubmit.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { propertyId } = this.state;
-    await this.getPropertyData(propertyId);
-    await this.getRates();
+    this.getPropertyData(propertyId);
   }
 
   async getPropertyData(id) {
@@ -56,7 +55,7 @@ class App extends React.Component {
         insuranceRate,
         propertyTaxRate,
         cost: redfinCostEstimate,
-      });
+      }, this.getRates);
     } catch (err) {
       console.log(err);
     }

@@ -9,13 +9,13 @@ describe('DownPayment', () => {
   let wrapper;
   const cost = 800000;
   const downPay = 20;
-  const handleDownPaySubmit = jest.fn();
+  const handleUserSubmit = jest.fn();
 
   beforeAll(() => {
     wrapper = mount(<DownPayment
       cost={cost}
       downPay={downPay}
-      handleDownPaySubmit={handleDownPaySubmit}
+      handleUserSubmit={handleUserSubmit}
     />, { attachTo: document.getElementById(mountNode) });
   });
 
@@ -50,9 +50,9 @@ describe('DownPayment', () => {
       expect(wrapper.find('#downPayDollars').getElements()[2].props.value).toBe(cost * (changedDownPay / 100));
     });
 
-    test('It should call update handleDownPaySubmit after moving slider', () => {
+    test('It should call update handleUserSubmit after moving slider', () => {
       wrapper.find('#downPaySlider').find('input').simulate('mouseUp');
-      expect(handleDownPaySubmit).toHaveBeenCalled();
+      expect(handleUserSubmit).toHaveBeenCalled();
     });
   });
 });
