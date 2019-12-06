@@ -1,8 +1,13 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import CostInputs from './components/CostInputs.jsx';
+
+const Container = styled.div`
+  max-width: 667px;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -80,10 +85,12 @@ class App extends React.Component {
 
   handleCostSubmit(cost) {
     this.setState({ cost });
+    this.getRates();
   }
 
   handleDownPaySubmit(downPay) {
     this.setState({ downPay });
+    this.getRates();
   }
 
   render() {
@@ -99,7 +106,7 @@ class App extends React.Component {
       redfinCostEstimate,
     } = this.state;
     return (
-      <div>
+      <Container>
         <CostInputs
           key={cost * downPay}
           cost={cost}
@@ -108,7 +115,7 @@ class App extends React.Component {
           handleDownPaySubmit={this.handleDownPaySubmit}
           redfinCostEstimate={redfinCostEstimate}
         />
-      </div>
+      </Container>
     );
   }
 }
