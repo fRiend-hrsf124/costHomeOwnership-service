@@ -3,12 +3,16 @@ import { shallow } from 'enzyme';
 import CostInputs from './CostInputs';
 
 describe('CostInputs', () => {
-  let costInputs;
+  let wrapper;
   beforeAll(() => {
-    costInputs = shallow(<CostInputs />);
+    wrapper = shallow(<CostInputs />);
   });
 
-  test('It should mount two components', () => {
-    expect(costInputs.find('div').children().length).toBe(2);
+  test('It should mount HomePrice component', () => {
+    expect(wrapper.find('HomePrice').length).toBe(1);
+  });
+
+  test('It should mount DownPayment component', () => {
+    expect(wrapper.find('DownPayment').length).toBe(1);
   });
 });
