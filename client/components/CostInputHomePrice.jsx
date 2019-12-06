@@ -1,13 +1,25 @@
+/* eslint-disable import/extensions */
 import React from 'react';
+import styled from 'styled-components';
+import { formatNum, parseUserStr } from '../utils';
+import { Box, Input, Slider } from './CostInput.styles.jsx';
+
+const Container = styled.span`
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 10px;
+`;
 
 const HomePrice = (props) => {
   const { cost, handleCostSubmit, redfinCostEstimate } = props;
   const [costForm, setCost] = React.useState(cost);
   const [costSlider, setCostSlider] = React.useState(cost);
+  const [inputSelected, setInputSelected] = React.useState(false);
 
+  const inputRef = React.createRef();
 
   const handleTextChange = (e) => {
-    setCost(e.target.value);
+    setCost(parseUserStr(e.target.value, costForm));
   };
 
   const handleTextEnter = (e) => {
@@ -17,30 +29,39 @@ const HomePrice = (props) => {
   };
 
   const handleSliderChange = (e) => {
-    const newCost = e.target.value;
+    const newCost = parseUserStr(e.target.value, costForm);
     setCostSlider(newCost);
     setCost(newCost);
   };
 
-  const handleSubmit = () => {
+  const handleInputDeselect = () => {
+    setInputSelected(false);
     handleCostSubmit(costForm);
   };
 
+  const handleInputSelect = () => {
+    setInputSelected(true);
+    inputRef.current.focus();
+  };
+
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <label htmlFor="cost">Home Price</label>
-      <br />
-      <input
-        type="text"
-        id="cost"
-        name="cost"
-        value={costForm}
-        onChange={handleTextChange}
-        onKeyDown={handleTextEnter}
-        onBlur={handleSubmit}
-      />
-      <br />
-      <input
+    <Container>
+      <span>Home Price</span>
+      <Box
+        onBlur={handleInputDeselect}
+        onFocus={handleInputSelect}
+      >
+        <Input
+          type="text"
+          id="cost"
+          ref={inputRef}
+          name="cost"
+          value={inputSelected ? costForm : formatNum(costForm)}
+          onChange={handleTextChange}
+          onKeyDown={handleTextEnter}
+        />
+      </Box>
+      <Slider
         type="range"
         id="costSlider"
         name="costSlider"
@@ -49,9 +70,9 @@ const HomePrice = (props) => {
         value={costSlider}
         step={1000}
         onChange={handleSliderChange}
-        onMouseUp={handleSubmit}
+        onMouseUp={() => handleCostSubmit(costForm)}
       />
-    </form>
+    </Container>
   );
 };
 

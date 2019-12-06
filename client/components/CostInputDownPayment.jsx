@@ -1,4 +1,25 @@
+/* eslint-disable import/extensions */
 import React from 'react';
+import styled from 'styled-components';
+import { formatNum, parseUserStr } from '../utils';
+import { Box, Input, Slider } from './CostInput.styles.jsx';
+
+const Container = styled.span`
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 10px;
+`;
+
+const SplitContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const SubContainer = styled.div`
+  width: ${(props) => props.width}%;
+  flex-basis: ${(props) => props.width}%;
+`;
 
 const DownPayment = (props) => {
   const { cost, downPay, handleDownPaySubmit } = props;
@@ -7,15 +28,20 @@ const DownPayment = (props) => {
   const [downPayForm, setDownPayForm] = React.useState(downPay);
   const [downPayDollarsForm, setDownPayDollarsForm] = React.useState(cost * (downPay / 100));
   const [downPaySlider, setDownPaySlider] = React.useState(downPay);
+  const [inputSelected, setInputSelected] = React.useState(false);
+  const [inputDollarsSelected, setInputDollarsSelected] = React.useState(false);
+
+  const inputRef = React.createRef();
+  const inputDollarsRef = React.createRef();
 
   const handleDownPayChange = (e) => {
-    const nextVal = e.target.value;
+    const nextVal = parseUserStr(e.target.value, downPayNew);
     setDownPayForm(nextVal);
     setDownPayNew(nextVal);
   };
 
   const handleDownPayDollarsChange = (e) => {
-    const nextVal = e.target.value;
+    const nextVal = parseUserStr(e.target.value, downPayDollarsForm);
     setDownPayDollarsForm(nextVal);
     setDownPayNew((nextVal / cost) * 100);
   };
@@ -27,41 +53,71 @@ const DownPayment = (props) => {
   };
 
   const handleSliderChange = (e) => {
-    const newDownPaySlider = e.target.value;
+    const newDownPaySlider = parseUserStr(e.target.value, downPayNew);
     setDownPaySlider(newDownPaySlider);
     setDownPayNew(newDownPaySlider);
     setDownPayForm(newDownPaySlider);
     setDownPayDollarsForm(cost * (newDownPaySlider / 100));
   };
 
-  const handleSubmit = () => {
+  const handleInputDollarsDeselect = () => {
+    setInputDollarsSelected(false);
     handleDownPaySubmit(downPayNew);
   };
 
+  const handleInputDollarsSelect = () => {
+    setInputDollarsSelected(true);
+    inputDollarsRef.current.focus();
+  };
+
+  const handleInputDeselect = () => {
+    setInputSelected(false);
+    handleDownPaySubmit(downPayNew);
+  };
+
+  const handleInputSelect = () => {
+    setInputSelected(true);
+    inputRef.current.focus();
+  };
+
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <label htmlFor="downPayDollars">Down Payment</label>
-      <br />
-      <input
-        type="text"
-        id="downPayDollars"
-        name="downPayDollars"
-        value={downPayDollarsForm}
-        onChange={handleDownPayDollarsChange}
-        onBlur={handleSubmit}
-        onKeyDown={handleTextEnter}
-      />
-      <input
-        type="text"
-        id="downPay"
-        name="downPay"
-        value={downPayForm}
-        onChange={handleDownPayChange}
-        onBlur={handleSubmit}
-        onKeyDown={handleTextEnter}
-      />
-      <br />
-      <input
+    <Container>
+      <span>Down Payment</span>
+      <SplitContainer>
+        <SubContainer width={70}>
+          <Box
+            onBlur={handleInputDollarsDeselect}
+            onFocus={handleInputDollarsSelect}
+          >
+            <Input
+              type="text"
+              id="downPayDollars"
+              ref={inputDollarsRef}
+              name="downPayDollars"
+              value={inputDollarsSelected ? downPayDollarsForm : formatNum(downPayDollarsForm)}
+              onChange={handleDownPayDollarsChange}
+              onKeyDown={handleTextEnter}
+            />
+          </Box>
+        </SubContainer>
+        <SubContainer width={30}>
+          <Box
+            onBlur={handleInputDeselect}
+            onFocus={handleInputSelect}
+          >
+            <Input
+              type="text"
+              id="downPay"
+              ref={inputRef}
+              name="downPay"
+              value={inputSelected ? downPayForm : `${downPayForm}%`}
+              onChange={handleDownPayChange}
+              onKeyDown={handleTextEnter}
+            />
+          </Box>
+        </SubContainer>
+      </SplitContainer>
+      <Slider
         type="range"
         id="downPaySlider"
         name="downPaySlider"
@@ -70,9 +126,9 @@ const DownPayment = (props) => {
         value={downPaySlider}
         step={1}
         onChange={handleSliderChange}
-        onMouseUp={handleSubmit}
+        onMouseUp={() => handleDownPaySubmit(downPayNew)}
       />
-    </form>
+    </Container>
   );
 };
 
