@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import DownPayment from './DownPayment';
+import { formatNum } from '../../utils';
 
-describe('CostInputDownPayment', () => {
+describe('DownPayment', () => {
   const mountNode = 'root';
   let downPayment;
   const cost = 800000;
@@ -25,17 +26,17 @@ describe('CostInputDownPayment', () => {
 
   describe('Props', () => {
     test('It should set passed in downPay prop to downPay input value', () => {
-      const domDownPay = downPayment.find('#downPay').props().value;
-      expect(domDownPay).toEqual(downPay);
+      const domDownPay = downPayment.find('#downPay').getElements()[2].props.value;
+      expect(domDownPay).toEqual(`${downPay}%`);
     });
 
     test('It should set downPayDollars value correctly', () => {
-      const domDownPayDollars = downPayment.find('#downPayDollars').props().value;
-      expect(domDownPayDollars).toEqual((downPay / 100) * cost);
+      const domDownPayDollars = downPayment.find('#downPayDollars').getElements()[2].props.value;
+      expect(domDownPayDollars).toEqual(formatNum((downPay / 100) * cost));
     });
 
     test('It should set downPaySlider value correctly', () => {
-      const domDownPaySlider = downPayment.find('#downPaySlider').props().value;
+      const domDownPaySlider = downPayment.find('#downPaySlider').getElements()[2].props.value;
       expect(domDownPaySlider).toEqual(downPay);
     });
   });
@@ -43,14 +44,14 @@ describe('CostInputDownPayment', () => {
   describe('Slider', () => {
     test('It should update numeric values on percent and dollars inputs', () => {
       const changedDownPay = 25;
-      downPayment.find('#downPaySlider').simulate('change', { target: { value: changedDownPay } });
-      expect(downPayment.find('#downPaySlider').props().value).toBe(changedDownPay);
-      expect(downPayment.find('#downPay').props().value).toBe(changedDownPay);
-      expect(downPayment.find('#downPayDollars').props().value).toBe(cost * (changedDownPay / 100));
+      downPayment.find('#downPaySlider').find('input').simulate('change', { target: { value: `${changedDownPay}%` } });
+      expect(downPayment.find('#downPaySlider').getElements()[2].props.value).toBe(changedDownPay);
+      expect(downPayment.find('#downPay').getElements()[2].props.value).toBe(changedDownPay);
+      expect(downPayment.find('#downPayDollars').getElements()[2].props.value).toBe(cost * (changedDownPay / 100));
     });
 
     test('It should call update handleDownPaySubmit after moving slider', () => {
-      downPayment.find('#downPaySlider').simulate('mouseUp');
+      downPayment.find('#downPaySlider').find('input').simulate('mouseUp');
       expect(handleDownPaySubmit).toHaveBeenCalled();
     });
   });
