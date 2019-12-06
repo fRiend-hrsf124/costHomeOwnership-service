@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { formatNum, parseUserStr } from '../../utils';
 import {
@@ -20,12 +20,12 @@ const SubContainer = styled.div`
 const DownPayment = (props) => {
   const { cost, downPay, handleUserSubmit } = props;
 
-  const [downPayNew, setDownPayNew] = React.useState(downPay);
-  const [downPayForm, setDownPayForm] = React.useState(downPay);
-  const [downPayDollarsForm, setDownPayDollarsForm] = React.useState(cost * (downPay / 100));
-  const [downPaySlider, setDownPaySlider] = React.useState(downPay);
-  const [inputSelected, setInputSelected] = React.useState(false);
-  const [inputDollarsSelected, setInputDollarsSelected] = React.useState(false);
+  const [downPayNew, setDownPayNew] = useState(downPay);
+  const [downPayForm, setDownPayForm] = useState(downPay);
+  const [downPayDollarsForm, setDownPayDollarsForm] = useState(cost * (downPay / 100));
+  const [downPaySlider, setDownPaySlider] = useState(downPay);
+  const [inputSelected, setInputSelected] = useState(false);
+  const [inputDollarsSelected, setInputDollarsSelected] = useState(false);
 
   const inputRef = React.createRef();
   const inputDollarsRef = React.createRef();

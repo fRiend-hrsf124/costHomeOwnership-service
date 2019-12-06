@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { InputContainer, Box, Input } from '../styles.jsx';
 import { formatLoanType } from '../../utils';
 
 const LoanType = (props) => {
   const { loanTerm, loanType, handleUserSubmit } = props;
-  const [selectVal, setSelectVal] = React.useState(formatLoanType(loanTerm, loanType));
+  const [selectVal, setSelectVal] = useState(formatLoanType(loanTerm, loanType));
 
   return (
     <InputContainer>
@@ -14,7 +14,10 @@ const LoanType = (props) => {
           as="select"
           id="loan"
           value={selectVal}
-          onChange={handleUserSubmit}
+          onChange={(e) => {
+            setSelectVal(e.target.value);
+            handleUserSubmit('loanType', loanType);
+          }}
         />
       </Box>
     </InputContainer>

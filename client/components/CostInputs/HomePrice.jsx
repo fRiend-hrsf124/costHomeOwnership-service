@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React from 'react';
+import React, { useState } from 'react';
 import { formatNum, parseUserStr } from '../../utils';
 import {
   InputContainer, Box, Input, Slider,
@@ -7,9 +7,9 @@ import {
 
 const HomePrice = (props) => {
   const { cost, handleUserSubmit, redfinCostEstimate } = props;
-  const [costForm, setCost] = React.useState(cost);
-  const [costSlider, setCostSlider] = React.useState(cost);
-  const [inputSelected, setInputSelected] = React.useState(false);
+  const [costForm, setCost] = useState(cost);
+  const [costSlider, setCostSlider] = useState(cost);
+  const [inputSelected, setInputSelected] = useState(false);
 
   const inputRef = React.createRef();
 
