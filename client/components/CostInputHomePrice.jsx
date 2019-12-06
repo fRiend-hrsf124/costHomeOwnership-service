@@ -2,6 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import formatNum from '../util.currency';
 
+const Container = styled.span`
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 10px;
+`;
+
+const Box = styled.span`
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+  display: block;
+  padding: 10px 8px 9px;
+  background-color: #fff;
+  box-sizing: border-box;
+  position: relative;
+`;
+
 // eslint-disable-next-line no-unused-vars
 const Input = styled.input`
   font: 400 11px system-ui;
@@ -19,6 +36,7 @@ const HomePrice = (props) => {
   const { cost, handleCostSubmit, redfinCostEstimate } = props;
   const [costForm, setCost] = React.useState(cost);
   const [costSlider, setCostSlider] = React.useState(cost);
+  const [inputSelected, setInputSelected] = React.useState(false);
 
 
   const handleTextChange = (e) => {
@@ -37,24 +55,26 @@ const HomePrice = (props) => {
     setCost(newCost);
   };
 
-  const handleSubmit = () => {
+  const handleInputDeselect = () => {
+    setInputSelected(false);
     handleCostSubmit(costForm);
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <label htmlFor="cost">Home Price</label>
-      <br />
-      <input
-        type="text"
-        id="cost"
-        name="cost"
-        value={costForm}
-        onChange={handleTextChange}
-        onKeyDown={handleTextEnter}
-        onBlur={handleSubmit}
-      />
-      <br />
+    <Container>
+      <span>Home Price</span>
+      <Box>
+        <input
+          type="text"
+          id="cost"
+          name="cost"
+          value={inputSelected ? costForm : formatNum(costForm)}
+          onChange={handleTextChange}
+          onKeyDown={handleTextEnter}
+          onBlur={handleInputDeselect}
+          onFocus={() => setInputSelected(true)}
+        />
+      </Box>
       <input
         type="range"
         id="costSlider"
@@ -64,9 +84,9 @@ const HomePrice = (props) => {
         value={costSlider}
         step={1000}
         onChange={handleSliderChange}
-        onMouseUp={handleSubmit}
+        onMouseUp={() => handleCostSubmit(costForm)}
       />
-    </form>
+    </Container>
   );
 };
 

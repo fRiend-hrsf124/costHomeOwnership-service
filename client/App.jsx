@@ -7,6 +7,7 @@ import CostInputs from './components/CostInputs.jsx';
 
 const Container = styled.div`
   max-width: 667px;
+  font-family: Libre Franklin;
 `;
 
 class App extends React.Component {
