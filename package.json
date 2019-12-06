@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:debug": "node --inspect=9230 node_modules/.bin/jest --runInBand",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "lint": "eslint --ext .js,.jsx .",
     "seed:dev": "node database/seed.js",
     "build:dev": "webpack -d -w --config webpack.config.js",
