@@ -1,5 +1,5 @@
 import React from 'react';
-import formatNum from '../util.currency';
+// import formatNum from '../util.currency';
 
 const DownPayment = (props) => {
   const { cost, downPay, handleDownPaySubmit } = props;
