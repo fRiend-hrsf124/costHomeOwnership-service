@@ -19,7 +19,6 @@ const Box = styled.span`
   position: relative;
 `;
 
-// eslint-disable-next-line no-unused-vars
 const Input = styled.input`
   font: 400 11px system-ui;
   font-size: 1rem;
@@ -27,18 +26,37 @@ const Input = styled.input`
   border: none;
   margin: 0;
   padding: 0;
-  background-image: none;
-  background-color: transparent;
   width: 100%;
 `;
 
-// eslint-disable-next-line no-unused-vars
 const Slider = styled.input`
-  background: transparent;
+  -webkit-appearance: none;
+  width: 100%;
   margin-top: 16px;
   margin-bottom: 0;
-  width: 100%;
-  color: rgb(144, 144, 144);
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1.8px;
+    cursor: pointer;
+    box-shadow: 0.1px 0.1px 0px #000000, 0px 0px 0.1px #0d0d0d;
+    background: #2cd9ff;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+  }
+  &::-webkit-slider-thumb {
+    box-shadow: 0.4px 0.4px 4.7px #000000, 0px 0px 0.4px #0d0d0d;
+    border: 1px solid #9feaff;
+    height: 26px;
+    width: 26px;
+    border-radius: 26px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -12.3px;
+  };
 `;
 
 const HomePrice = (props) => {
@@ -92,7 +110,7 @@ const HomePrice = (props) => {
           onKeyDown={handleTextEnter}
         />
       </Box>
-      <input
+      <Slider
         type="range"
         id="costSlider"
         name="costSlider"
