@@ -25,6 +25,9 @@ const Rates = (props) => {
           /> */}
         </HalfContainer>
       </FullContainer>
+      <FullContainer>
+        {/* Loans component */}
+      </FullContainer>
       {/* view all rates footer */}
     </div>
   );

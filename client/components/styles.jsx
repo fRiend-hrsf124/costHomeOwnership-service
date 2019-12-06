@@ -13,6 +13,12 @@ const HalfContainer = styled.div`
   margin-top: 10px;
 `;
 
+const InputContainer = styled.span`
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 10px;
+`;
+
 const Box = styled.span`
   border-width: 1px;
   border-style: solid;
@@ -64,5 +70,5 @@ const Slider = styled.input`
 `;
 
 export {
-  FullContainer, HalfContainer, Box, Input, Slider,
+  FullContainer, HalfContainer, InputContainer, Box, Input, Slider,
 };

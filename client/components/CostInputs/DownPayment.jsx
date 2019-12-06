@@ -2,13 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatNum, parseUserStr } from '../../utils';
-import { Box, Input, Slider } from '../styles.jsx';
-
-const Container = styled.span`
-  width: 100%;
-  flex-basis: 100%;
-  margin-top: 10px;
-`;
+import {
+  InputContainer, Box, Input, Slider,
+} from '../styles.jsx';
 
 const SplitContainer = styled.div`
   display: flex;
@@ -81,7 +77,7 @@ const DownPayment = (props) => {
   };
 
   return (
-    <Container>
+    <InputContainer>
       <span>Down Payment</span>
       <SplitContainer>
         <SubContainer width={70}>
@@ -128,7 +124,7 @@ const DownPayment = (props) => {
         onChange={handleSliderChange}
         onMouseUp={() => handleDownPaySubmit(downPayNew)}
       />
-    </Container>
+    </InputContainer>
   );
 };
 

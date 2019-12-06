@@ -1,14 +1,9 @@
 /* eslint-disable import/extensions */
 import React from 'react';
-import styled from 'styled-components';
 import { formatNum, parseUserStr } from '../../utils';
-import { Box, Input, Slider } from '../styles.jsx';
-
-const Container = styled.span`
-  width: 100%;
-  flex-basis: 100%;
-  margin-top: 10px;
-`;
+import {
+  InputContainer, Box, Input, Slider,
+} from '../styles.jsx';
 
 const HomePrice = (props) => {
   const { cost, handleCostSubmit, redfinCostEstimate } = props;
@@ -45,7 +40,7 @@ const HomePrice = (props) => {
   };
 
   return (
-    <Container>
+    <InputContainer>
       <span>Home Price</span>
       <Box
         onBlur={handleInputDeselect}
@@ -72,7 +67,7 @@ const HomePrice = (props) => {
         onChange={handleSliderChange}
         onMouseUp={() => handleCostSubmit(costForm)}
       />
-    </Container>
+    </InputContainer>
   );
 };
 
