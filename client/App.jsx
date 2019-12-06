@@ -89,23 +89,19 @@ class App extends React.Component {
 
   // could these four be refactored into one func?
   handleCostSubmit(cost) {
-    this.setState({ cost });
-    this.getRates();
+    this.setState({ cost }, this.getRates);
   }
 
   handleDownPaySubmit(downPay) {
-    this.setState({ downPay });
-    this.getRates();
+    this.setState({ downPay }, this.getRates);
   }
 
-  handleTypeSubmit(loanType) {
-    this.setState({ loanType });
-    this.getRates();
+  handleTypeSubmit(loanType, loanTerm) {
+    this.setState({ loanType, loanTerm }, this.getRates);
   }
 
   handleCreditSubmit(credit) {
-    this.setState({ credit });
-    this.getRates();
+    this.setState({ credit }, this.getRates);
   }
 
   render() {
