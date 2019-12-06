@@ -1,8 +1,8 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import styled from 'styled-components';
-import HomePrice from './CostInputHomePrice.jsx';
-import DownPayment from './CostInputDownPayment.jsx';
+import HomePrice from './CostInputs/HomePrice.jsx';
+import DownPayment from './CostInputs/DownPayment.jsx';
 
 const Container = styled.div`
   display: flex;

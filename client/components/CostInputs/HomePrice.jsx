@@ -1,8 +1,8 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import styled from 'styled-components';
-import { formatNum, parseUserStr } from '../utils';
-import { Box, Input, Slider } from './CostInput.styles.jsx';
+import { formatNum, parseUserStr } from '../../utils';
+import { Box, Input, Slider } from './styles.jsx';
 
 const Container = styled.span`
   width: 100%;
