@@ -1,6 +1,7 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import styled from 'styled-components';
-import formatNum from '../util.currency';
+import { formatNum, parseUserStr } from '../utils';
 import { Box, Input, Slider } from './CostInputStyles.jsx';
 
 const Container = styled.span`
@@ -34,13 +35,13 @@ const DownPayment = (props) => {
   const inputDollarsRef = React.createRef();
 
   const handleDownPayChange = (e) => {
-    const nextVal = e.target.value;
+    const nextVal = parseUserStr(e.target.value, downPayNew);
     setDownPayForm(nextVal);
     setDownPayNew(nextVal);
   };
 
   const handleDownPayDollarsChange = (e) => {
-    const nextVal = e.target.value;
+    const nextVal = parseUserStr(e.target.value, downPayDollarsForm);
     setDownPayDollarsForm(nextVal);
     setDownPayNew((nextVal / cost) * 100);
   };
@@ -52,7 +53,7 @@ const DownPayment = (props) => {
   };
 
   const handleSliderChange = (e) => {
-    const newDownPaySlider = e.target.value;
+    const newDownPaySlider = parseUserStr(e.target.value, downPayNew);
     setDownPaySlider(newDownPaySlider);
     setDownPayNew(newDownPaySlider);
     setDownPayForm(newDownPaySlider);

@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import styled from 'styled-components';
-import formatNum from '../util.currency';
+import { formatNum, parseUserStr } from '../utils';
 import { Box, Input, Slider } from './CostInputStyles.jsx';
 
 const Container = styled.span`
@@ -19,7 +19,7 @@ const HomePrice = (props) => {
   const inputRef = React.createRef();
 
   const handleTextChange = (e) => {
-    setCost(e.target.value);
+    setCost(parseUserStr(e.target.value, costForm));
   };
 
   const handleTextEnter = (e) => {
@@ -29,7 +29,7 @@ const HomePrice = (props) => {
   };
 
   const handleSliderChange = (e) => {
-    const newCost = e.target.value;
+    const newCost = parseUserStr(e.target.value, costForm);
     setCostSlider(newCost);
     setCost(newCost);
   };
