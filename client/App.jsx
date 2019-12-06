@@ -21,7 +21,7 @@ class App extends React.Component {
       insuranceRate: null,
       propertyTaxRate: null,
       cost: 10,
-      term: 30,
+      loanTerm: 30,
       loanType: 'Fixed',
       downPay: 20,
       credit: 740,
@@ -67,11 +67,11 @@ class App extends React.Component {
 
   async getRates() {
     const {
-      cost, zipCode, term, loanType, downPay, credit, origYear,
+      cost, zipCode, loanTerm, loanType, downPay, credit, origYear,
     } = this.state;
 
     const queries = {
-      cost, zipCode, term, type: loanType, downPay, credit, origYear,
+      cost, zipCode, term: loanTerm, type: loanType, downPay, credit, origYear,
     };
 
     const queryString = Object.keys(queries)
@@ -116,6 +116,7 @@ class App extends React.Component {
       insuranceRate,
       // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
+      loanTerm,
       loanType,
       credit,
       cost,
@@ -135,6 +136,7 @@ class App extends React.Component {
         />
         <Rates
           // add key
+          loanTerm={loanTerm}
           loanType={loanType}
           handleTypeSubmit={this.handleTypeSubmit}
           credit={credit}
