@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
-import HomePrice from './CostInputHomePrice';
-import { formatNum } from '../utils';
+import HomePrice from './HomePrice';
+import { formatNum } from '../../utils';
 
 describe('CostInputHomePrice', () => {
   const mountNode = 'root';

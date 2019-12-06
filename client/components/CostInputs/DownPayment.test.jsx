@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
-import DownPayment from './CostInputDownPayment';
+import DownPayment from './DownPayment';
 
 describe('CostInputDownPayment', () => {
   const mountNode = 'root';
