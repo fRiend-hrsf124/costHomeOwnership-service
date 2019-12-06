@@ -23,7 +23,7 @@ const Input = styled.input`
 const Slider = styled.input`
   -webkit-appearance: none;
   width: 100%;
-  margin-top: 16px;
+  margin-top: 26px;
   margin-bottom: 0;
   &:focus {
     outline: none;
