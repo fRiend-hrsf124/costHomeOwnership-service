@@ -6,7 +6,7 @@ import CreditScore from './Rates/CreditScore.jsx';
 
 const Rates = (props) => {
   const {
-    loanTerm, loanType, handleTypeSubmit, credit, handleCreditSubmit,
+    handleUserSubmit, loanTerm, loanType, credit,
   } = props;
 
   return (
@@ -16,13 +16,13 @@ const Rates = (props) => {
           <LoanType
             loanTerm={loanTerm}
             loanType={loanType}
-            handleTypeSubmit={handleTypeSubmit}
+            handleUserSubmit={handleUserSubmit}
           />
         </HalfContainer>
         <HalfContainer>
           {/* <CreditScore
             credit={credit}
-            handleCreditSubmit={handleCreditSubmit}
+            handleUserSubmit={handleUserSubmit}
           /> */}
         </HalfContainer>
       </FullContainer>

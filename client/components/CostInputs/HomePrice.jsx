@@ -6,7 +6,7 @@ import {
 } from '../styles.jsx';
 
 const HomePrice = (props) => {
-  const { cost, handleCostSubmit, redfinCostEstimate } = props;
+  const { cost, handleUserSubmit, redfinCostEstimate } = props;
   const [costForm, setCost] = React.useState(cost);
   const [costSlider, setCostSlider] = React.useState(cost);
   const [inputSelected, setInputSelected] = React.useState(false);
@@ -19,7 +19,7 @@ const HomePrice = (props) => {
 
   const handleTextEnter = (e) => {
     if (e.key === 'Enter') {
-      handleCostSubmit(costForm);
+      handleUserSubmit('cost', costForm);
     }
   };
 
@@ -31,7 +31,7 @@ const HomePrice = (props) => {
 
   const handleInputDeselect = () => {
     setInputSelected(false);
-    handleCostSubmit(costForm);
+    handleUserSubmit('cost', costForm);
   };
 
   const handleInputSelect = () => {
@@ -65,7 +65,7 @@ const HomePrice = (props) => {
         value={costSlider}
         step={1000}
         onChange={handleSliderChange}
-        onMouseUp={() => handleCostSubmit(costForm)}
+        onMouseUp={() => handleUserSubmit('cost', costForm)}
       />
     </InputContainer>
   );

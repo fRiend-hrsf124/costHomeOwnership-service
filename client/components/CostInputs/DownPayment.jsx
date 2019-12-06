@@ -18,7 +18,7 @@ const SubContainer = styled.div`
 `;
 
 const DownPayment = (props) => {
-  const { cost, downPay, handleDownPaySubmit } = props;
+  const { cost, downPay, handleUserSubmit } = props;
 
   const [downPayNew, setDownPayNew] = React.useState(downPay);
   const [downPayForm, setDownPayForm] = React.useState(downPay);
@@ -44,7 +44,7 @@ const DownPayment = (props) => {
 
   const handleTextEnter = (e) => {
     if (e.key === 'Enter') {
-      handleDownPaySubmit(downPayNew);
+      handleUserSubmit('downPay', downPayNew);
     }
   };
 
@@ -58,7 +58,7 @@ const DownPayment = (props) => {
 
   const handleInputDollarsDeselect = () => {
     setInputDollarsSelected(false);
-    handleDownPaySubmit(downPayNew);
+    handleUserSubmit('downPay', downPayNew);
   };
 
   const handleInputDollarsSelect = () => {
@@ -68,7 +68,7 @@ const DownPayment = (props) => {
 
   const handleInputDeselect = () => {
     setInputSelected(false);
-    handleDownPaySubmit(downPayNew);
+    handleUserSubmit('downPay', downPayNew);
   };
 
   const handleInputSelect = () => {
@@ -122,7 +122,7 @@ const DownPayment = (props) => {
         value={downPaySlider}
         step={1}
         onChange={handleSliderChange}
-        onMouseUp={() => handleDownPaySubmit(downPayNew)}
+        onMouseUp={() => handleUserSubmit('downPay', downPayNew)}
       />
     </InputContainer>
   );

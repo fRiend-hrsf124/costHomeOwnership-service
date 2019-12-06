@@ -29,10 +29,7 @@ class App extends React.Component {
       rates: [],
     };
 
-    this.handleCostSubmit = this.handleCostSubmit.bind(this);
-    this.handleDownPaySubmit = this.handleDownPaySubmit.bind(this);
-    this.handleTypeSubmit = this.handleTypeSubmit.bind(this);
-    this.handleCreditSubmit = this.handleCreditSubmit.bind(this);
+    this.handleUserSubmit = this.handleUserSubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -87,21 +84,8 @@ class App extends React.Component {
     }
   }
 
-  // could these four be refactored into one func?
-  handleCostSubmit(cost) {
-    this.setState({ cost }, this.getRates);
-  }
-
-  handleDownPaySubmit(downPay) {
-    this.setState({ downPay }, this.getRates);
-  }
-
-  handleTypeSubmit(loanType, loanTerm) {
-    this.setState({ loanType, loanTerm }, this.getRates);
-  }
-
-  handleCreditSubmit(credit) {
-    this.setState({ credit }, this.getRates);
+  handleUserSubmit(stateKey, stateVal) {
+    this.setState({ [stateKey]: stateVal }, this.getRates);
   }
 
   render() {
@@ -124,19 +108,17 @@ class App extends React.Component {
       <Container>
         <CostInputs
           key={cost * downPay}
+          handleUserSubmit={this.handleUserSubmit}
           cost={cost}
-          handleCostSubmit={this.handleCostSubmit}
           downPay={downPay}
-          handleDownPaySubmit={this.handleDownPaySubmit}
           redfinCostEstimate={redfinCostEstimate}
         />
         <Rates
           // add key
+          handleUserSubmit={this.handleUserSubmit}
           loanTerm={loanTerm}
           loanType={loanType}
-          handleTypeSubmit={this.handleTypeSubmit}
           credit={credit}
-          handleCreditSubmit={this.handleCreditSubmit}
         />
       </Container>
     );
