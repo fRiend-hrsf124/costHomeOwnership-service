@@ -1,21 +1,8 @@
 /* eslint-disable import/extensions */
 import React from 'react';
-import styled from 'styled-components';
+import { FullContainer, HalfContainer } from './styles.jsx';
 import HomePrice from './CostInputs/HomePrice.jsx';
 import DownPayment from './CostInputs/DownPayment.jsx';
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding-bottom: 24px;
-`;
-
-const SubContainer = styled.div`
-  width: 49%;
-  flex-basis: 49%;
-  margin-top: 10px;
-`;
 
 const CostInputs = (props) => {
   const {
@@ -27,22 +14,22 @@ const CostInputs = (props) => {
   } = props;
 
   return (
-    <Container>
-      <SubContainer>
+    <FullContainer>
+      <HalfContainer>
         <HomePrice
           cost={cost}
           handleCostSubmit={handleCostSubmit}
           redfinCostEstimate={redfinCostEstimate}
         />
-      </SubContainer>
-      <SubContainer>
+      </HalfContainer>
+      <HalfContainer>
         <DownPayment
           cost={cost}
           downPay={downPay}
           handleDownPaySubmit={handleDownPaySubmit}
         />
-      </SubContainer>
-    </Container>
+      </HalfContainer>
+    </FullContainer>
   );
 };
 
