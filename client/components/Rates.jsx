@@ -2,11 +2,11 @@
 import React from 'react';
 import { FullContainer, HalfContainer } from './styles.jsx';
 import LoanType from './Rates/LoanType.jsx';
-import CreditScore from './Rates/CreditScore.jsx';
+// import CreditScore from './Rates/CreditScore.jsx';
 
 const Rates = (props) => {
   const {
-    handleUserSubmit, loanTerm, loanType, credit,
+    handleUserSubmit, loanTerm, loanType,
   } = props;
 
   return (

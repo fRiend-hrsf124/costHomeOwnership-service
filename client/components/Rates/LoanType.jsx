@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React, { useState } from 'react';
 import { InputContainer, Box, Input } from '../styles.jsx';
 import { formatLoanType } from '../../utils';
