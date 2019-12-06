@@ -42,7 +42,7 @@ describe('DownPayment', () => {
   });
 
   describe('Slider', () => {
-    xtest('It should update numeric values on percent and dollars inputs', () => {
+    test.skip('It should update numeric values on percent and dollars inputs', () => {
       const changedDownPay = 25;
       wrapper.find('#downPaySlider').find('input').simulate('change', { target: { value: `${changedDownPay}%` } });
       expect(wrapper.find('#downPaySlider').getElements()[2].props.value).toBe(changedDownPay);

@@ -37,7 +37,7 @@ describe('HomePrice', () => {
   });
 
   describe('Slider', () => {
-    xtest('It should update numeric values on cost input', () => {
+    test.skip('It should update numeric values on cost input', () => {
       const changedCost = 900000;
       wrapper.find('#costSlider').find('input').simulate('change', { target: { value: formatNum(changedCost) } });
       wrapper.update();
