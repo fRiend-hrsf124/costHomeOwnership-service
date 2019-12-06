@@ -1,4 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+import formatNum from '../util.currency';
+
+// eslint-disable-next-line no-unused-vars
+const Input = styled.input`
+  font: 400 11px system-ui;
+`;
+
+// eslint-disable-next-line no-unused-vars
+const Slider = styled.input`
+  background: transparent;
+  margin-top: 16px;
+  margin-bottom: 0;
+  color: rgb(144, 144, 144);
+`;
 
 const HomePrice = (props) => {
   const { cost, handleCostSubmit, redfinCostEstimate } = props;
