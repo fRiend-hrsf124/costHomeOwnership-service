@@ -5,19 +5,24 @@ import LoanType from './Rates/LoanType.jsx';
 import CreditScore from './Rates/CreditScore.jsx';
 
 const Rates = (props) => {
-  const {} = props;
+  const {
+    loanType, handleTypeSubmit, credit, handleCreditSubmit,
+  } = props;
+
   return (
     <div>
       <FullContainer>
         <HalfContainer>
-          <LoanType
-
-          />
+          {/* <LoanType
+            loanType={loanType}
+            handleTypeSubmit={handleTypeSubmit}
+          /> */}
         </HalfContainer>
         <HalfContainer>
-          <CreditScore
-
-          />
+          {/* <CreditScore
+            credit={credit}
+            handleCreditSubmit={handleCreditSubmit}
+          /> */}
         </HalfContainer>
       </FullContainer>
       {/* view all rates footer */}

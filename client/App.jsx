@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import CostInputs from './components/CostInputs.jsx';
+import Rates from './components/Rates.jsx';
 
 const Container = styled.div`
   max-width: 667px;
@@ -21,7 +22,7 @@ class App extends React.Component {
       propertyTaxRate: null,
       cost: 10,
       term: 30,
-      type: 'Fixed',
+      loanType: 'Fixed',
       downPay: 20,
       credit: 740,
       origYear: 2019,
@@ -30,6 +31,8 @@ class App extends React.Component {
 
     this.handleCostSubmit = this.handleCostSubmit.bind(this);
     this.handleDownPaySubmit = this.handleDownPaySubmit.bind(this);
+    this.handleTypeSubmit = this.handleTypeSubmit.bind(this);
+    this.handleCreditSubmit = this.handleCreditSubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -64,11 +67,11 @@ class App extends React.Component {
 
   async getRates() {
     const {
-      cost, zipCode, term, type, downPay, credit, origYear,
+      cost, zipCode, term, loanType, downPay, credit, origYear,
     } = this.state;
 
     const queries = {
-      cost, zipCode, term, type, downPay, credit, origYear,
+      cost, zipCode, term, type: loanType, downPay, credit, origYear,
     };
 
     const queryString = Object.keys(queries)
@@ -84,6 +87,7 @@ class App extends React.Component {
     }
   }
 
+  // could these four be refactored into one func?
   handleCostSubmit(cost) {
     this.setState({ cost });
     this.getRates();
@@ -91,6 +95,16 @@ class App extends React.Component {
 
   handleDownPaySubmit(downPay) {
     this.setState({ downPay });
+    this.getRates();
+  }
+
+  handleTypeSubmit(loanType) {
+    this.setState({ loanType });
+    this.getRates();
+  }
+
+  handleCreditSubmit(credit) {
+    this.setState({ credit });
     this.getRates();
   }
 
@@ -102,10 +116,13 @@ class App extends React.Component {
       insuranceRate,
       // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
+      loanType,
+      credit,
       cost,
       downPay,
       redfinCostEstimate,
     } = this.state;
+
     return (
       <Container>
         <CostInputs
@@ -115,6 +132,13 @@ class App extends React.Component {
           downPay={downPay}
           handleDownPaySubmit={this.handleDownPaySubmit}
           redfinCostEstimate={redfinCostEstimate}
+        />
+        <Rates
+          // add key
+          loanType={loanType}
+          handleTypeSubmit={this.handleTypeSubmit}
+          credit={credit}
+          handleCreditSubmit={this.handleCreditSubmit}
         />
       </Container>
     );
