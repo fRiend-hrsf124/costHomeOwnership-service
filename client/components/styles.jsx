@@ -7,6 +7,10 @@ const FullContainer = styled.div`
   padding-bottom: 24px;
 `;
 
+const FullContainerExpandable = styled(FullContainer)`
+  display: ${(props) => (props.isExpanded ? 'flex' : 'none')};
+`;
+
 const HalfContainer = styled.div`
   width: 49%;
   flex-basis: 49%;
@@ -95,5 +99,14 @@ const Slider = styled.input`
 `;
 
 export {
-  FullContainer, HalfContainer, InputContainer, Box, Label, Input, Option, Slider, Select,
+  FullContainer,
+  FullContainerExpandable,
+  HalfContainer,
+  InputContainer,
+  Box,
+  Label,
+  Input,
+  Option,
+  Slider,
+  Select,
 };

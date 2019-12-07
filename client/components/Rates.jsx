@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
-import React from 'react';
-import { FullContainer, HalfContainer } from './styles.jsx';
+import React, { useState } from 'react';
+import { FullContainerExpandable, HalfContainer } from './styles.jsx';
+import RatesHeader from './Rates/RatesHeader.jsx';
 import LoanType from './Rates/LoanType.jsx';
 import CreditScore from './Rates/CreditScore.jsx';
 import Loans from './Rates/Loans.jsx';
@@ -10,10 +11,16 @@ const Rates = (props) => {
     handleUserSubmit, loanType, loanTypes, credit, cost, rates,
   } = props;
 
+  const [isExpanded, setIsExpanded] = useState(true);
+
   return (
     <div>
-      {/* Today's rates toggle area */}
-      <FullContainer>
+      <RatesHeader
+        setIsExpanded={setIsExpanded}
+        loanType={loanType}
+        credit={credit}
+      />
+      <FullContainerExpandable isExpanded={isExpanded}>
         <HalfContainer>
           <LoanType
             loanType={loanType}
@@ -27,7 +34,7 @@ const Rates = (props) => {
             handleUserSubmit={handleUserSubmit}
           />
         </HalfContainer>
-      </FullContainer>
+      </FullContainerExpandable>
       <Loans
         cost={cost}
         rates={rates}
