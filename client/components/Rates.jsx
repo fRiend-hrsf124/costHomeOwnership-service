@@ -20,10 +20,10 @@ const Rates = (props) => {
           />
         </HalfContainer>
         <HalfContainer>
-          {/* <CreditScore
+          <CreditScore
             credit={credit}
             handleUserSubmit={handleUserSubmit}
-          /> */}
+          />
         </HalfContainer>
       </FullContainer>
       <FullContainer>

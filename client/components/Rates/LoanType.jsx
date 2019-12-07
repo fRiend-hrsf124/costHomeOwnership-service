@@ -1,6 +1,8 @@
 /* eslint-disable import/extensions */
 import React from 'react';
-import { InputContainer, Box, Input, Option } from '../styles.jsx';
+import {
+  InputContainer, Box, Input, Option,
+} from '../styles.jsx';
 
 const LoanType = (props) => {
   const {

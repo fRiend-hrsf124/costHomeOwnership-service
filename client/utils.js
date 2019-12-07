@@ -32,9 +32,21 @@ const unFormatLoan = (loan) => {
   return { term, type };
 };
 
+const createCreditDisplayRange = (credit) => {
+  // fill in
+  return credit;
+};
+
+const getCreditFromDisplayRange = (displayRange) => {
+  // fill in
+  return displayRange;
+};
+
 export {
   formatNum,
   parseUserStr,
   formatLoan,
   unFormatLoan,
+  createCreditDisplayRange,
+  getCreditFromDisplayRange,
 };
