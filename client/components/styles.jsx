@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
-  max-width: 667px;
+  width: 1010px;
+  padding: 0px 30px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 `;
 
 const FullContainer = styled.div`
+  width: 67%;
+  max-width: 667px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -44,7 +47,7 @@ const Box = styled.span`
 const Label = styled.span`
   font: 11px system-ui;
   font-weight: ${({ weight }) => (weight || 400)};
-  font-size: 1rem;
+  font-size: ${({ fontSize }) => (fontSize || '1rem')};
   vertical-align: baseline;
 `;
 
@@ -86,6 +89,7 @@ const Select = styled.select`
   padding: 0;
   width: 100%;
   background: transparent;
+  cursor: pointer;
   /* display: none; */
   &:selected {
     /* background-color: #9feaff; */
@@ -128,7 +132,7 @@ const Slider = styled.input`
 `;
 
 const Carousel = styled.div`
-  margin-top: 15px;
+  margin-top: 10px;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   overflow-x: scroll;
@@ -150,10 +154,42 @@ const Loan = styled.div`
   border-width: 1px;
   border-style: solid;
   border-color: #ccc;
+  border-radius: 4px;
   padding-left: 0;
   padding-right: 8px;
   width: 325px;
+  height: 130px;
   color: #333;
+  cursor:pointer;
+`;
+
+const LoanGridContainer = styled.div`
+  padding: 20px 30px;
+`;
+
+const LoanGrid = styled.div`
+  display: grid;
+  grid-template-columns: 102px 94px;
+  grid-template-rows: 40px 40px;
+  grid-row-gap: 14px;
+  grid-column-gap: calc(100% - 196px);
+`;
+
+const LoanGridItem = styled.div`
+  vertical-align:baseline;
+  display:grid;
+`;
+
+const LoanGridLogo = styled.img`
+  max-height: 22px;
+  width: auto;
+  max-width: 100%;
+`;
+
+const LoanGridLabel = styled.div`
+  font: 400 11px system-ui;
+  font-size: 0.75rem;
+  color: #767676;
 `;
 
 export {
@@ -172,4 +208,9 @@ export {
   Select,
   Carousel,
   Loan,
+  LoanGridContainer,
+  LoanGrid,
+  LoanGridItem,
+  LoanGridLabel,
+  LoanGridLogo,
 };
