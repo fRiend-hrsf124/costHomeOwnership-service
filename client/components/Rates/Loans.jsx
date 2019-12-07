@@ -9,7 +9,7 @@ const Loans = (props) => {
       {cost}
       <br />
       {rates.map((rate) => (
-        <div key={rate.lenderId}>
+        <div key={rate.rateId}>
           <span>{rate.apr}</span>
           <img alt="logo" src={rate.lenderLogoUrl} />
         </div>
