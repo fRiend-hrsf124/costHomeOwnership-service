@@ -32,15 +32,14 @@ const unFormatLoan = (loan) => {
   return { term, type };
 };
 
-const createCreditDisplayRange = (credit) => {
-  // fill in
-  return credit;
-};
+const createCreditDisplayRange = (credit) => (
+  // eslint-disable-next-line prefer-template
+  `${credit}${credit === 740 ? '+' : ' - ' + (credit + 19)} Credit Score`
+);
 
-const getCreditFromDisplayRange = (displayRange) => {
-  // fill in
-  return displayRange;
-};
+const getCreditFromDisplayRange = (displayRange) => (
+  parseInt(displayRange.substring(0, 3), 10)
+);
 
 export {
   formatNum,
