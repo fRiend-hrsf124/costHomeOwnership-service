@@ -1,18 +1,11 @@
 /* eslint-disable import/extensions */
 import React from 'react';
-import { InputContainer, Box, Input } from '../styles.jsx';
-import { formatLoan, unFormatLoan } from '../../utils';
+import { InputContainer, Box, Input, Option } from '../styles.jsx';
 
 const LoanType = (props) => {
   const {
     loanType, loanTypes, handleUserSubmit,
   } = props;
-
-  const handleChange = (e) => {
-    // const loan = unFormatLoan(e.target.value);
-    const loan = e.target.value;
-    handleUserSubmit('loanType', loan);
-  };
 
   return (
     <InputContainer>
@@ -22,16 +15,16 @@ const LoanType = (props) => {
           as="select"
           id="loan"
           value={loanType}
-          onChange={handleChange}
+          onChange={(e) => handleUserSubmit('loanType', e.target.value)}
         >
           {
             loanTypes.map((lT) => (
-              <option key={lT} value={lT}>{lT}</option>
+              <Option key={lT} value={lT}>{lT}</Option>
             ))
           }
-          <option value="noRates">noRates</option>
-          <option value="30 Year Fixed">30 Year Fixed (static)</option>
-          <option value={loanType}>{`${loanType}(dynamic)`}</option>
+          <Option value="noRates">noRates</Option>
+          <Option value="30 Year Fixed">30 Year Fixed (static)</Option>
+          <Option value={loanType}>{`${loanType}(dynamic)`}</Option>
         </Input>
       </Box>
     </InputContainer>

@@ -39,6 +39,10 @@ const Input = styled.input`
   width: 100%;
 `;
 
+const Option = styled.option`
+
+`;
+
 const Slider = styled.input`
   -webkit-appearance: none;
   width: 100%;
@@ -70,5 +74,5 @@ const Slider = styled.input`
 `;
 
 export {
-  FullContainer, HalfContainer, InputContainer, Box, Input, Slider,
+  FullContainer, HalfContainer, InputContainer, Box, Input, Option, Slider,
 };
