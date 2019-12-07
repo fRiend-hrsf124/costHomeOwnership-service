@@ -44,6 +44,21 @@ const Input = styled.input`
   width: 100%;
 `;
 
+const Select = styled.select`
+  -webkit-appearance: none;
+  font: 400 11px system-ui;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* display: none; */
+  &:selected {
+    background-color: #9feaff;
+  }
+`;
+
 const Option = styled.option`
 
 `;
@@ -79,5 +94,5 @@ const Slider = styled.input`
 `;
 
 export {
-  FullContainer, HalfContainer, InputContainer, Box, Label, Input, Option, Slider,
+  FullContainer, HalfContainer, InputContainer, Box, Label, Input, Option, Slider, Select,
 };

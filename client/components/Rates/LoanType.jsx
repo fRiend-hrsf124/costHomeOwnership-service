@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import {
-  InputContainer, Box, Input, Option, Label,
+  InputContainer, Box, Select, Option, Label,
 } from '../styles.jsx';
 
 const LoanType = (props) => {
@@ -13,8 +13,7 @@ const LoanType = (props) => {
     <InputContainer>
       <Label>Loan Type</Label>
       <Box>
-        <Input
-          as="select"
+        <Select
           id="loan"
           value={loanType}
           onChange={(e) => handleUserSubmit('loanType', e.target.value)}
@@ -25,7 +24,7 @@ const LoanType = (props) => {
             ))
           }
           <Option value="noRates">noRates</Option>
-        </Input>
+        </Select>
       </Box>
     </InputContainer>
   );

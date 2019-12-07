@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import {
-  InputContainer, Box, Input, Option, Label,
+  InputContainer, Box, Select, Option, Label,
 } from '../styles.jsx';
 import { createCreditDisplayRange, getCreditFromDisplayRange } from '../../utils';
 
@@ -14,8 +14,7 @@ const CreditScore = (props) => {
     <InputContainer>
       <Label>Credit Score</Label>
       <Box>
-        <Input
-          as="select"
+        <Select
           id="credit"
           value={createCreditDisplayRange(credit)}
           onChange={(e) => handleUserSubmit('credit', getCreditFromDisplayRange(e.target.value))}
@@ -30,7 +29,7 @@ const CreditScore = (props) => {
               </Option>
             ))
           }
-        </Input>
+        </Select>
       </Box>
     </InputContainer>
   );
