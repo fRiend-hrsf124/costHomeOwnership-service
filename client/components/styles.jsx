@@ -4,11 +4,12 @@ const FullContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding-bottom: 24px;
+  padding-bottom: ${({ paddingBottom }) => paddingBottom || '24px'};
+  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'inherit')};
 `;
 
 const FullContainerExpandable = styled(FullContainer)`
-  display: ${(props) => (props.isExpanded ? 'flex' : 'none')};
+  display: ${({ isExpanded }) => (isExpanded ? 'flex' : 'none')};
 `;
 
 const HalfContainer = styled.div`
@@ -34,8 +35,17 @@ const Box = styled.span`
 `;
 
 const Label = styled.span`
+  font: 11px system-ui;
+  font-weight: ${({ weight }) => (weight || 400)};
+  font-size: 1rem;
+`;
+
+const Expander = styled.div`
   font: 400 11px system-ui;
   font-size: 1rem;
+  color: #0c82a5;
+  text-align: end;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
@@ -105,6 +115,7 @@ export {
   InputContainer,
   Box,
   Label,
+  Expander,
   Input,
   Option,
   Slider,
