@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import CostInputs from './components/CostInputs.jsx';
 import Rates from './components/Rates.jsx';
+import { formatLoan } from './utils';
 
 const Container = styled.div`
   max-width: 667px;
@@ -23,6 +24,8 @@ class App extends React.Component {
       cost: 10,
       loanTerm: 30,
       loanType: 'Fixed',
+      // loanType: '30 Year Fixed'
+      loanTypes: [],
       downPay: 20,
       credit: 740,
       origYear: 2019,
@@ -77,7 +80,15 @@ class App extends React.Component {
     try {
       const res = await axios.get(`/api/costHomeOwnership/rates?${queryString}`);
       const rates = await res.data;
-      this.setState({ rates });
+
+      // TODO - change to server supplying loanTypes
+      let loanTypes = new Set();
+      rates.forEach((rate) => {
+        loanTypes.add(formatLoan(rate.term, rate.loanType));
+      });
+      loanTypes = [...loanTypes];
+
+      this.setState({ rates, loanTypes });
     } catch (err) {
       console.log(err);
     }
@@ -97,6 +108,7 @@ class App extends React.Component {
       propertyTaxRate,
       loanTerm,
       loanType,
+      loanTypes,
       credit,
       cost,
       downPay,
@@ -117,6 +129,7 @@ class App extends React.Component {
           handleUserSubmit={this.handleUserSubmit}
           loanTerm={loanTerm}
           loanType={loanType}
+          loanTypes={loanTypes}
           credit={credit}
         />
       </Container>

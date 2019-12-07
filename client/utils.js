@@ -13,7 +13,7 @@ const parseUserStr = (str, prevNum) => {
   return nextNum;
 };
 
-const formatLoanType = (term, type) => {
+const formatLoan = (term, type) => {
   let formattedLoan;
   if (type === 'Fixed') {
     formattedLoan = `${term} Year Fixed`;
@@ -24,8 +24,17 @@ const formatLoanType = (term, type) => {
   return formattedLoan;
 };
 
+const unFormatLoan = (loan) => {
+  const parts = loan.split(' ');
+  const type = parts[parts.length - 1];
+  const term = parts[0].split('/')[0];
+
+  return { term, type };
+};
+
 export {
   formatNum,
   parseUserStr,
-  formatLoanType,
+  formatLoan,
+  unFormatLoan,
 };
