@@ -6,10 +6,14 @@ import {
 import { createCreditDisplayRange } from '../../utils';
 
 const RatesHeader = (props) => {
-  const { setIsExpanded, loanType, credit } = props;
+  const { handleHeaderClick, loanType, credit } = props;
 
   return (
-    <FullContainer paddingBottom="10px" clickable="true">
+    <FullContainer
+      paddingBottom="10px"
+      clickable="true"
+      onClick={handleHeaderClick}
+    >
       <HalfContainer>
         <Label weight="600">Today&apos;s rates for this home</Label>
       </HalfContainer>

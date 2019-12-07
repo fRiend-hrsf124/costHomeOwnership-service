@@ -12,11 +12,14 @@ const Rates = (props) => {
   } = props;
 
   const [isExpanded, setIsExpanded] = useState(true);
+  const handleHeaderClick = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
     <div>
       <RatesHeader
-        setIsExpanded={setIsExpanded}
+        handleHeaderClick={handleHeaderClick}
         loanType={loanType}
         credit={credit}
       />
