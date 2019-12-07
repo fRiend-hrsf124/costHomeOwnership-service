@@ -1,6 +1,7 @@
 import validator from 'validator';
 
 const formatNum = (num) => `$${new Intl.NumberFormat('en-US').format(num)}`;
+
 const parseUserStr = (str, prevNum) => {
   // TODO - sanitize input to prevent XSS
   if (str === '') return 0;
@@ -12,7 +13,39 @@ const parseUserStr = (str, prevNum) => {
   return nextNum;
 };
 
+const formatLoan = (term, type) => {
+  let formattedLoan;
+  if (type === 'Fixed') {
+    formattedLoan = `${term} Year Fixed`;
+  } else {
+    formattedLoan = `${term}/1 ARM`;
+  }
+
+  return formattedLoan;
+};
+
+const unFormatLoan = (loan) => {
+  const parts = loan.split(' ');
+  const type = parts[parts.length - 1];
+  const term = parts[0].split('/')[0];
+
+  return { term, type };
+};
+
+const createCreditDisplayRange = (credit) => (
+  // eslint-disable-next-line prefer-template
+  `${credit}${credit === 740 ? '+' : ' - ' + (credit + 19)} Credit Score`
+);
+
+const getCreditFromDisplayRange = (displayRange) => (
+  parseInt(displayRange.substring(0, 3), 10)
+);
+
 export {
   formatNum,
   parseUserStr,
+  formatLoan,
+  unFormatLoan,
+  createCreditDisplayRange,
+  getCreditFromDisplayRange,
 };

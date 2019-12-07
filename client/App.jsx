@@ -4,6 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import CostInputs from './components/CostInputs.jsx';
+import Rates from './components/Rates.jsx';
+import { formatLoan, unFormatLoan } from './utils';
 
 const Container = styled.div`
   max-width: 667px;
@@ -20,22 +22,24 @@ class App extends React.Component {
       insuranceRate: null,
       propertyTaxRate: null,
       cost: 10,
-      term: 30,
-      type: 'Fixed',
+      loanType: formatLoan(30, 'Fixed'),
+      loanTypes: [
+        formatLoan(30, 'Fixed'),
+        formatLoan(15, 'Fixed'),
+        formatLoan(5, 'ARM'),
+      ],
       downPay: 20,
       credit: 740,
       origYear: 2019,
       rates: [],
     };
 
-    this.handleCostSubmit = this.handleCostSubmit.bind(this);
-    this.handleDownPaySubmit = this.handleDownPaySubmit.bind(this);
+    this.handleUserSubmit = this.handleUserSubmit.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { propertyId } = this.state;
-    await this.getPropertyData(propertyId);
-    await this.getRates();
+    this.getPropertyData(propertyId);
   }
 
   async getPropertyData(id) {
@@ -49,6 +53,7 @@ class App extends React.Component {
         propertyTaxRate,
       } = await res.data[0];
 
+      // TODO - change to server supplying available loanTypes
       this.setState({
         propertyId,
         zipCode,
@@ -56,7 +61,7 @@ class App extends React.Component {
         insuranceRate,
         propertyTaxRate,
         cost: redfinCostEstimate,
-      });
+      }, this.getRates);
     } catch (err) {
       console.log(err);
     }
@@ -64,8 +69,10 @@ class App extends React.Component {
 
   async getRates() {
     const {
-      cost, zipCode, term, type, downPay, credit, origYear,
+      cost, zipCode, loanType, downPay, credit, origYear,
     } = this.state;
+
+    const { term, type } = unFormatLoan(loanType);
 
     const queries = {
       cost, zipCode, term, type, downPay, credit, origYear,
@@ -78,20 +85,15 @@ class App extends React.Component {
     try {
       const res = await axios.get(`/api/costHomeOwnership/rates?${queryString}`);
       const rates = await res.data;
+
       this.setState({ rates });
     } catch (err) {
       console.log(err);
     }
   }
 
-  handleCostSubmit(cost) {
-    this.setState({ cost });
-    this.getRates();
-  }
-
-  handleDownPaySubmit(downPay) {
-    this.setState({ downPay });
-    this.getRates();
+  handleUserSubmit(stateKey, stateVal) {
+    this.setState({ [stateKey]: stateVal }, this.getRates);
   }
 
   render() {
@@ -102,19 +104,29 @@ class App extends React.Component {
       insuranceRate,
       // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
+      loanType,
+      loanTypes,
+      credit,
       cost,
       downPay,
       redfinCostEstimate,
     } = this.state;
+
     return (
       <Container>
         <CostInputs
           key={cost * downPay}
+          handleUserSubmit={this.handleUserSubmit}
           cost={cost}
-          handleCostSubmit={this.handleCostSubmit}
           downPay={downPay}
-          handleDownPaySubmit={this.handleDownPaySubmit}
           redfinCostEstimate={redfinCostEstimate}
+        />
+        <Rates
+          // add key
+          handleUserSubmit={this.handleUserSubmit}
+          loanType={loanType}
+          loanTypes={loanTypes}
+          credit={credit}
         />
       </Container>
     );

@@ -1,5 +1,24 @@
 import styled from 'styled-components';
 
+const FullContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 24px;
+`;
+
+const HalfContainer = styled.div`
+  width: 49%;
+  flex-basis: 49%;
+  margin-top: 10px;
+`;
+
+const InputContainer = styled.span`
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 10px;
+`;
+
 const Box = styled.span`
   border-width: 1px;
   border-style: solid;
@@ -10,6 +29,11 @@ const Box = styled.span`
   position: relative;
 `;
 
+const Label = styled.span`
+  font: 400 11px system-ui;
+  font-size: 1rem;
+`;
+
 const Input = styled.input`
   font: 400 11px system-ui;
   font-size: 1rem;
@@ -18,6 +42,10 @@ const Input = styled.input`
   margin: 0;
   padding: 0;
   width: 100%;
+`;
+
+const Option = styled.option`
+
 `;
 
 const Slider = styled.input`
@@ -51,5 +79,5 @@ const Slider = styled.input`
 `;
 
 export {
-  Box, Input, Slider,
+  FullContainer, HalfContainer, InputContainer, Box, Label, Input, Option, Slider,
 };

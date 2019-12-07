@@ -1,14 +1,10 @@
 /* eslint-disable import/extensions */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { formatNum, parseUserStr } from '../../utils';
-import { Box, Input, Slider } from './styles.jsx';
-
-const Container = styled.span`
-  width: 100%;
-  flex-basis: 100%;
-  margin-top: 10px;
-`;
+import {
+  InputContainer, Box, Input, Slider, Label,
+} from '../styles.jsx';
 
 const SplitContainer = styled.div`
   display: flex;
@@ -22,14 +18,14 @@ const SubContainer = styled.div`
 `;
 
 const DownPayment = (props) => {
-  const { cost, downPay, handleDownPaySubmit } = props;
+  const { cost, downPay, handleUserSubmit } = props;
 
-  const [downPayNew, setDownPayNew] = React.useState(downPay);
-  const [downPayForm, setDownPayForm] = React.useState(downPay);
-  const [downPayDollarsForm, setDownPayDollarsForm] = React.useState(cost * (downPay / 100));
-  const [downPaySlider, setDownPaySlider] = React.useState(downPay);
-  const [inputSelected, setInputSelected] = React.useState(false);
-  const [inputDollarsSelected, setInputDollarsSelected] = React.useState(false);
+  const [downPayNew, setDownPayNew] = useState(downPay);
+  const [downPayForm, setDownPayForm] = useState(downPay);
+  const [downPayDollarsForm, setDownPayDollarsForm] = useState(cost * (downPay / 100));
+  const [downPaySlider, setDownPaySlider] = useState(downPay);
+  const [inputSelected, setInputSelected] = useState(false);
+  const [inputDollarsSelected, setInputDollarsSelected] = useState(false);
 
   const inputRef = React.createRef();
   const inputDollarsRef = React.createRef();
@@ -48,7 +44,7 @@ const DownPayment = (props) => {
 
   const handleTextEnter = (e) => {
     if (e.key === 'Enter') {
-      handleDownPaySubmit(downPayNew);
+      handleUserSubmit('downPay', downPayNew);
     }
   };
 
@@ -62,7 +58,7 @@ const DownPayment = (props) => {
 
   const handleInputDollarsDeselect = () => {
     setInputDollarsSelected(false);
-    handleDownPaySubmit(downPayNew);
+    handleUserSubmit('downPay', downPayNew);
   };
 
   const handleInputDollarsSelect = () => {
@@ -72,7 +68,7 @@ const DownPayment = (props) => {
 
   const handleInputDeselect = () => {
     setInputSelected(false);
-    handleDownPaySubmit(downPayNew);
+    handleUserSubmit('downPay', downPayNew);
   };
 
   const handleInputSelect = () => {
@@ -81,8 +77,8 @@ const DownPayment = (props) => {
   };
 
   return (
-    <Container>
-      <span>Down Payment</span>
+    <InputContainer>
+      <Label>Down Payment</Label>
       <SplitContainer>
         <SubContainer width={70}>
           <Box
@@ -126,9 +122,9 @@ const DownPayment = (props) => {
         value={downPaySlider}
         step={1}
         onChange={handleSliderChange}
-        onMouseUp={() => handleDownPaySubmit(downPayNew)}
+        onMouseUp={() => handleUserSubmit('downPay', downPayNew)}
       />
-    </Container>
+    </InputContainer>
   );
 };
 

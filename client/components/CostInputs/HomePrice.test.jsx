@@ -8,13 +8,13 @@ describe('HomePrice', () => {
   const mountNode = 'root';
   let wrapper;
   const cost = 800000;
-  const handleCostSubmit = jest.fn();
+  const handleUserSubmit = jest.fn();
   const redfinCostEstimate = 800000;
 
   beforeAll(() => {
     wrapper = mount(<HomePrice
       cost={cost}
-      handleCostSubmit={handleCostSubmit}
+      handleUserSubmit={handleUserSubmit}
       redfinCostEstimate={redfinCostEstimate}
     />, { attachTo: document.getElementById(mountNode) });
   });
@@ -47,7 +47,7 @@ describe('HomePrice', () => {
 
     test('It should call update handleDownPaySubmit after moving slider', () => {
       wrapper.find('#costSlider').find('input').simulate('mouseUp');
-      expect(handleCostSubmit).toHaveBeenCalled();
+      expect(handleUserSubmit).toHaveBeenCalled();
     });
   });
 });

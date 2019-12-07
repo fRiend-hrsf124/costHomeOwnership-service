@@ -1,20 +1,15 @@
 /* eslint-disable import/extensions */
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import { formatNum, parseUserStr } from '../../utils';
-import { Box, Input, Slider } from './styles.jsx';
-
-const Container = styled.span`
-  width: 100%;
-  flex-basis: 100%;
-  margin-top: 10px;
-`;
+import {
+  InputContainer, Box, Input, Slider, Label,
+} from '../styles.jsx';
 
 const HomePrice = (props) => {
-  const { cost, handleCostSubmit, redfinCostEstimate } = props;
-  const [costForm, setCost] = React.useState(cost);
-  const [costSlider, setCostSlider] = React.useState(cost);
-  const [inputSelected, setInputSelected] = React.useState(false);
+  const { cost, handleUserSubmit, redfinCostEstimate } = props;
+  const [costForm, setCost] = useState(cost);
+  const [costSlider, setCostSlider] = useState(cost);
+  const [inputSelected, setInputSelected] = useState(false);
 
   const inputRef = React.createRef();
 
@@ -24,7 +19,7 @@ const HomePrice = (props) => {
 
   const handleTextEnter = (e) => {
     if (e.key === 'Enter') {
-      handleCostSubmit(costForm);
+      handleUserSubmit('cost', costForm);
     }
   };
 
@@ -36,7 +31,7 @@ const HomePrice = (props) => {
 
   const handleInputDeselect = () => {
     setInputSelected(false);
-    handleCostSubmit(costForm);
+    handleUserSubmit('cost', costForm);
   };
 
   const handleInputSelect = () => {
@@ -45,8 +40,8 @@ const HomePrice = (props) => {
   };
 
   return (
-    <Container>
-      <span>Home Price</span>
+    <InputContainer>
+      <Label>Home Price</Label>
       <Box
         onBlur={handleInputDeselect}
         onFocus={handleInputSelect}
@@ -70,9 +65,9 @@ const HomePrice = (props) => {
         value={costSlider}
         step={1000}
         onChange={handleSliderChange}
-        onMouseUp={() => handleCostSubmit(costForm)}
+        onMouseUp={() => handleUserSubmit('cost', costForm)}
       />
-    </Container>
+    </InputContainer>
   );
 };
 
