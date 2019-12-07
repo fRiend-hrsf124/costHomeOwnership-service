@@ -1,17 +1,11 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
 import CostInputs from './components/CostInputs.jsx';
 import Rates from './components/Rates.jsx';
 import { formatLoan, unFormatLoan } from './utils';
-
-const Container = styled.div`
-  max-width: 667px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-`;
+import { AppContainer } from './components/styles.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -113,7 +107,7 @@ class App extends React.Component {
     } = this.state;
 
     return (
-      <Container>
+      <AppContainer>
         <CostInputs
           key={cost * downPay}
           handleUserSubmit={this.handleUserSubmit}
@@ -130,7 +124,7 @@ class App extends React.Component {
           cost={cost}
           rates={rates}
         />
-      </Container>
+      </AppContainer>
     );
   }
 }

@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+
+const AppContainer = styled.div`
+  max-width: 667px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+`;
+
 const FullContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -16,6 +23,7 @@ const HalfContainer = styled.div`
   width: 49%;
   flex-basis: 49%;
   margin-top: 10px;
+  text-align: ${({ align }) => align || 'inherit'};
 `;
 
 const InputContainer = styled.span`
@@ -40,12 +48,20 @@ const Label = styled.span`
   font-size: 1rem;
 `;
 
-const Expander = styled.div`
+const LinkDiv = styled.div`
   font: 400 11px system-ui;
   font-size: 1rem;
   color: #0c82a5;
-  text-align: end;
-  cursor: pointer;
+  vertical-align: baseline;
+`;
+
+const Arrow = styled.svg`
+  position: relative;
+  height: 24px;
+  width: 24px;
+  fill: #0c82a5;
+  transition: all .15s ease-out 0s;
+  transform: rotate(180deg);
 `;
 
 const Input = styled.input`
@@ -109,13 +125,15 @@ const Slider = styled.input`
 `;
 
 export {
+  AppContainer,
   FullContainer,
   FullContainerExpandable,
   HalfContainer,
   InputContainer,
   Box,
   Label,
-  Expander,
+  LinkDiv,
+  Arrow,
   Input,
   Option,
   Slider,
