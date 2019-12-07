@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import CostInputs from './components/CostInputs.jsx';
 import Rates from './components/Rates.jsx';
-import { formatLoan } from './utils';
+import { formatLoan, unFormatLoan } from './utils';
 
 const Container = styled.div`
   max-width: 667px;
@@ -22,9 +22,7 @@ class App extends React.Component {
       insuranceRate: null,
       propertyTaxRate: null,
       cost: 10,
-      loanTerm: 30,
-      loanType: 'Fixed',
-      // loanType: '30 Year Fixed'
+      loanType: formatLoan(30, 'Fixed'),
       loanTypes: [],
       downPay: 20,
       credit: 740,
@@ -66,11 +64,13 @@ class App extends React.Component {
 
   async getRates() {
     const {
-      cost, zipCode, loanTerm, loanType, downPay, credit, origYear,
+      cost, zipCode, loanType, downPay, credit, origYear,
     } = this.state;
 
+    const { term, type } = unFormatLoan(loanType);
+
     const queries = {
-      cost, zipCode, term: loanTerm, type: loanType, downPay, credit, origYear,
+      cost, zipCode, term, type, downPay, credit, origYear,
     };
 
     const queryString = Object.keys(queries)
@@ -81,7 +81,7 @@ class App extends React.Component {
       const res = await axios.get(`/api/costHomeOwnership/rates?${queryString}`);
       const rates = await res.data;
 
-      // TODO - change to server supplying loanTypes
+      // TODO - change to server supplying available loanTypes in getPropertyData
       let loanTypes = new Set();
       rates.forEach((rate) => {
         loanTypes.add(formatLoan(rate.term, rate.loanType));
@@ -106,7 +106,6 @@ class App extends React.Component {
       insuranceRate,
       // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
-      loanTerm,
       loanType,
       loanTypes,
       credit,
@@ -127,7 +126,6 @@ class App extends React.Component {
         <Rates
           // add key
           handleUserSubmit={this.handleUserSubmit}
-          loanTerm={loanTerm}
           loanType={loanType}
           loanTypes={loanTypes}
           credit={credit}

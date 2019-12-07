@@ -6,7 +6,7 @@ import LoanType from './Rates/LoanType.jsx';
 
 const Rates = (props) => {
   const {
-    handleUserSubmit, loanTerm, loanType, loanTypes,
+    handleUserSubmit, loanType, loanTypes,
   } = props;
 
   return (
@@ -14,7 +14,6 @@ const Rates = (props) => {
       <FullContainer>
         <HalfContainer>
           <LoanType
-            loanTerm={loanTerm}
             loanType={loanType}
             loanTypes={loanTypes}
             handleUserSubmit={handleUserSubmit}

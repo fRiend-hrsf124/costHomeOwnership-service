@@ -5,19 +5,13 @@ import { formatLoan, unFormatLoan } from '../../utils';
 
 const LoanType = (props) => {
   const {
-    loanTerm, loanType, loanTypes, handleUserSubmit,
+    loanType, loanTypes, handleUserSubmit,
   } = props;
 
-  // const [selectVal, setSelectVal] = useState(formatLoan(loanTerm, loanType));
-  // useEffect(() => {
-  //   const loan = unFormatLoan(selectVal);
-  //   handleUserSubmit('term', loan.term);
-  // }, [selectVal]);
-
   const handleChange = (e) => {
-    // setSelectVal(e.target.value);
-    const loan = unFormatLoan(e.target.value);
-    handleUserSubmit('loanType', loan.type);
+    // const loan = unFormatLoan(e.target.value);
+    const loan = e.target.value;
+    handleUserSubmit('loanType', loan);
   };
 
   return (
@@ -27,8 +21,7 @@ const LoanType = (props) => {
         <Input
           as="select"
           id="loan"
-          // value={selectVal}
-          value={formatLoan(loanTerm, loanType)}
+          value={loanType}
           onChange={handleChange}
         >
           {
@@ -37,8 +30,8 @@ const LoanType = (props) => {
             ))
           }
           <option value="noRates">noRates</option>
-          <option value="Fixed">Fixed</option>
-          <option value={formatLoan(loanTerm, loanType)}>{formatLoan(loanTerm, loanType)}</option>
+          <option value="30 Year Fixed">30 Year Fixed (static)</option>
+          <option value={loanType}>{`${loanType}(dynamic)`}</option>
         </Input>
       </Box>
     </InputContainer>
