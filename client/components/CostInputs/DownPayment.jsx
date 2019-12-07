@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { formatNum, parseUserStr } from '../../utils';
 import {
-  InputContainer, Box, Input, Slider,
+  InputContainer, Box, Input, Slider, Label,
 } from '../styles.jsx';
 
 const SplitContainer = styled.div`
@@ -78,7 +78,7 @@ const DownPayment = (props) => {
 
   return (
     <InputContainer>
-      <span>Down Payment</span>
+      <Label>Down Payment</Label>
       <SplitContainer>
         <SubContainer width={70}>
           <Box

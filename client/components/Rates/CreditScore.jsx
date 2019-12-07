@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import {
-  InputContainer, Box, Input, Option,
+  InputContainer, Box, Input, Option, Label,
 } from '../styles.jsx';
 import { createCreditDisplayRange, getCreditFromDisplayRange } from '../../utils';
 
@@ -12,7 +12,7 @@ const CreditScore = (props) => {
 
   return (
     <InputContainer>
-      <span>Credit Score</span>
+      <Label>Credit Score</Label>
       <Box>
         <Input
           as="select"

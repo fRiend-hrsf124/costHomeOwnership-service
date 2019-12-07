@@ -29,6 +29,11 @@ const Box = styled.span`
   position: relative;
 `;
 
+const Label = styled.span`
+  font: 400 11px system-ui;
+  font-size: 1rem;
+`;
+
 const Input = styled.input`
   font: 400 11px system-ui;
   font-size: 1rem;
@@ -74,5 +79,5 @@ const Slider = styled.input`
 `;
 
 export {
-  FullContainer, HalfContainer, InputContainer, Box, Input, Option, Slider,
+  FullContainer, HalfContainer, InputContainer, Box, Label, Input, Option, Slider,
 };

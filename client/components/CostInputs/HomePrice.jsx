@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { formatNum, parseUserStr } from '../../utils';
 import {
-  InputContainer, Box, Input, Slider,
+  InputContainer, Box, Input, Slider, Label,
 } from '../styles.jsx';
 
 const HomePrice = (props) => {
@@ -41,7 +41,7 @@ const HomePrice = (props) => {
 
   return (
     <InputContainer>
-      <span>Home Price</span>
+      <Label>Home Price</Label>
       <Box
         onBlur={handleInputDeselect}
         onFocus={handleInputSelect}

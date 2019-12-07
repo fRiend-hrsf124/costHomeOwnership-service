@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import {
-  InputContainer, Box, Input, Option,
+  InputContainer, Box, Input, Option, Label,
 } from '../styles.jsx';
 
 const LoanType = (props) => {
@@ -11,7 +11,7 @@ const LoanType = (props) => {
 
   return (
     <InputContainer>
-      <span>Loan Type</span>
+      <Label>Loan Type</Label>
       <Box>
         <Input
           as="select"
