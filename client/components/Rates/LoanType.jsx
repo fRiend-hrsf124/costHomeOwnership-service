@@ -23,8 +23,6 @@ const LoanType = (props) => {
             ))
           }
           <Option value="noRates">noRates</Option>
-          <Option value="30 Year Fixed">30 Year Fixed (static)</Option>
-          <Option value={loanType}>{`${loanType}(dynamic)`}</Option>
         </Input>
       </Box>
     </InputContainer>

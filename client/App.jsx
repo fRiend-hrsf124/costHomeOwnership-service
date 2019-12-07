@@ -23,7 +23,11 @@ class App extends React.Component {
       propertyTaxRate: null,
       cost: 10,
       loanType: formatLoan(30, 'Fixed'),
-      loanTypes: [],
+      loanTypes: [
+        formatLoan(30, 'Fixed'),
+        formatLoan(15, 'Fixed'),
+        formatLoan(5, 'ARM'),
+      ],
       downPay: 20,
       credit: 740,
       origYear: 2019,
@@ -49,6 +53,7 @@ class App extends React.Component {
         propertyTaxRate,
       } = await res.data[0];
 
+      // TODO - change to server supplying available loanTypes
       this.setState({
         propertyId,
         zipCode,
@@ -81,14 +86,7 @@ class App extends React.Component {
       const res = await axios.get(`/api/costHomeOwnership/rates?${queryString}`);
       const rates = await res.data;
 
-      // TODO - change to server supplying available loanTypes in getPropertyData
-      let loanTypes = new Set();
-      rates.forEach((rate) => {
-        loanTypes.add(formatLoan(rate.term, rate.loanType));
-      });
-      loanTypes = [...loanTypes];
-
-      this.setState({ rates, loanTypes });
+      this.setState({ rates });
     } catch (err) {
       console.log(err);
     }
