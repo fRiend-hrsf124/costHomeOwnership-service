@@ -9,7 +9,8 @@ import { formatLoan, unFormatLoan } from './utils';
 
 const Container = styled.div`
   max-width: 667px;
-  font-family: Libre Franklin;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 `;
 
 class App extends React.Component {
