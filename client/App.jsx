@@ -99,14 +99,13 @@ class App extends React.Component {
   render() {
     const {
       // eslint-disable-next-line no-unused-vars
-      rates,
-      // eslint-disable-next-line no-unused-vars
       insuranceRate,
       // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
       loanType,
       loanTypes,
       credit,
+      rates,
       cost,
       downPay,
       redfinCostEstimate,
@@ -127,6 +126,8 @@ class App extends React.Component {
           loanType={loanType}
           loanTypes={loanTypes}
           credit={credit}
+          cost={cost}
+          rates={rates}
         />
       </Container>
     );
