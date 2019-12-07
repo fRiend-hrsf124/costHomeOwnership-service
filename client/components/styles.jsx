@@ -127,6 +127,35 @@ const Slider = styled.input`
   };
 `;
 
+const Carousel = styled.div`
+  margin-top: 15px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    width: 0!important;
+    height: 0!important;
+  }
+`;
+
+const Loan = styled.div`
+  margin-right: 15px;
+  position: relative;
+  scroll-snap-align: start;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+  padding-left: 0;
+  padding-right: 8px;
+  width: 325px;
+  color: #333;
+`;
+
 export {
   AppContainer,
   FullContainer,
@@ -141,4 +170,6 @@ export {
   Option,
   Slider,
   Select,
+  Carousel,
+  Loan,
 };
