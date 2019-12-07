@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 const AppContainer = styled.div`
   max-width: 667px;
   text-rendering: optimizeLegibility;
@@ -46,9 +45,12 @@ const Label = styled.span`
   font: 11px system-ui;
   font-weight: ${({ weight }) => (weight || 400)};
   font-size: 1rem;
+  vertical-align: baseline;
 `;
 
 const LinkDiv = styled.div`
+  position: relative;
+  top: -6px;
   font: 400 11px system-ui;
   font-size: 1rem;
   color: #0c82a5;
