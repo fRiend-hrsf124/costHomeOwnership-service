@@ -63,7 +63,7 @@ const Arrow = styled.svg`
   width: 24px;
   fill: #0c82a5;
   transition: all .15s ease-out 0s;
-  transform: rotate(180deg);
+  transform: rotate(${({ isExpanded }) => (isExpanded ? 0 : 180)}deg);
 `;
 
 const Input = styled.input`

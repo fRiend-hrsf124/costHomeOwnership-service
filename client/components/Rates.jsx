@@ -11,7 +11,7 @@ const Rates = (props) => {
     handleUserSubmit, loanType, loanTypes, credit, cost, rates,
   } = props;
 
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const handleHeaderClick = () => {
     setIsExpanded(!isExpanded);
   };
@@ -20,6 +20,7 @@ const Rates = (props) => {
     <div>
       <RatesHeader
         handleHeaderClick={handleHeaderClick}
+        isExpanded={isExpanded}
         loanType={loanType}
         credit={credit}
       />
