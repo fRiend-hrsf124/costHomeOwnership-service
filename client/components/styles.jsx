@@ -85,6 +85,7 @@ const Select = styled.select`
   margin: 0;
   padding: 0;
   width: 100%;
+  background: transparent;
   /* display: none; */
   &:selected {
     /* background-color: #9feaff; */
