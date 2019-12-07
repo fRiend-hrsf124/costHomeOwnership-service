@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { InputContainer, Box, Input } from '../styles.jsx';
 import { formatLoan, unFormatLoan } from '../../utils';
 
