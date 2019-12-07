@@ -55,12 +55,13 @@ const Select = styled.select`
   width: 100%;
   /* display: none; */
   &:selected {
-    background-color: #9feaff;
+    /* background-color: #9feaff; */
   }
 `;
 
 const Option = styled.option`
-
+  background-color: lightgray;
+  color: whitesmoke;
 `;
 
 const Slider = styled.input`
