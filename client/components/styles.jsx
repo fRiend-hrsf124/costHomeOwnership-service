@@ -48,7 +48,7 @@ const Label = styled.span`
   font: 11px system-ui;
   font-weight: ${({ weight }) => (weight || 400)};
   font-size: ${({ fontSize }) => (fontSize || '1rem')};
-  ${({ color }) => (color ? 'color: ' + color + ';' : '')}
+  color: ${({ color }) => (color || 'inherit')};
   vertical-align: baseline;
 `;
 
