@@ -9,9 +9,17 @@ import {
   LoanGridLogo,
   Label,
 } from '../styles.jsx';
-import { formatNum, getDate } from '../../utils';
+import {
+  formatNum, getDate, getFakeRate, getPayment,
+} from '../../utils';
 
-const Loan = ({ rate, cost }) => (
+const Loan = ({
+  rate,
+  cost,
+  downPay,
+  insuranceRate,
+  propertyTaxRate,
+}) => (
   <LoanCard>
     <LoanGridContainer>
       <LoanGrid>
@@ -19,10 +27,10 @@ const Loan = ({ rate, cost }) => (
           <Label
             as="div"
           >
-            {formatNum(cost)}
+            {formatNum(getPayment(cost, rate, downPay, insuranceRate, propertyTaxRate))}
           </Label>
           <LoanGridLabel>
-            Monthly Payment
+              Monthly Payment
           </LoanGridLabel>
         </LoanGridItem>
         <LoanGridItem>
@@ -31,7 +39,7 @@ const Loan = ({ rate, cost }) => (
             src={rate.lenderLogoUrl}
           />
           <LoanGridLabel>
-            NMLS#
+              NMLS#
             {rate.lenderNmls}
           </LoanGridLabel>
         </LoanGridItem>
@@ -41,11 +49,11 @@ const Loan = ({ rate, cost }) => (
             weight="600"
             fontSize=".925rem"
           >
-            {rate.apr}
-            %
+            {getFakeRate(rate)}
+              %
           </Label>
           <LoanGridLabel>
-            Interest Rate
+              Interest Rate
           </LoanGridLabel>
         </LoanGridItem>
         <LoanGridItem>
@@ -54,10 +62,10 @@ const Loan = ({ rate, cost }) => (
             fontSize=".925rem"
           >
             {rate.apr}
-            %
+              %
           </Label>
           <LoanGridLabel>
-            APR as of
+              APR as of
             {getDate()}
           </LoanGridLabel>
         </LoanGridItem>

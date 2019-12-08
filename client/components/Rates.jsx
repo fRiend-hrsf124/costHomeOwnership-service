@@ -8,7 +8,15 @@ import Loans from './Rates/Loans.jsx';
 
 const Rates = (props) => {
   const {
-    handleUserSubmit, loanType, loanTypes, credit, cost, rates,
+    handleUserSubmit,
+    loanType,
+    loanTypes,
+    credit,
+    cost,
+    rates,
+    downPay,
+    insuranceRate,
+    propertyTaxRate,
   } = props;
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -42,6 +50,9 @@ const Rates = (props) => {
       <Loans
         cost={cost}
         rates={rates}
+        downPay={downPay}
+        insuranceRate={insuranceRate}
+        propertyTaxRate={propertyTaxRate}
       />
       {/* view all rates footer */}
     </div>

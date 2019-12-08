@@ -12,7 +12,13 @@ import Loan from './Loan.jsx';
 import LoanArrow from './LoanArrow.jsx';
 
 const Loans = (props) => {
-  const { cost, rates } = props;
+  const {
+    cost,
+    rates,
+    downPay,
+    insuranceRate,
+    propertyTaxRate,
+  } = props;
   const ratesCount = rates.length;
 
   const [rateIdx, setRateIdx] = useState(0);
@@ -35,10 +41,26 @@ const Loans = (props) => {
             idx={rateIdx}
           >
             {ratesCount > 0
-              ? <Loan rate={rates[rateIdx]} cost={cost} />
+              ? (
+                <Loan
+                  rate={rates[rateIdx]}
+                  cost={cost}
+                  downPay={downPay}
+                  insuranceRate={insuranceRate}
+                  propertyTaxRate={propertyTaxRate}
+                />
+              )
               : ''}
             {ratesCount > 1
-              ? <Loan rate={rates[rateIdx]} cost={cost} />
+              ? (
+                <Loan
+                  rate={rates[rateIdx + 1]}
+                  cost={cost}
+                  downPay={downPay}
+                  insuranceRate={insuranceRate}
+                  propertyTaxRate={propertyTaxRate}
+                />
+              )
               : ''}
             {/* TODO - animate scrolling */}
             {/* {rates.map((rate) => (

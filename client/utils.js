@@ -48,6 +48,19 @@ const getDate = () => {
   return ` ${mm}/${dd}`;
 };
 
+// eslint-disable-next-line arrow-body-style
+const getFakeRate = ({ apr, lenderId }) => {
+  // TODO - remove once server provides
+  const rateAdjusted = Math.floor((parseFloat(apr) * 1000) - (lenderId * 43));
+  return Number.prototype.toFixed.call((rateAdjusted - (rateAdjusted % 125)) / 1000, 3);
+};
+
+const getPayment = (cost, rate, downPay, insuranceRate, propertyTaxRate) => {
+  const { apr, term, loanType } = rate;
+  const payment = cost;
+  return payment;
+};
+
 export {
   formatNum,
   parseUserStr,
@@ -56,4 +69,6 @@ export {
   createCreditDisplayRange,
   getCreditFromDisplayRange,
   getDate,
+  getPayment,
+  getFakeRate,
 };
