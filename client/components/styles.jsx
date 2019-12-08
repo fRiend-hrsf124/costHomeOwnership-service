@@ -131,17 +131,43 @@ const Slider = styled.input`
   };
 `;
 
-const Carousel = styled.div`
+const CarouselContainer = styled.div`
   margin-top: 10px;
+  position: relative;
+`;
+
+const Carousel = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
   &::-webkit-scrollbar {
-    width: 0!important;
-    height: 0!important;
+    display: none;
   }
+`;
+
+const CarouselScrollButton = styled.div`
+  transform: ${({ left }) => (left ? 'translateY(-50%) rotate(180deg)' : 'none')};
+  ${({ left }) => (left ? 'left' : 'right')}: -24px;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  background-color: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 20px;
+  cursor: pointer;
+  display: ${({ isShown }) => (isShown === 'true' ? 'block' : 'none')};
+`;
+
+const CarouselScrollArrow = styled.svg`
+  width: 13px;
+  height: 16px;
+  padding-top: 9px;
+  padding-left: 12px;
+  fill: #585858;
 `;
 
 const Loan = styled.div`
@@ -207,6 +233,9 @@ export {
   Slider,
   Select,
   Carousel,
+  CarouselContainer,
+  CarouselScrollButton,
+  CarouselScrollArrow,
   Loan,
   LoanGridContainer,
   LoanGrid,
