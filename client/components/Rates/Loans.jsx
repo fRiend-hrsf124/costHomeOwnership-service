@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import {
   FullContainer,
   CarouselContainer,
-  Carousel,
+  CarouselItemsContainer,
+  CarouselItems,
   CarouselScrollButton,
   CarouselScrollArrow,
 } from '../styles.jsx';
@@ -29,14 +30,19 @@ const Loans = (props) => {
   return (
     <FullContainer>
       <CarouselContainer>
-        <Carousel>
-          {ratesCount > 0
+        <CarouselItemsContainer>
+          <CarouselItems>
+            {/* {ratesCount > 0
             ? <Loan rate={rates[rateIdx]} cost={cost} />
             : ''}
-          {ratesCount > 1
-            ? <Loan rate={rates[rateIdx]} cost={cost} />
-            : ''}
-        </Carousel>
+            {ratesCount > 1
+              ? <Loan rate={rates[rateIdx]} cost={cost} />
+            : ''} */}
+            {rates.map((rate) => (
+              <Loan key={rate.rateId} rate={rate} cost={cost} />
+            ))}
+          </CarouselItems>
+        </CarouselItemsContainer>
         <CarouselScrollButton
           isShown={rateIdx > 0}
           left="true"

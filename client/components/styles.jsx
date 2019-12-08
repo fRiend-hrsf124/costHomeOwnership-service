@@ -137,7 +137,10 @@ const CarouselContainer = styled.div`
   position: relative;
 `;
 
-const Carousel = styled.div`
+const CarouselItemsContainer = styled.div`
+`;
+
+const CarouselItems = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   overflow-x: scroll;
@@ -146,29 +149,6 @@ const Carousel = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
-
-const CarouselScrollButton = styled.div`
-  transform: ${({ left }) => (left ? 'translateY(-50%) rotate(180deg)' : 'none')};
-  ${({ left }) => (left ? 'left' : 'right')}: -24px;
-  z-index: 10;
-  position: absolute;
-  top: 50%;
-  width: 34px;
-  height: 34px;
-  background-color: #fff;
-  border: 1px solid #e2e2e2;
-  border-radius: 20px;
-  cursor: pointer;
-  display: ${({ isShown }) => (isShown ? 'block' : 'none')};
-`;
-
-const CarouselScrollArrow = styled.svg`
-  width: 13px;
-  height: 16px;
-  padding-top: 9px;
-  padding-left: 12px;
-  fill: #585858;
 `;
 
 const LoanCard = styled.div`
@@ -219,6 +199,29 @@ const LoanGridLabel = styled.div`
   color: #767676;
 `;
 
+const CarouselScrollButton = styled.div`
+  transform: translateY(-50%) ${({ left }) => (left ? 'rotate(180deg)' : '')};
+  ${({ left }) => (left ? 'left' : 'right')}: -24px;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  background-color: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 20px;
+  cursor: pointer;
+  display: ${({ isShown }) => (isShown ? 'inline' : 'none')};
+`;
+
+const CarouselScrollArrow = styled.svg`
+  width: 13px;
+  height: 16px;
+  padding-top: 9px;
+  padding-left: 12px;
+  fill: #585858;
+`;
+
 export {
   AppContainer,
   FullContainer,
@@ -233,8 +236,9 @@ export {
   Option,
   Slider,
   Select,
-  Carousel,
   CarouselContainer,
+  CarouselItemsContainer,
+  CarouselItems,
   CarouselScrollButton,
   CarouselScrollArrow,
   LoanCard,
