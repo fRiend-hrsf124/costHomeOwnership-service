@@ -1,16 +1,31 @@
 import styled from 'styled-components';
 
+const AppContainer = styled.div`
+  width: 1010px;
+  padding: 0px 30px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+`;
+
 const FullContainer = styled.div`
+  width: 67%;
+  max-width: 667px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding-bottom: 24px;
+  padding-bottom: ${({ paddingBottom }) => paddingBottom || '24px'};
+  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'inherit')};
+`;
+
+const FullContainerExpandable = styled(FullContainer)`
+  display: ${({ isExpanded }) => (isExpanded ? 'flex' : 'none')};
 `;
 
 const HalfContainer = styled.div`
   width: 49%;
   flex-basis: 49%;
   margin-top: 10px;
+  text-align: ${({ align }) => align || 'inherit'};
 `;
 
 const InputContainer = styled.span`
@@ -30,8 +45,50 @@ const Box = styled.span`
 `;
 
 const Label = styled.span`
+  font: 11px system-ui;
+  font-weight: ${({ weight }) => (weight || 400)};
+  font-size: ${({ fontSize }) => (fontSize || '1rem')};
+  color: ${({ color }) => (color || 'inherit')};
+  vertical-align: baseline;
+`;
+
+const LinkDiv = styled.div`
+  position: relative;
+  top: -6px;
   font: 400 11px system-ui;
   font-size: 1rem;
+  color: #0c82a5;
+  vertical-align: baseline;
+`;
+
+const LinkAway = styled(LinkDiv)`
+  cursor: pointer;
+  &:hover {
+    opacity: 50%;
+  }
+`;
+
+const Arrow = styled.svg`
+  position: relative;
+  height: 24px;
+  width: 24px;
+  fill: #0c82a5;
+  transition: all .15s ease-out 0s;
+  transform: rotate(${({ isExpanded }) => (isExpanded ? 0 : 180)}deg);
+`;
+
+const InfoBtnContainer = styled.span`
+  cursor: pointer;
+`;
+
+const InfoBtn = styled.svg`
+  width: 14px;
+  height: 14px;
+  margin: -4px 5px -2px 5px;
+  fill: #ccc;
+  &:hover {
+    fill: #333;
+  }
 `;
 
 const Input = styled.input`
@@ -44,8 +101,26 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const Option = styled.option`
+const Select = styled.select`
+  /* -webkit-appearance: none; */
+  font: 400 11px system-ui;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+  /* display: none; */
+  &:selected {
+    /* background-color: #9feaff; */
+  }
+`;
 
+const Option = styled.option`
+  background-color: lightgray;
+  color: whitesmoke;
 `;
 
 const Slider = styled.input`
@@ -78,6 +153,126 @@ const Slider = styled.input`
   };
 `;
 
+const CarouselContainer = styled.div`
+  margin-top: 10px;
+  width: 100%;
+  position: relative;
+`;
+
+const CarouselItemsContainer = styled.div`
+`;
+
+const CarouselItems = styled.div.attrs(({ idx }) => ({
+  distance: idx * 340,
+}))`
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  /* transform: translateX(-${({ distance }) => distance}px); */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const LoanCard = styled.div`
+  margin-right: 15px;
+  position: relative;
+  scroll-snap-align: start;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+  border-radius: 4px;
+  padding-left: 0;
+  padding-right: 8px;
+  width: 325px;
+  height: 130px;
+  color: #333;
+  cursor:pointer;
+`;
+
+const LoanGridContainer = styled.div`
+  padding: 20px 30px;
+`;
+
+const LoanGrid = styled.div`
+  display: grid;
+  grid-template-columns: 102px 94px;
+  grid-template-rows: 40px 40px;
+  grid-row-gap: 14px;
+  grid-column-gap: calc(100% - 196px);
+`;
+
+const LoanGridItem = styled.div`
+  vertical-align:baseline;
+  display:grid;
+`;
+
+const LoanGridLogo = styled.img`
+  max-height: 22px;
+  width: auto;
+  max-width: 100%;
+`;
+
+const LoanGridLabel = styled.div`
+  font: 400 11px system-ui;
+  font-size: 0.75rem;
+  color: #767676;
+`;
+
+const CarouselScrollButton = styled.div`
+  transform: translateY(-50%) ${({ left }) => (left ? 'rotate(180deg)' : '')};
+  ${({ left }) => (left ? 'left' : 'right')}: -24px;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  background-color: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 20px;
+  cursor: pointer;
+  display: ${({ isShown }) => (isShown ? 'inline' : 'none')};
+`;
+
+const CarouselScrollArrow = styled.svg`
+  width: 13px;
+  height: 16px;
+  padding-top: 9px;
+  padding-left: 12px;
+  fill: #585858;
+`;
+
 export {
-  FullContainer, HalfContainer, InputContainer, Box, Label, Input, Option, Slider,
+  AppContainer,
+  FullContainer,
+  FullContainerExpandable,
+  HalfContainer,
+  InputContainer,
+  Box,
+  Label,
+  LinkDiv,
+  LinkAway,
+  Arrow,
+  InfoBtnContainer,
+  InfoBtn,
+  Input,
+  Option,
+  Slider,
+  Select,
+  CarouselContainer,
+  CarouselItemsContainer,
+  CarouselItems,
+  CarouselScrollButton,
+  CarouselScrollArrow,
+  LoanCard,
+  LoanGridContainer,
+  LoanGrid,
+  LoanGridItem,
+  LoanGridLabel,
+  LoanGridLogo,
 };

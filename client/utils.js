@@ -41,6 +41,30 @@ const getCreditFromDisplayRange = (displayRange) => (
   parseInt(displayRange.substring(0, 3), 10)
 );
 
+const getDate = () => {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  return ` ${mm}/${dd}`;
+};
+
+// eslint-disable-next-line arrow-body-style
+const getFakeRate = ({ apr, lenderId }) => {
+  // TODO - remove once server provides
+  const rateAdjusted = Math.floor((parseFloat(apr) * 1000) - (lenderId * 43));
+  return Number.prototype.toFixed.call((rateAdjusted - (rateAdjusted % 125)) / 1000, 3);
+};
+
+const getMortgagePayment = (cost, rate, downPay) => {
+  const { term } = rate;
+  const r = parseFloat(getFakeRate(rate));
+
+  const n = term * 12;
+  const i = r / 12 / 100;
+  const d = (((1 + i) ** n) - 1) / (i * (1 + i) ** n);
+  return Math.trunc((cost * (1 - (downPay / 100))) / d);
+};
+
 export {
   formatNum,
   parseUserStr,
@@ -48,4 +72,7 @@ export {
   unFormatLoan,
   createCreditDisplayRange,
   getCreditFromDisplayRange,
+  getDate,
+  getMortgagePayment,
+  getFakeRate,
 };

@@ -1,16 +1,11 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
 import CostInputs from './components/CostInputs.jsx';
 import Rates from './components/Rates.jsx';
 import { formatLoan, unFormatLoan } from './utils';
-
-const Container = styled.div`
-  max-width: 667px;
-  font-family: Libre Franklin;
-`;
+import { AppContainer } from './components/styles.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -99,21 +94,20 @@ class App extends React.Component {
   render() {
     const {
       // eslint-disable-next-line no-unused-vars
-      rates,
-      // eslint-disable-next-line no-unused-vars
       insuranceRate,
       // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
       loanType,
       loanTypes,
       credit,
+      rates,
       cost,
       downPay,
       redfinCostEstimate,
     } = this.state;
 
     return (
-      <Container>
+      <AppContainer>
         <CostInputs
           key={cost * downPay}
           handleUserSubmit={this.handleUserSubmit}
@@ -127,8 +121,11 @@ class App extends React.Component {
           loanType={loanType}
           loanTypes={loanTypes}
           credit={credit}
+          cost={cost}
+          rates={rates}
+          downPay={downPay}
         />
-      </Container>
+      </AppContainer>
     );
   }
 }
