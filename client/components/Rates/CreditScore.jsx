@@ -4,6 +4,7 @@ import {
   InputContainer, Box, Select, Option, Label,
 } from '../styles.jsx';
 import { createCreditDisplayRange, getCreditFromDisplayRange } from '../../utils';
+import InfoFlyout from '../InfoFlyout.jsx';
 
 const CreditScore = (props) => {
   const { credit, handleUserSubmit } = props;
@@ -12,7 +13,10 @@ const CreditScore = (props) => {
 
   return (
     <InputContainer>
-      <Label>Credit Score</Label>
+      <Label>
+        Credit Score
+        <InfoFlyout />
+      </Label>
       <Box>
         <Select
           id="credit"

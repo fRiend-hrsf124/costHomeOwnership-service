@@ -3,6 +3,7 @@ import React from 'react';
 import {
   InputContainer, Box, Select, Option, Label,
 } from '../styles.jsx';
+import InfoFlyout from '../InfoFlyout.jsx';
 
 const LoanType = (props) => {
   const {
@@ -11,7 +12,10 @@ const LoanType = (props) => {
 
   return (
     <InputContainer>
-      <Label>Loan Type</Label>
+      <Label>
+        Loan Type
+        <InfoFlyout />
+      </Label>
       <Box>
         <Select
           id="loan"
