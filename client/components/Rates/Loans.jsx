@@ -31,16 +31,19 @@ const Loans = (props) => {
     <FullContainer>
       <CarouselContainer>
         <CarouselItemsContainer>
-          <CarouselItems>
-            {/* {ratesCount > 0
-            ? <Loan rate={rates[rateIdx]} cost={cost} />
-            : ''}
+          <CarouselItems
+            idx={rateIdx}
+          >
+            {ratesCount > 0
+              ? <Loan rate={rates[rateIdx]} cost={cost} />
+              : ''}
             {ratesCount > 1
               ? <Loan rate={rates[rateIdx]} cost={cost} />
-            : ''} */}
-            {rates.map((rate) => (
+              : ''}
+            {/* TODO - animate scrolling */}
+            {/* {rates.map((rate) => (
               <Loan key={rate.rateId} rate={rate} cost={cost} />
-            ))}
+            ))} */}
           </CarouselItems>
         </CarouselItemsContainer>
         <CarouselScrollButton

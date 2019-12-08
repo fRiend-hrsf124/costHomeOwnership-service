@@ -140,12 +140,15 @@ const CarouselContainer = styled.div`
 const CarouselItemsContainer = styled.div`
 `;
 
-const CarouselItems = styled.div`
+const CarouselItems = styled.div.attrs(({ idx }) => ({
+  distance: idx * 340,
+}))`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  /* transform: translateX(-${({ distance }) => distance}px); */
   &::-webkit-scrollbar {
     display: none;
   }
