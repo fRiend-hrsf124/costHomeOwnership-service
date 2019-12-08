@@ -133,6 +133,7 @@ const Slider = styled.input`
 
 const CarouselContainer = styled.div`
   margin-top: 10px;
+  width: 100%;
   position: relative;
 `;
 
@@ -159,7 +160,7 @@ const CarouselScrollButton = styled.div`
   border: 1px solid #e2e2e2;
   border-radius: 20px;
   cursor: pointer;
-  display: ${({ isShown }) => (isShown === 'true' ? 'block' : 'none')};
+  display: ${({ isShown }) => (isShown ? 'block' : 'none')};
 `;
 
 const CarouselScrollArrow = styled.svg`
