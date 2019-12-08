@@ -86,6 +86,9 @@ const InfoBtn = styled.svg`
   height: 14px;
   margin: -4px 5px -2px 5px;
   fill: #ccc;
+  &:hover {
+    fill: #333;
+  }
 `;
 
 const Input = styled.input`
