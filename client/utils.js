@@ -55,7 +55,7 @@ const getFakeRate = ({ apr, lenderId }) => {
   return Number.prototype.toFixed.call((rateAdjusted - (rateAdjusted % 125)) / 1000, 3);
 };
 
-const getPayment = (cost, rate, downPay, insuranceRate, propertyTaxRate) => {
+const getMortgagePayment = (cost, rate, downPay, insuranceRate, propertyTaxRate) => {
   const { apr, term, loanType } = rate;
   const payment = cost;
   return payment;
@@ -69,6 +69,6 @@ export {
   createCreditDisplayRange,
   getCreditFromDisplayRange,
   getDate,
-  getPayment,
+  getMortgagePayment,
   getFakeRate,
 };

@@ -80,7 +80,7 @@ const Input = styled.input`
 `;
 
 const Select = styled.select`
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   font: 400 11px system-ui;
   font-size: 1rem;
   outline: none;

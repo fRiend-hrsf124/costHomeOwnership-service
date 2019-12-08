@@ -10,7 +10,7 @@ import {
   Label,
 } from '../styles.jsx';
 import {
-  formatNum, getDate, getFakeRate, getPayment,
+  formatNum, getDate, getFakeRate, getMortgagePayment,
 } from '../../utils';
 
 const Loan = ({
@@ -27,7 +27,7 @@ const Loan = ({
           <Label
             as="div"
           >
-            {formatNum(getPayment(cost, rate, downPay, insuranceRate, propertyTaxRate))}
+            {formatNum(getMortgagePayment(cost, rate, downPay, insuranceRate, propertyTaxRate))}
           </Label>
           <LoanGridLabel>
               Monthly Payment
