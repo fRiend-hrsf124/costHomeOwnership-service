@@ -15,8 +15,6 @@ const Rates = (props) => {
     cost,
     rates,
     downPay,
-    insuranceRate,
-    propertyTaxRate,
   } = props;
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -51,8 +49,6 @@ const Rates = (props) => {
         cost={cost}
         rates={rates}
         downPay={downPay}
-        insuranceRate={insuranceRate}
-        propertyTaxRate={propertyTaxRate}
       />
       {/* view all rates footer */}
     </div>
