@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FullContainer,
   CarouselContainer,
@@ -19,6 +19,19 @@ import LoanArrow from './LoanArrow.jsx';
 
 const Loans = (props) => {
   const { cost, rates } = props;
+  const ratesCount = rates.length;
+  const [rateIdx, setRateIdx] = useState(0);
+  const handleScrollClick = (dir) => {
+    if (dir === 'left') {
+      const nextRateIdx = rateIdx - 2 < 0 ? 0 : rateIdx - 2;
+      setRateIdx(nextRateIdx);
+    } else {
+      const nextRateIdx = rateIdx + 2 > ratesCount - 1
+        ? ratesCount - 1
+        : rateIdx + 2;
+      setRateIdx(nextRateIdx);
+    }
+  };
 
   return (
     <FullContainer>
@@ -80,15 +93,19 @@ const Loans = (props) => {
           ))}
         </Carousel>
         <CarouselScrollButton
+          // isShown={rateIdx > 0}
           isShown="true"
-          left="false"
+          left="true"
+          onClick={() => handleScrollClick('left')}
         >
           <CarouselScrollArrow>
             <LoanArrow />
           </CarouselScrollArrow>
         </CarouselScrollButton>
         <CarouselScrollButton
+          // isShown={rateIdx + 1 < ratesCount}
           isShown="true"
+          onClick={() => handleScrollClick('right')}
         >
           <CarouselScrollArrow>
             <LoanArrow />
