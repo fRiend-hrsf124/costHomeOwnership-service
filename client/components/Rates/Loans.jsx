@@ -14,11 +14,12 @@ import {
   LoanGridLogo,
   Label,
 } from '../styles.jsx';
-import { formatNum } from '../../utils';
+import { formatNum, getDate } from '../../utils';
 import LoanArrow from './LoanArrow.jsx';
 
 const Loans = (props) => {
   const { cost, rates } = props;
+
   return (
     <FullContainer>
       <CarouselContainer>
@@ -70,6 +71,7 @@ const Loans = (props) => {
                     </Label>
                     <LoanGridLabel>
                       APR as of
+                      {getDate()}
                     </LoanGridLabel>
                   </LoanGridItem>
                 </LoanGrid>
