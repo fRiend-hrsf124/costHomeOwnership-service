@@ -16,8 +16,6 @@ const Loans = (props) => {
     cost,
     rates,
     downPay,
-    insuranceRate,
-    propertyTaxRate,
   } = props;
   const ratesCount = rates.length;
 
@@ -46,8 +44,6 @@ const Loans = (props) => {
                   rate={rates[rateIdx]}
                   cost={cost}
                   downPay={downPay}
-                  insuranceRate={insuranceRate}
-                  propertyTaxRate={propertyTaxRate}
                 />
               )
               : ''}
@@ -57,8 +53,6 @@ const Loans = (props) => {
                   rate={rates[rateIdx + 1]}
                   cost={cost}
                   downPay={downPay}
-                  insuranceRate={insuranceRate}
-                  propertyTaxRate={propertyTaxRate}
                 />
               )
               : ''}

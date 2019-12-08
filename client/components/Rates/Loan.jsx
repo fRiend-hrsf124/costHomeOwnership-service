@@ -17,8 +17,6 @@ const Loan = ({
   rate,
   cost,
   downPay,
-  insuranceRate,
-  propertyTaxRate,
 }) => (
   <LoanCard>
     <LoanGridContainer>
@@ -27,7 +25,7 @@ const Loan = ({
           <Label
             as="div"
           >
-            {formatNum(getMortgagePayment(cost, rate, downPay, insuranceRate, propertyTaxRate))}
+            {formatNum(getMortgagePayment(cost, rate, downPay))}
           </Label>
           <LoanGridLabel>
               Monthly Payment
