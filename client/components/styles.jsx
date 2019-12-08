@@ -77,6 +77,17 @@ const Arrow = styled.svg`
   transform: rotate(${({ isExpanded }) => (isExpanded ? 0 : 180)}deg);
 `;
 
+const InfoBtnContainer = styled.span`
+  cursor: pointer;
+`;
+
+const InfoBtn = styled.svg`
+  width: 14px;
+  height: 14px;
+  margin: -4px 5px -2px 5px;
+  fill: #ccc;
+`;
+
 const Input = styled.input`
   font: 400 11px system-ui;
   font-size: 1rem;
@@ -244,6 +255,8 @@ export {
   LinkDiv,
   LinkAway,
   Arrow,
+  InfoBtnContainer,
+  InfoBtn,
   Input,
   Option,
   Slider,
