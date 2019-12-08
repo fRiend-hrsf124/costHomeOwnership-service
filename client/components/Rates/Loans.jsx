@@ -7,7 +7,6 @@ import {
   CarouselItems,
   CarouselScrollButton,
   CarouselScrollArrow,
-  Label,
 } from '../styles.jsx';
 import Loan from './Loan.jsx';
 import LoanArrow from './LoanArrow.jsx';
@@ -40,7 +39,7 @@ const Loans = (props) => {
           <CarouselItems
             idx={rateIdx}
           >
-            {ratesCount > 0
+            {ratesCount > 0 && rateIdx < ratesCount
               ? (
                 <Loan
                   rate={rates[rateIdx]}
@@ -49,7 +48,7 @@ const Loans = (props) => {
                 />
               )
               : <LoanEmpty />}
-            {ratesCount > 1
+            {ratesCount > 1 && rateIdx + 1 < ratesCount
               ? (
                 <Loan
                   rate={rates[rateIdx + 1]}
