@@ -92,7 +92,7 @@ const seedRates = (conn, zips) => {
     const term = terms[faker.random.number(type === 'Fixed'
       ? { min: 4, max: terms.length - 1 }
       : 3)];
-    const low = faker.random.number({ min: 0, max: 2000000, precision: 100000 });
+    const low = faker.random.number({ min: 10000, max: 2000000, precision: 10000 });
     const high = faker.random.number({ min: 1000000, max: 3500000, precision: 100000 });
     const downPaymentMin = faker.random.number({ min: 0, max: 20, precision: 10 });
     const creditMin = faker.random.number({ min: 660, max: 740, precision: 20 });
