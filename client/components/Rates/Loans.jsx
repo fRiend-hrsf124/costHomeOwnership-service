@@ -7,9 +7,11 @@ import {
   CarouselItems,
   CarouselScrollButton,
   CarouselScrollArrow,
+  Label,
 } from '../styles.jsx';
 import Loan from './Loan.jsx';
 import LoanArrow from './LoanArrow.jsx';
+import LoanEmpty from './LoanEmpty.jsx';
 
 const Loans = (props) => {
   const {
@@ -46,7 +48,7 @@ const Loans = (props) => {
                   downPay={downPay}
                 />
               )
-              : ''}
+              : <LoanEmpty />}
             {ratesCount > 1
               ? (
                 <Loan
