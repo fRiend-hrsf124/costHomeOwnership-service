@@ -48,6 +48,7 @@ const Label = styled.span`
   font: 11px system-ui;
   font-weight: ${({ weight }) => (weight || 400)};
   font-size: ${({ fontSize }) => (fontSize || '1rem')};
+  ${({ color }) => (color ? 'color: ' + color + ';' : '')}
   vertical-align: baseline;
 `;
 
@@ -58,6 +59,13 @@ const LinkDiv = styled.div`
   font-size: 1rem;
   color: #0c82a5;
   vertical-align: baseline;
+`;
+
+const LinkAway = styled(LinkDiv)`
+  cursor: pointer;
+  &:hover {
+    opacity: 50%;
+  }
 `;
 
 const Arrow = styled.svg`
@@ -234,6 +242,7 @@ export {
   Box,
   Label,
   LinkDiv,
+  LinkAway,
   Arrow,
   Input,
   Option,

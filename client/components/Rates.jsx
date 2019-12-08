@@ -5,6 +5,7 @@ import RatesHeader from './Rates/RatesHeader.jsx';
 import LoanType from './Rates/LoanType.jsx';
 import CreditScore from './Rates/CreditScore.jsx';
 import Loans from './Rates/Loans.jsx';
+import RatesFooter from './Rates/RatesFooter.jsx';
 
 const Rates = (props) => {
   const {
@@ -50,7 +51,7 @@ const Rates = (props) => {
         rates={rates}
         downPay={downPay}
       />
-      {/* view all rates footer */}
+      <RatesFooter />
     </div>
   );
 };
