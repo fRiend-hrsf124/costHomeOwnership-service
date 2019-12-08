@@ -56,21 +56,13 @@ const getFakeRate = ({ apr, lenderId }) => {
 };
 
 const getMortgagePayment = (cost, rate, downPay) => {
-  const { term, loanType } = rate;
+  const { term } = rate;
   const r = parseFloat(getFakeRate(rate));
 
-  let payment;
-  if (loanType === 'Fixed') {
-    const n = term * 12;
-    const i = r / 12 / 100;
-    const d = (((1 + i) ** n) - 1) / (i * (1 + i) ** n);
-    payment = (cost * (1 - (downPay / 100))) / d;
-  } else {
-    // adj
-
-  }
-
-  return Math.trunc(payment);
+  const n = term * 12;
+  const i = r / 12 / 100;
+  const d = (((1 + i) ** n) - 1) / (i * (1 + i) ** n);
+  return Math.trunc((cost * (1 - (downPay / 100))) / d);
 };
 
 export {
