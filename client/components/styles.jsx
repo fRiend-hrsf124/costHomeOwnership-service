@@ -171,7 +171,7 @@ const CarouselScrollArrow = styled.svg`
   fill: #585858;
 `;
 
-const Loan = styled.div`
+const LoanCard = styled.div`
   margin-right: 15px;
   position: relative;
   scroll-snap-align: start;
@@ -237,7 +237,7 @@ export {
   CarouselContainer,
   CarouselScrollButton,
   CarouselScrollArrow,
-  Loan,
+  LoanCard,
   LoanGridContainer,
   LoanGrid,
   LoanGridItem,
