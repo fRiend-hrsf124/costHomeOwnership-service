@@ -13,7 +13,6 @@ import LoanArrow from './LoanArrow.jsx';
 import LoanEmpty from './LoanEmpty.jsx';
 
 const Loans = (props) => {
-  const loansNode = useRef(null);
   const {
     cost,
     rates,
@@ -22,10 +21,13 @@ const Loans = (props) => {
   const ratesCount = rates.length;
 
   const [rateIdx, setRateIdx] = useState(0);
+  const loansNode = useRef(null);
   useEffect(() => {
     setRateIdx(0);
     const loansNodeRef = loansNode.current;
-    return () => loansNodeRef.scrollTo(0, 0);
+    return () => {
+      loansNodeRef.scrollTo(0, 0);
+    };
   }, [rates]);
 
   const handleScrollClick = (dir) => {

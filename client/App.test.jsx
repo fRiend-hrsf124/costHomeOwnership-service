@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import mockAxios from 'axios';
 import App from './App';
@@ -38,8 +37,7 @@ describe('App', () => {
   });
 
   afterAll(() => {
-    // TODO - check that this functions as intended
-    ReactDOM.unmountComponentAtNode(mountNode);
+    wrapper.detach();
   });
 
   test('It should render CostInputs component with cost prop before server calls', () => {
