@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import DownPayment from './DownPayment';
 import { formatNum } from '../../utils';
@@ -20,8 +19,7 @@ describe('DownPayment', () => {
   });
 
   afterAll(() => {
-    // TODO - check that this functions as intended
-    ReactDOM.unmountComponentAtNode(mountNode);
+    wrapper.detach();
   });
 
   describe('Props', () => {
