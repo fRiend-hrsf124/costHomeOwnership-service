@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
+import ErrorBoundary from './ErrorBoundary.jsx';
 import CostInputs from './components/CostInputs.jsx';
 import Rates from './components/Rates.jsx';
 import { formatLoan, unFormatLoan } from './utils';
@@ -107,25 +108,27 @@ class App extends React.Component {
     } = this.state;
 
     return (
-      <AppContainer>
-        <CostInputs
-          key={cost * downPay}
-          handleUserSubmit={this.handleUserSubmit}
-          cost={cost}
-          downPay={downPay}
-          redfinCostEstimate={redfinCostEstimate}
-        />
-        <Rates
-          // add key
-          handleUserSubmit={this.handleUserSubmit}
-          loanType={loanType}
-          loanTypes={loanTypes}
-          credit={credit}
-          cost={cost}
-          rates={rates}
-          downPay={downPay}
-        />
-      </AppContainer>
+      <ErrorBoundary>
+        <AppContainer>
+          <CostInputs
+            key={cost * downPay}
+            handleUserSubmit={this.handleUserSubmit}
+            cost={cost}
+            downPay={downPay}
+            redfinCostEstimate={redfinCostEstimate}
+          />
+          <Rates
+            // add key
+            handleUserSubmit={this.handleUserSubmit}
+            loanType={loanType}
+            loanTypes={loanTypes}
+            credit={credit}
+            cost={cost}
+            rates={rates}
+            downPay={downPay}
+          />
+        </AppContainer>
+      </ErrorBoundary>
     );
   }
 }
