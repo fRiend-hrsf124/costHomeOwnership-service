@@ -160,6 +160,7 @@ const CarouselContainer = styled.div`
 `;
 
 const CarouselItemsContainer = styled.div`
+  overflow: hidden;
 `;
 
 const CarouselItems = styled.div.attrs(({ idx }) => ({

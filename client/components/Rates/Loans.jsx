@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   FullContainer,
   CarouselContainer,
@@ -13,6 +13,7 @@ import LoanArrow from './LoanArrow.jsx';
 import LoanEmpty from './LoanEmpty.jsx';
 
 const Loans = (props) => {
+  const loansNode = useRef(null);
   const {
     cost,
     rates,
@@ -21,46 +22,39 @@ const Loans = (props) => {
   const ratesCount = rates.length;
 
   const [rateIdx, setRateIdx] = useState(0);
+  useEffect(() => {
+    setRateIdx(0);
+    loansNode.current.scrollTo(0, 0);
+  }, [rates]);
+
   const handleScrollClick = (dir) => {
     if (dir === 'left') {
+      loansNode.current.scrollBy(-340, 0);
+
       const nextRateIdx = rateIdx - 2 < 0 ? 0 : rateIdx - 2;
       setRateIdx(nextRateIdx);
     } else {
+      loansNode.current.scrollBy(340, 0);
+
       const nextRateIdx = rateIdx + 2 > ratesCount - 1
         ? ratesCount - 1
         : rateIdx + 2;
       setRateIdx(nextRateIdx);
     }
   };
+
   return (
     <FullContainer>
       <CarouselContainer>
         <CarouselItemsContainer>
           <CarouselItems
-            idx={rateIdx}
+            ref={loansNode}
           >
-            {ratesCount > 0 && rateIdx < ratesCount
-              ? (
-                <Loan
-                  rate={rates[rateIdx]}
-                  cost={cost}
-                  downPay={downPay}
-                />
-              )
+            {ratesCount > 0
+              ? (rates.map((rate) => (
+                <Loan key={rate.rateId} rate={rate} cost={cost} downPay={downPay} />
+              )))
               : <LoanEmpty />}
-            {ratesCount > 1 && rateIdx + 1 < ratesCount
-              ? (
-                <Loan
-                  rate={rates[rateIdx + 1]}
-                  cost={cost}
-                  downPay={downPay}
-                />
-              )
-              : ''}
-            {/* TODO - animate scrolling */}
-            {/* {rates.map((rate) => (
-              <Loan key={rate.rateId} rate={rate} cost={cost} />
-            ))} */}
           </CarouselItems>
         </CarouselItemsContainer>
         <CarouselScrollButton
