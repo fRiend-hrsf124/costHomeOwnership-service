@@ -39,7 +39,7 @@ const DownPayment = (props) => {
   const handleDownPayDollarsChange = (e) => {
     const nextVal = parseUserStr(e.target.value, downPayDollarsForm);
     setDownPayDollarsForm(nextVal);
-    setDownPayNew((nextVal / cost) * 100);
+    setDownPayNew(Math.trunc((nextVal / cost) * 100));
   };
 
   const handleTextEnter = (e) => {

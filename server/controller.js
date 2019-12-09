@@ -22,9 +22,12 @@ const getRates = async (cost, zip, term, type, downPay, credit, origYear) => {
     AND r.origination_year = ?`;
 
   const conn = await dbConn;
+
+  const financedCost = cost * ((100 - downPay) / 100);
+
   return conn.execute(query, [
-    cost,
-    cost,
+    financedCost,
+    financedCost,
     zip,
     term,
     type,
