@@ -24,7 +24,7 @@ const Loans = (props) => {
   const [rateIdx, setRateIdx] = useState(0);
   useEffect(() => {
     setRateIdx(0);
-    loansNode.current.scrollTo(0, 0);
+    // loansNode.current.scrollTo(0, 0);
   }, [rates]);
 
   const handleScrollClick = (dir) => {
