@@ -58,7 +58,7 @@ const Loans = (props) => {
           </CarouselItems>
         </CarouselItemsContainer>
         <CarouselScrollButton
-          isShown={rateIdx > 0}
+          isShown={ratesCount > 2 && rateIdx > 0}
           left="true"
           onClick={() => handleScrollClick('left')}
         >
@@ -67,7 +67,7 @@ const Loans = (props) => {
           </CarouselScrollArrow>
         </CarouselScrollButton>
         <CarouselScrollButton
-          isShown={rateIdx + 1 < ratesCount}
+          isShown={ratesCount > 2 && rateIdx + 1 < ratesCount}
           onClick={() => handleScrollClick('right')}
         >
           <CarouselScrollArrow>
