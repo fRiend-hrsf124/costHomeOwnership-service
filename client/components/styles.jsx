@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const AppContainer = styled.div`
   width: 1010px;
-  padding: 0px 30px;
+  padding: 0px 10px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 `;
