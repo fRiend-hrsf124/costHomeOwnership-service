@@ -8,14 +8,16 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "lint": "eslint --ext .js,.jsx .",
+    "build": "webpack --mode='production' --config webpack.config.js",
+    "build:dev": "webpack -d -w --config webpack.config.js",
+    "seed:dev": "node database/seed.js",
+    "start": "node server/server.js",
+    "start:dev": "nodemon server/server.js",
+    "start:debug": "nodemon --inspect server/server.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
-    "lint": "eslint --ext .js,.jsx .",
-    "seed:dev": "node database/seed.js",
-    "build:dev": "webpack -d -w --config webpack.config.js",
-    "start:debug": "nodemon --inspect server/server.js",
-    "start:dev": "nodemon server/server.js"
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "axios": "^0.19.0",
