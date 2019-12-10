@@ -8,6 +8,8 @@ import Rates from './components/Rates.jsx';
 import { formatLoan, unFormatLoan } from './utils';
 import { AppContainer } from './components/styles.jsx';
 
+const host = 'http://localhost:3001';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -40,7 +42,7 @@ class App extends React.Component {
 
   async getPropertyData(id) {
     try {
-      const res = await axios.get(`/api/costHomeOwnership/properties?id=${id}`);
+      const res = await axios.get(`${host}/api/costHomeOwnership/properties?id=${id}`);
       const {
         propertyId,
         zipCode,
@@ -79,7 +81,7 @@ class App extends React.Component {
       .join('&');
 
     try {
-      const res = await axios.get(`/api/costHomeOwnership/rates?${queryString}`);
+      const res = await axios.get(`${host}/api/costHomeOwnership/rates?${queryString}`);
       const rates = await res.data;
 
       this.setState({ rates });
