@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const controller = require('./controller');
 const keysToCamel = require('./camelCaseUtil');
 
 const app = express();
+app.use(cors());
 
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
