@@ -17,7 +17,7 @@
     "start:debug": "nodemon --inspect server/server.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "axios": "^0.19.0",
