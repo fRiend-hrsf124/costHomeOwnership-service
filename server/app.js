@@ -11,9 +11,10 @@ app.use(cors());
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 app.get('/api/costHomeOwnership/properties', async (req, res) => {
-  const { id } = req.query;
   // TODO - check security implications
+  const { id } = req.query;
 
+  console.log('properties API hit');
   try {
     const [properties] = await controller.getPropertyData(id);
     res.json(keysToCamel(properties));
@@ -23,11 +24,12 @@ app.get('/api/costHomeOwnership/properties', async (req, res) => {
 });
 
 app.get('/api/costHomeOwnership/rates', async (req, res) => {
+  // TODO - check security implications
   const {
     cost, zipCode, term, type, downPay, credit, origYear,
   } = req.query;
-  // TODO - check security implications
 
+  console.log('rates API hit');
   try {
     const [rates] = await controller.getRates(
       cost, zipCode, term, type, downPay, credit, origYear,

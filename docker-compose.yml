@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  database:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: fRiend_prod
+      MYSQL_USER: prod
+      MYSQL_PASSWORD: prod
+
+  payment_server:
+    build: .
+    depends_on:
+      - 'database'
+    ports:
+      - '3001:3001'
