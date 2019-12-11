@@ -10,8 +10,6 @@ RUN npm install
 
 RUN apk update && apk add bash
 
-COPY wait-for-it.sh /wait-for-it.sh
-
 ENV NODE_ENV="prod"
 
 EXPOSE 3001
