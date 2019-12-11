@@ -127,7 +127,7 @@ const seedRates = (conn, zips) => {
   return conn.query(query);
 };
 
-const seedDb = async (conn, env) => {
+const seedDb = async (conn) => {
   const db = await conn;
 
   let sharedZips = new Set();
@@ -139,7 +139,7 @@ const seedDb = async (conn, env) => {
   }
   sharedZips = [...sharedZips];
 
-  await createDbTables(db, env);
+  await createDbTables(db);
   console.log('created database tables if non-existant');
 
   await cleanDbTables(db);

@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const auth = require('./auth');
 
-const createDbConn = async (scopeAuth, env) => {
+const createDbConn = async (scopeAuth) => {
+  const env = process.env.NODE_ENV || 'dev';
   const {
     user, password, host,
   } = scopeAuth[env];
@@ -48,10 +49,10 @@ const cleanDbTables = (conn) => {
   return conn.query(query);
 };
 
-const env = process.env.NODE_ENV || 'dev';
+// const env = process.env.NODE_ENV || 'dev';
 
 module.exports = {
-  dbConn: createDbConn(auth, env).catch(console.log),
+  dbConn: createDbConn(auth).catch(console.log),
   createDbTables,
   cleanDbTables,
 };
