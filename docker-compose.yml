@@ -5,9 +5,9 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: rootpw
-      MYSQL_DATABASE: fRiend_dev
-      MYSQL_USER: dev
-      MYSQL_PASSWORD: dev
+      MYSQL_DATABASE: fRiend_prod
+      MYSQL_USER: prod
+      MYSQL_PASSWORD: prod
 
   payment_server:
     build: .
@@ -15,4 +15,3 @@ services:
       - 'database'
     ports:
       - '3001:3001'
-    command: bash -c "./wait-for-it.sh database:3306 && npm run seed:dev && npm start"
