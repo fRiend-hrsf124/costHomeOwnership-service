@@ -31,9 +31,18 @@ jobs:
             echo Failed waiting for MySQL && exit 1
       - run: npm install
       - run: npm run test
+  publish:
+    docker:
+      - image: circleci/node:10.15.3
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm build
+      - run: npm publish
 workflows:
   version: 2
-  lint_and_test:
+  lint_test_publish:
     jobs:
       - lint
       - test
+      - publish
