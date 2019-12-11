@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  database:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: fRiend_dev
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+
+  payment_server:
+    build: .
+    depends_on:
+      - 'database'
+    ports:
+      - '3001:3001'
+    command: bash -c "./wait-for-it.sh database:3306 && npm run seed:dev && npm start"
