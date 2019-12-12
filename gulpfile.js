@@ -1,11 +1,17 @@
+/* eslint-disable no-console */
 const path = require('path');
 const {
-  parallel, series, watch, src, dest,
+  parallel, series, watch, src,
 } = require('gulp');
 const run = require('gulp-run');
+const s3config = require('./database/s3credentials');
+// eslint-disable-next-line import/order
+const s3 = require('gulp-s3-upload')(s3config);
+
+const bundleFile = path.resolve('.', 'public', 'bundle.js');
 
 const build = (cb) => {
-  const watcher = watch(path.resolve('.', 'public', 'bundle.js'));
+  const watcher = watch(bundleFile);
   run('npm run build').exec();
   watcher.on('change', () => {
     cb();
@@ -13,8 +19,17 @@ const build = (cb) => {
   });
 };
 
-const deployBundleToS3 = async () => {
-  await Promise.resolve('complete');
+const deployBundleToS3 = (cb) => {
+  src(bundleFile).pipe(s3({
+    Bucket: 'hrsf-fec-nz',
+    ACL: 'public-read',
+    onChange: (keyname) => {
+      console.log(`'${keyname}' has been updated`);
+      cb();
+    },
+  }, {
+    maxRetries: 3,
+  }));
 };
 
 module.exports = {
