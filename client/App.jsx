@@ -9,10 +9,10 @@ import { formatLoan, unFormatLoan } from './utils';
 import { AppContainer } from './components/styles.jsx';
 
 // const hostLocal = 'http://localhost:3001';
-// const hostAWS = 'http://ec2-13-52-99-63.us-west-1.compute.amazonaws.com';
-// const host = 'http://ec2-13-52-99-63.us-west-1.compute.amazonaws.com';
-// const host = window.location.href.includes('localhost') ? hostLocal : hostAWS;
-const host = window.location.href;
+// const hostAWS = 'http://ec2-13-52-99-63.us-west-1.compute.amazonaws.com/';
+const url = window.location.href;
+const firstQIdx = url.indexOf('?');
+const host = url.substring(0, firstQIdx > 0 ? firstQIdx : url.length);
 
 class App extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class App extends React.Component {
   async getPropertyData(id) {
     try {
       console.log(`requesting properties from '${host}'...`);
-      const res = await axios.get(`${host}/api/costHomeOwnership/properties?id=${id}`);
+      const res = await axios.get(`${host}api/costHomeOwnership/properties?id=${id}`);
       const {
         propertyId,
         zipCode,
