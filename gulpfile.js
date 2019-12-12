@@ -27,6 +27,10 @@ const deployBundleToS3 = (cb) => {
       console.log(`'${keyname}' has been updated`);
       cb();
     },
+    onNoChange: (keyname) => {
+      console.log(`'${keyname}' matches existing version, no change`);
+      cb();
+    },
   }, {
     maxRetries: 3,
   }));
