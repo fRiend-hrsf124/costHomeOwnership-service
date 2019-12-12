@@ -8,12 +8,10 @@ import Rates from './components/Rates.jsx';
 import { formatLoan, unFormatLoan } from './utils';
 import { AppContainer } from './components/styles.jsx';
 
-// const hostLocal = 'http://localhost:3001';
-// const hostAWS = 'http://ec2-13-52-99-63.us-west-1.compute.amazonaws.com/';
-// const url = window.location.href;
-// const firstQIdx = url.indexOf('?');
-// const host = url.substring(0, firstQIdx > 0 ? firstQIdx : url.length);
-const host = window.location.origin;
+const localhost = 'http://localhost:3001';
+const aws = 'http://ec2-13-52-99-63.us-west-1.compute.amazonaws.com';
+const { origin } = window.location;
+const host = origin.includes('localhost') ? localhost : aws;
 
 class App extends React.Component {
   constructor(props) {
