@@ -9,9 +9,9 @@ import { formatLoan, unFormatLoan } from './utils';
 import { AppContainer } from './components/styles.jsx';
 
 const localhost = 'http://localhost:3001';
-const aws = 'http://ec2-13-52-99-63.us-west-1.compute.amazonaws.com';
+const aws = 'http://52.52.118.225';
 const { origin } = window.location;
-const host = origin.includes('localhost') ? localhost : aws;
+const host = (origin && !origin.includes('localhost')) ? aws : localhost;
 
 class App extends React.Component {
   constructor(props) {
