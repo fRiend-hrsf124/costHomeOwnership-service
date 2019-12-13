@@ -10,11 +10,14 @@ const createDbConn = async (scopeAuth) => {
     user, password, host,
   } = scopeAuth[env];
 
-  const conn = await mysql.createConnection({
+  const conn = await mysql.createPool({
     host,
     user,
     password,
+    waitForConnections: true,
     multipleStatements: true,
+    connectionLimit: 10,
+    queueLimit: 0,
   });
 
   const database = `fRiend_${env}`;
