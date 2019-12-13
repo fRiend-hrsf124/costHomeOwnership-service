@@ -13,7 +13,7 @@ const aws = 'http://ec2-52-52-118-225.us-west-1.compute.amazonaws.com';
 const { origin } = window.location;
 const host = (origin && !origin.includes('localhost')) ? aws : localhost;
 if (host === localhost) {
-  console.log(`using ${localhost} for API server since client is run as 'localhost'`);
+  console.log(`using ${localhost} for API server since client loaded at 'localhost'`);
 }
 
 class App extends React.Component {
