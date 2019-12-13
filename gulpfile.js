@@ -4,7 +4,7 @@ const {
   parallel, series, watch, src,
 } = require('gulp');
 const run = require('gulp-run');
-const s3config = require('./database/s3credentials');
+const s3config = require('./database/s3credentials'); // eslint-disable-line
 // eslint-disable-next-line import/order
 const s3 = require('gulp-s3-upload')(s3config);
 
