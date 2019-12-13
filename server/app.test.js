@@ -6,8 +6,9 @@ const { dbConn, createDbTables, cleanDbTables } = require('../database/index');
 
 (() => {
   const zipCode = 12345;
+  let conn;
   beforeAll(async () => {
-    const conn = await dbConn;
+    conn = await dbConn;
     await createDbTables(conn);
     await cleanDbTables(conn);
 
@@ -92,8 +93,6 @@ const { dbConn, createDbTables, cleanDbTables } = require('../database/index');
   });
 
   afterAll(async () => {
-    const conn = await dbConn;
-    await cleanDbTables(conn);
     await conn.end();
   });
 
