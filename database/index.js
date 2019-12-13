@@ -11,6 +11,7 @@ const createDbConn = async (scopeAuth) => {
     user, password, host,
   } = scopeAuth[env];
 
+  // TODO - setup pool for connection closing and overnight disconns
   // const pool = mysql.createPool({
   //   host,
   //   user,
