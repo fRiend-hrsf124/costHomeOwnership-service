@@ -1,4 +1,34 @@
+/* eslint-disable no-console */
+const fs = require('fs');
+const path = require('path');
+const axios = require('axios');
 const { dbConn } = require('../database/index.js');
+
+const updateClientBundle = async () => {
+  const url = 'https://hrsf-fec-nz.s3-us-west-2.amazonaws.com/bundle.js';
+  const bundleFilePath = path.resolve(__dirname, '..', 'public', 'bundle.js');
+  const writer = fs.createWriteStream(bundleFilePath);
+
+  const res = await axios({
+    url,
+    method: 'GET',
+    responseType: 'stream',
+  });
+
+  res.data.pipe(writer);
+
+  return new Promise((resolve, reject) => {
+    writer.on('finish', () => {
+      console.log('bundle updated from s3');
+      resolve();
+    });
+    writer.on('error', (err) => {
+      console.log('error retrieving bundle from s3');
+      console.log(err);
+      reject();
+    });
+  });
+};
 
 const getPropertyData = async (id) => {
   const query = `SELECT * FROM properties AS p JOIN zips AS z
@@ -38,6 +68,7 @@ const getRates = async (cost, zip, term, type, downPay, credit, origYear) => {
 };
 
 module.exports = {
+  updateClientBundle,
   getPropertyData,
   getRates,
 };

@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const mysql = require('mysql2/promise');
+// const mysql = require('mysql2');
 const fs = require('fs');
 const path = require('path');
 const auth = require('./auth');
@@ -9,6 +10,17 @@ const createDbConn = async (scopeAuth) => {
   const {
     user, password, host,
   } = scopeAuth[env];
+
+  // TODO - setup pool for connection closing and overnight disconns
+  // const pool = mysql.createPool({
+  //   host,
+  //   user,
+  //   password,
+  //   multipleStatements: true,
+  //   connectionLimit: 10,
+  //   queueLimit: 0,
+  // });
+  // const conn = pool.promise();
 
   const conn = await mysql.createConnection({
     host,
@@ -48,8 +60,6 @@ const cleanDbTables = (conn) => {
   `;
   return conn.query(query);
 };
-
-// const env = process.env.NODE_ENV || 'dev';
 
 module.exports = {
   dbConn: createDbConn(auth).catch(console.log),

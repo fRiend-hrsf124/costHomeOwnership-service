@@ -14,7 +14,7 @@ app.get('/api/costHomeOwnership/properties', async (req, res) => {
   // TODO - check security implications
   const { id } = req.query;
 
-  console.log('properties API hit');
+  // console.log('properties API hit');
   try {
     const [properties] = await controller.getPropertyData(id);
     res.json(keysToCamel(properties));
@@ -29,7 +29,7 @@ app.get('/api/costHomeOwnership/rates', async (req, res) => {
     cost, zipCode, term, type, downPay, credit, origYear,
   } = req.query;
 
-  console.log('rates API hit');
+  // console.log('rates API hit');
   try {
     const [rates] = await controller.getRates(
       cost, zipCode, term, type, downPay, credit, origYear,
