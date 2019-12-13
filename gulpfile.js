@@ -23,14 +23,8 @@ const deployBundleToS3 = (cb) => {
   src(bundleFile).pipe(s3({
     Bucket: 'hrsf-fec-nz',
     ACL: 'public-read',
-    onChange: (keyname) => {
-      console.log(`'${keyname}' has been updated`);
-      cb();
-    },
-    onNoChange: (keyname) => {
-      console.log(`'${keyname}' matches existing version, no change`);
-      cb();
-    },
+    onChange: () => cb(),
+    onNoChange: () => cb(),
   }, {
     maxRetries: 3,
   }));
