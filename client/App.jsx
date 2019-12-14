@@ -26,6 +26,7 @@ class App extends React.Component {
       redfinCostEstimate: null,
       insuranceRate: null,
       propertyTaxRate: null,
+      hoa: 200,
       cost: 10,
       loanType: formatLoan(30, 'Fixed'),
       loanTypes: [
@@ -112,6 +113,7 @@ class App extends React.Component {
       rateUser,
       rates,
       cost,
+      hoa,
       downPay,
       redfinCostEstimate,
     } = this.state;
@@ -130,6 +132,7 @@ class App extends React.Component {
             loanType={loanType}
             rateUser={rateUser}
             cost={cost}
+            hoa={hoa}
             downPay={downPay}
           />
           <CostInputs

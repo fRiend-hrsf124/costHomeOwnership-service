@@ -9,21 +9,24 @@ import { unFormatLoan, formatNum, getMortgagePayment } from '../utils';
 
 const Summary = (props) => {
   const {
-    // eslint-disable-next-line no-unused-vars
     insuranceRate,
-    // eslint-disable-next-line no-unused-vars
     propertyTaxRate,
     loanType,
     rateUser,
     cost,
+    hoa,
     downPay,
   } = props;
 
+  const mortgage = getMortgagePayment(cost, unFormatLoan(loanType).term, rateUser, downPay);
+  const propertyTax = Math.trunc((cost * (propertyTaxRate / 100)) / 12);
+  const insurance = Math.trunc((cost * (insuranceRate / 100)) / 12);
+  // debugger;
   return (
     <div>
       <Label fontSize="1.75rem">
         {`
-          ${formatNum(getMortgagePayment(cost, unFormatLoan(loanType).term, rateUser, downPay))}
+          ${formatNum(mortgage + propertyTax + insurance + hoa)}
           per month
         `}
       </Label>
