@@ -103,9 +103,7 @@ class App extends React.Component {
 
   render() {
     const {
-      // eslint-disable-next-line no-unused-vars
       insuranceRate,
-      // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
       loanType,
       loanTypes,
@@ -125,6 +123,8 @@ class App extends React.Component {
             </Label>
           </ModuleHeader>
           <Summary
+            insuranceRate={insuranceRate}
+            propertyTaxRate={propertyTaxRate}
             cost={cost}
           />
           <CostInputs

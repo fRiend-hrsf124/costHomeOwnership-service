@@ -1,12 +1,15 @@
 import React from 'react';
+// eslint-disable-next-line import/extensions
+import { FullContainer } from './styles.jsx';
 
 const Summary = (props) => {
-  // const {} = props;
+  const {
+    // eslint-disable-next-line no-unused-vars
+    cost,
+  } = props;
 
   return (
-    <div>
-      hi
-    </div>
+    <FullContainer />
   );
 };
 
