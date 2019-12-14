@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import BarChartLegend from './BarChartLegend.jsx';
-import { FullContainer } from '../styles.jsx';
+import { FullContainer, GraphBar, GraphSegment } from '../styles.jsx';
 
 const BarChart = (props) => {
   const {
@@ -9,27 +9,51 @@ const BarChart = (props) => {
     propertyTax,
     insurance,
     hoa,
-    // payment,
+    payment,
   } = props;
+
+  const green = '#59e0d0';
+  const blue = '#77a2d0';
+  const red = '#e69c8a';
+  const yellow = '#fadd77';
+
   return (
     <FullContainer>
+      <GraphBar>
+        <GraphSegment
+          color={green}
+          width={`${100 * (mortgage / payment)}%`}
+        />
+        <GraphSegment
+          color={blue}
+          width={`${100 * (propertyTax / payment)}%`}
+        />
+        <GraphSegment
+          color={red}
+          width={`${100 * (hoa / payment)}%`}
+        />
+        <GraphSegment
+          color={yellow}
+          width={`${100 * (insurance / payment)}%`}
+        />
+      </GraphBar>
       <BarChartLegend
-        legendColor="#59e0d0"
+        legendColor={green}
         legendKey="Principal and Interest"
         legendVal={mortgage}
       />
       <BarChartLegend
-        legendColor="#77a2d0"
+        legendColor={blue}
         legendKey="Property Taxes"
         legendVal={propertyTax}
       />
       <BarChartLegend
-        legendColor="#e69c8a"
+        legendColor={red}
         legendKey="HOA Dues"
         legendVal={hoa}
       />
       <BarChartLegend
-        legendColor="#fadd77"
+        legendColor={yellow}
         legendKey="Homeowners' Insurance"
         legendVal={insurance}
       />

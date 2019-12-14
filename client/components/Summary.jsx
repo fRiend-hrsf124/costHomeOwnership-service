@@ -32,7 +32,7 @@ const Summary = (props) => {
           per month
         `}
       </Label>
-      <FullContainer>
+      <FullContainer paddingBottom="5px">
         <HalfContainer>
           <Label>
             {`

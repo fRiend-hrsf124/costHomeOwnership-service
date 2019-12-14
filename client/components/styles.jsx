@@ -263,6 +263,22 @@ const LegendDot = styled.svg`
   height: 12px;
 `;
 
+const GraphBar = styled.div`
+  margin-bottom: 15px;
+  height: 10px;
+  width: 100%;
+  display: flex;
+  margin-top: 24px;
+  border-radius: 5px;
+  overflow: hidden;
+`;
+
+const GraphSegment = styled.div`
+  display: inline-block;
+  background-color: ${({ color }) => color};;
+  width: ${({ width }) => width};;
+`;
+
 export {
   AppContainer,
   ModuleHeader,
@@ -293,4 +309,6 @@ export {
   LoanGridLabel,
   LoanGridLogo,
   LegendDot,
+  GraphBar,
+  GraphSegment,
 };
