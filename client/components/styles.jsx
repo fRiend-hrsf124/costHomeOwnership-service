@@ -256,6 +256,23 @@ const CarouselScrollArrow = styled.svg`
   fill: #585858;
 `;
 
+// const Legend = styled.div`
+//   width: 101.96078431%;
+//   box-sizing: border-box;
+//   display: flex;
+//   flex-wrap: wrap;
+//   padding-top: 24px;
+// `;
+
+// const LegendItem = styled.div`
+//   display: block;
+//   float: left;
+//   width: 98.03921569%;
+//   margin-right: .98039216%;
+//   margin-left: .98039216%;
+//   padding-bottom: 1rem;
+// `;
+
 const LegendDot = styled.svg`
   fill: ${({ color }) => color};
   padding-right: .75rem;
@@ -308,6 +325,8 @@ export {
   LoanGridItem,
   LoanGridLabel,
   LoanGridLogo,
+  // Legend,
+  // LegendItem,
   LegendDot,
   GraphBar,
   GraphSegment,
