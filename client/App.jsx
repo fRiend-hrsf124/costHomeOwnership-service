@@ -3,6 +3,7 @@
 import React from 'react';
 import axios from 'axios';
 import ErrorBoundary from './ErrorBoundary.jsx';
+import Summary from './components/Summary.jsx';
 import CostInputs from './components/CostInputs.jsx';
 import Rates from './components/Rates.jsx';
 import { formatLoan, unFormatLoan } from './utils';
@@ -123,6 +124,9 @@ class App extends React.Component {
               Payment Calculator
             </Label>
           </ModuleHeader>
+          <Summary
+            cost={cost}
+          />
           <CostInputs
             key={cost * downPay}
             handleUserSubmit={this.handleUserSubmit}
