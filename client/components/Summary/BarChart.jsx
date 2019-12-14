@@ -14,22 +14,22 @@ const BarChart = (props) => {
   return (
     <FullContainer>
       <BarChartLegend
-        legendColor="green"
+        legendColor="#59e0d0"
         legendKey="Principal and Interest"
         legendVal={mortgage}
       />
       <BarChartLegend
-        legendColor="blue"
+        legendColor="#77a2d0"
         legendKey="Property Taxes"
         legendVal={propertyTax}
       />
       <BarChartLegend
-        legendColor="red"
+        legendColor="#e69c8a"
         legendKey="HOA Dues"
         legendVal={hoa}
       />
       <BarChartLegend
-        legendColor="yellow"
+        legendColor="#fadd77"
         legendKey="Homeowners' Insurance"
         legendVal={insurance}
       />

@@ -256,6 +256,13 @@ const CarouselScrollArrow = styled.svg`
   fill: #585858;
 `;
 
+const LegendDot = styled.svg`
+  fill: ${({ color }) => color};
+  padding-right: .75rem;
+  width: 12px;
+  height: 12px;
+`;
+
 export {
   AppContainer,
   ModuleHeader,
@@ -285,4 +292,5 @@ export {
   LoanGridItem,
   LoanGridLabel,
   LoanGridLogo,
+  LegendDot,
 };
