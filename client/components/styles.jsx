@@ -256,6 +256,46 @@ const CarouselScrollArrow = styled.svg`
   fill: #585858;
 `;
 
+// const Legend = styled.div`
+//   width: 101.96078431%;
+//   box-sizing: border-box;
+//   display: flex;
+//   flex-wrap: wrap;
+//   padding-top: 24px;
+// `;
+
+// const LegendItem = styled.div`
+//   display: block;
+//   float: left;
+//   width: 98.03921569%;
+//   margin-right: .98039216%;
+//   margin-left: .98039216%;
+//   padding-bottom: 1rem;
+// `;
+
+const LegendDot = styled.svg`
+  fill: ${({ color }) => color};
+  padding-right: .75rem;
+  width: 12px;
+  height: 12px;
+`;
+
+const GraphBar = styled.div`
+  margin-bottom: 15px;
+  height: 10px;
+  width: 100%;
+  display: flex;
+  margin-top: 24px;
+  border-radius: 5px;
+  overflow: hidden;
+`;
+
+const GraphSegment = styled.div`
+  display: inline-block;
+  background-color: ${({ color }) => color};;
+  width: ${({ width }) => width};;
+`;
+
 export {
   AppContainer,
   ModuleHeader,
@@ -285,4 +325,9 @@ export {
   LoanGridItem,
   LoanGridLabel,
   LoanGridLogo,
+  // Legend,
+  // LegendItem,
+  LegendDot,
+  GraphBar,
+  GraphSegment,
 };
