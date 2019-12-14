@@ -36,6 +36,7 @@ class App extends React.Component {
       downPay: 20,
       credit: 740,
       origYear: 2019,
+      rateUser: 4.625,
       rates: [],
     };
 
@@ -108,6 +109,7 @@ class App extends React.Component {
       loanType,
       loanTypes,
       credit,
+      rateUser,
       rates,
       cost,
       downPay,
@@ -125,7 +127,10 @@ class App extends React.Component {
           <Summary
             insuranceRate={insuranceRate}
             propertyTaxRate={propertyTaxRate}
+            loanType={loanType}
+            rateUser={rateUser}
             cost={cost}
+            downPay={downPay}
           />
           <CostInputs
             key={cost * downPay}

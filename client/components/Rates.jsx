@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 import React, { useState } from 'react';
-import { FullContainerExpandable, HalfContainer } from './styles.jsx';
+import { FullContainer, FullContainerExpandable, HalfContainer } from './styles.jsx';
 import RatesHeader from './Rates/RatesHeader.jsx';
 import LoanType from './Rates/LoanType.jsx';
 import CreditScore from './Rates/CreditScore.jsx';

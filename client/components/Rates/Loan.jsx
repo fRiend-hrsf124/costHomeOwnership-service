@@ -25,7 +25,7 @@ const Loan = ({
           <Label
             as="div"
           >
-            {formatNum(getMortgagePayment(cost, rate, downPay))}
+            {formatNum(getMortgagePayment(cost, rate.term, getFakeRate(rate), downPay))}
           </Label>
           <LoanGridLabel>
               Monthly Payment

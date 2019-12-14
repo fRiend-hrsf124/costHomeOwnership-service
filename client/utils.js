@@ -55,9 +55,10 @@ const getFakeRate = ({ apr, lenderId }) => {
   return Number.prototype.toFixed.call((rateAdjusted - (rateAdjusted % 125)) / 1000, 3);
 };
 
-const getMortgagePayment = (cost, rate, downPay) => {
-  const { term } = rate;
-  const r = parseFloat(getFakeRate(rate));
+const getMortgagePayment = (cost, term, rate, downPay) => {
+  // const { term } = rate;
+  // const r = parseFloat(getFakeRate(rate));
+  const r = parseFloat(rate);
 
   const n = term * 12;
   const i = r / 12 / 100;
