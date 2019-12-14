@@ -3,17 +3,18 @@
 import React from 'react';
 import axios from 'axios';
 import ErrorBoundary from './ErrorBoundary.jsx';
+import Summary from './components/Summary.jsx';
 import CostInputs from './components/CostInputs.jsx';
 import Rates from './components/Rates.jsx';
 import { formatLoan, unFormatLoan } from './utils';
-import { AppContainer } from './components/styles.jsx';
+import { AppContainer, ModuleHeader, Label } from './components/styles.jsx';
 
 const localhost = 'http://localhost:3001';
 const aws = 'http://ec2-52-52-118-225.us-west-1.compute.amazonaws.com';
 const { origin } = window.location;
 const host = (origin && !origin.includes('localhost')) ? aws : localhost;
 if (host === localhost) {
-  console.log(`using ${localhost} for API server since client is run as 'localhost'`);
+  console.log(`using ${localhost} for API server since client loaded at 'localhost'`);
 }
 
 class App extends React.Component {
@@ -102,9 +103,7 @@ class App extends React.Component {
 
   render() {
     const {
-      // eslint-disable-next-line no-unused-vars
       insuranceRate,
-      // eslint-disable-next-line no-unused-vars
       propertyTaxRate,
       loanType,
       loanTypes,
@@ -118,6 +117,16 @@ class App extends React.Component {
     return (
       <ErrorBoundary>
         <AppContainer>
+          <ModuleHeader>
+            <Label fontSize="1.375rem">
+              Payment Calculator
+            </Label>
+          </ModuleHeader>
+          <Summary
+            insuranceRate={insuranceRate}
+            propertyTaxRate={propertyTaxRate}
+            cost={cost}
+          />
           <CostInputs
             key={cost * downPay}
             handleUserSubmit={this.handleUserSubmit}
