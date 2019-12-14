@@ -11,17 +11,6 @@ const createDbConn = async (scopeAuth) => {
     user, password, host,
   } = scopeAuth[env];
 
-  // TODO - setup pool for connection closing and overnight disconns
-  // const pool = mysql.createPool({
-  //   host,
-  //   user,
-  //   password,
-  //   multipleStatements: true,
-  //   connectionLimit: 10,
-  //   queueLimit: 0,
-  // });
-  // const conn = pool.promise();
-
   const conn = await mysql.createConnection({
     host,
     user,
@@ -35,9 +24,26 @@ const createDbConn = async (scopeAuth) => {
     USE ${database};
   `;
   await conn.query(query);
+  await conn.end();
+
+  let pool;
+  try {
+    pool = mysql.createPool({
+      host,
+      user,
+      database,
+      password,
+      multipleStatements: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+    });
+  } catch (error) {
+    console.log(`error creating pool for mysql database '${database}'`);
+    console.log(error);
+  }
 
   console.log(`MySQL connected for '${env}' env to database '${database}'`);
-  return conn;
+  return pool;
 };
 
 const createDbTables = (conn) => {
