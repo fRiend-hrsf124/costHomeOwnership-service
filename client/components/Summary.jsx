@@ -2,6 +2,7 @@
 import React from 'react';
 // eslint-disable-next-line import/extensions
 import InfoFlyout from './InfoFlyout.jsx';
+import BarChart from './Summary/BarChart.jsx';
 import {
   FullContainer, HalfContainer, Label, LinkAway,
 } from './styles.jsx';
@@ -21,12 +22,13 @@ const Summary = (props) => {
   const mortgage = getMortgagePayment(cost, unFormatLoan(loanType).term, rateUser, downPay);
   const propertyTax = Math.trunc((cost * (propertyTaxRate / 100)) / 12);
   const insurance = Math.trunc((cost * (insuranceRate / 100)) / 12);
-  // debugger;
+  const payment = mortgage + propertyTax + insurance + hoa;
+
   return (
-    <div>
+    <>
       <Label fontSize="1.75rem">
         {`
-          ${formatNum(mortgage + propertyTax + insurance + hoa)}
+          ${formatNum(payment)}
           per month
         `}
       </Label>
@@ -46,7 +48,14 @@ const Summary = (props) => {
           </LinkAway>
         </HalfContainer>
       </FullContainer>
-    </div>
+      <BarChart
+        mortgage={mortgage}
+        propertyTax={propertyTax}
+        insurance={insurance}
+        hoa={hoa}
+        payment={payment}
+      />
+    </>
   );
 };
 
