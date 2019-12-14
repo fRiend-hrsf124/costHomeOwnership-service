@@ -7,6 +7,16 @@ const AppContainer = styled.div`
   -webkit-font-smoothing: antialiased;
 `;
 
+const ModuleHeader = styled.div`
+  border-top: 1px solid #e2e2e2;
+  margin-top: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 67%;
+  word-spacing: .125rem;
+  text-overflow: ellipsis;
+`;
+
 const FullContainer = styled.div`
   width: 67%;
   max-width: 667px;
@@ -250,6 +260,7 @@ const CarouselScrollArrow = styled.svg`
 
 export {
   AppContainer,
+  ModuleHeader,
   FullContainer,
   FullContainerExpandable,
   HalfContainer,

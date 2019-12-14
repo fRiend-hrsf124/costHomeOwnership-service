@@ -6,7 +6,7 @@ import ErrorBoundary from './ErrorBoundary.jsx';
 import CostInputs from './components/CostInputs.jsx';
 import Rates from './components/Rates.jsx';
 import { formatLoan, unFormatLoan } from './utils';
-import { AppContainer } from './components/styles.jsx';
+import { AppContainer, ModuleHeader, Label } from './components/styles.jsx';
 
 const localhost = 'http://localhost:3001';
 const aws = 'http://ec2-52-52-118-225.us-west-1.compute.amazonaws.com';
@@ -118,6 +118,11 @@ class App extends React.Component {
     return (
       <ErrorBoundary>
         <AppContainer>
+          <ModuleHeader>
+            <Label fontSize="1.375rem">
+              Payment Calculator
+            </Label>
+          </ModuleHeader>
           <CostInputs
             key={cost * downPay}
             handleUserSubmit={this.handleUserSubmit}
