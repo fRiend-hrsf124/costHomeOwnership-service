@@ -18,6 +18,7 @@
     "start:debug": "nodemon --inspect server/server.js",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:watch:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --watch",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "dependencies": {

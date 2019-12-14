@@ -15,40 +15,40 @@ const { dbConn, createDbTables, cleanDbTables } = require('../database/index');
     // add zipCode entry
     const taxRate = 1.234;
     let query = `INSERT INTO zips (
-      zip_code,
-      property_tax_rate
-      ) VALUES (
-      "${zipCode}",
-      ${taxRate}
-    );\n`;
+        zip_code,
+        property_tax_rate
+        ) VALUES (
+        "${zipCode}",
+        ${taxRate}
+      );\n`;
     await conn.query(query);
 
     // add property entry
     const cost = 1234567;
     const insuranceRate = 0.123;
     query = `INSERT INTO properties (
-    property_id,
-    zip_code,
-    redfin_cost_estimate,
-    insurance_rate
-    ) VALUES (
-      ${1},
-      "${zipCode}",
-      ${cost},
-      ${insuranceRate}
-      );\n`;
+      property_id,
+      zip_code,
+      redfin_cost_estimate,
+      insurance_rate
+      ) VALUES (
+        ${1},
+        "${zipCode}",
+        ${cost},
+        ${insuranceRate}
+        );\n`;
     await conn.query(query);
 
     // add lender entry
     const lenderLogoUrl = 'https://hrsf-fec-cho-lenderlogos.s3-us-west-1.amazonaws.com/10271_logo.gif';
     const nmls = 123456;
     query = `INSERT INTO lenders (
-    lender_logo_url,
-    lender_nmls
-    ) VALUES (
-      "${lenderLogoUrl}",
-      ${nmls}
-      );\n`;
+      lender_logo_url,
+      lender_nmls
+      ) VALUES (
+        "${lenderLogoUrl}",
+        ${nmls}
+        );\n`;
     await conn.query(query);
 
     // add rate entry
@@ -61,36 +61,36 @@ const { dbConn, createDbTables, cleanDbTables } = require('../database/index');
     const creditMin = 700;
     const lenderId = 1;
     query = `INSERT INTO rates (
-    zip_code,
-    apr,
-    term,
-    loan_type,
-    cost_low,
-    cost_high,
-    down_payment_min,
-    credit_min,
-    lender_id,
-    origination_year
-    ) VALUES (
-      "${zipCode}",
-      ${apr},
-      ${term},
-      "${type}",
-      ${low},
-      ${high},
-      ${downPaymentMin},
-      ${creditMin},
-      ${lenderId},
-      2019
-      );\n`;
+      zip_code,
+      apr,
+      term,
+      loan_type,
+      cost_low,
+      cost_high,
+      down_payment_min,
+      credit_min,
+      lender_id,
+      origination_year
+      ) VALUES (
+        "${zipCode}",
+        ${apr},
+        ${term},
+        "${type}",
+        ${low},
+        ${high},
+        ${downPaymentMin},
+        ${creditMin},
+        ${lenderId},
+        2019
+        );\n`;
     await conn.query(query);
   });
 
-  beforeEach(async () => {
-  });
+  // beforeEach(async () => {
+  // });
 
-  afterEach(async () => {
-  });
+  // afterEach(async () => {
+  // });
 
   afterAll(async () => {
     await conn.end();
