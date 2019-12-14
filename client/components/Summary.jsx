@@ -1,8 +1,9 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 // eslint-disable-next-line import/extensions
 import InfoFlyout from './InfoFlyout.jsx';
 import {
-  FullContainer, HalfContainer, Label, LinkDiv,
+  FullContainer, HalfContainer, Label, LinkAway,
 } from './styles.jsx';
 import { unFormatLoan, formatNum, getMortgagePayment } from '../utils';
 
@@ -31,15 +32,15 @@ const Summary = (props) => {
           <Label>
             {`
               ${loanType},
-               ${rateUser}%
+               ${rateUser}% Interest
             `}
           </Label>
           <InfoFlyout />
         </HalfContainer>
         <HalfContainer align="right">
-          <LinkDiv>
+          <LinkAway>
             Customize calculations
-          </LinkDiv>
+          </LinkAway>
         </HalfContainer>
       </FullContainer>
     </div>
