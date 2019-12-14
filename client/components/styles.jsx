@@ -2,16 +2,14 @@ import styled from 'styled-components';
 
 const AppContainer = styled.div`
   width: 1010px;
-  padding: 0px 30px;
+  padding: 30px 30px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 `;
 
 const ModuleHeader = styled.div`
   border-top: 1px solid #e2e2e2;
-  margin-top: 50px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 30px 0px;
   width: 67%;
   word-spacing: .125rem;
   text-overflow: ellipsis;
