@@ -27,7 +27,6 @@ const LoanType = (props) => {
               <Option key={lT} value={lT}>{lT}</Option>
             ))
           }
-          <Option value="noRates">noRates</Option>
         </Select>
       </Box>
     </InputContainer>

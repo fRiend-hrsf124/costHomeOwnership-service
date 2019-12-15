@@ -19,7 +19,9 @@ const Summary = (props) => {
     downPay,
   } = props;
 
-  const mortgage = getMortgagePayment(cost, unFormatLoan(loanType).term, rateUser, downPay);
+  const { term, type } = unFormatLoan(loanType);
+
+  const mortgage = getMortgagePayment(cost, term, type, rateUser, downPay);
   const propertyTax = Math.trunc((cost * (propertyTaxRate / 100)) / 12);
   const insurance = Math.trunc((cost * (insuranceRate / 100)) / 12);
   const payment = mortgage + propertyTax + insurance + hoa;
