@@ -1,6 +1,6 @@
 # Project fRiend Loan Payment Calculator
 
-Microservice including frontend and backend.
+Microservice focused on frontend functionality and appearance.
 
 Screenshot:
 
