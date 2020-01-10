@@ -4,7 +4,7 @@ Microservice including frontend and backend.
 
 Screenshot:
 
-![Imgur Image](https://i.imgur.com/ZtBOqYf.png)
+![Imgur Image](./fec.gif)
 
 
 ## Setup to run locally
