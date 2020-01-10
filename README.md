@@ -1,10 +1,9 @@
 # Project fRiend Loan Payment Calculator
 
-> Microservice including frontend and backend.
+Microservice including frontend and backend.
 
-[![alt text](https://www.imgur.com... "UI screenshot")](https://imgur.com/a/mE85r20)
+![Imgur Image](https://i.imgur.com/ZtBOqYf.png)
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/mE85r20"><a href="//imgur.com/a/mE85r20"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 ## Setup to run locally
 
