@@ -1,40 +1,23 @@
-# Project Name
+# Project fRiend Loan Payment Calculator
 
-> fRiend - Cost of Home Ownership module
+> Microservice including frontend and backend.
 
-## Related Projects
+[![alt text](https://www.imgur.com... "UI screenshot")](https://imgur.com/a/mE85r20)
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/mE85r20"><a href="//imgur.com/a/mE85r20"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
-## Table of Contents
+## Setup to run locally
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+Install node ^10.15.3 and webpack ^6.13.4 if not already installed.
 
-## Usage
-
-> Some usage instructions
-
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
+From within the root directory of repo:
 
 ```sh
-npm install -g webpack
 npm install
+npm run build
+npm run start
 ```
 
-# NZ-Service
+Navigate to http://localhost:3001
+
+Optionally add an 'id' query key, value between 1 and 100.
