@@ -59,7 +59,7 @@
     "gulp-s3-upload": "^1.7.3",
     "jest": "^24.9.0",
     "jest-styled-components": "^6.3.4",
-    "jsdom": "^15.2.1",
+    "jsdom": "^16.5.0",
     "supertest": "^4.0.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
